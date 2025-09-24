@@ -2,7 +2,7 @@
 
 Bem-vindo ao meu espaço no GitHub. Aqui você encontrará meus projetos e um pouco sobre minha jornada no mundo da tecnologia.
 
-<img src="https://cdn.discordapp.com/attachments/1384745098306256939/1416551081307017246/Design_sem_nome_4.png?ex=68c74180&is=68c5f000&hm=68541567a838345ad4ac191ae9563c97805e31702ec02fab10cb197cf073fe9d&" alt="Banner Pessoal">
+<img src="https://cdn.discordapp.com/attachments/1384745098306256939/1416551081307017246/Design_sem_nome_4.png?ex=68d5c200&is=68d47080&hm=4acfcfa6be728c1e7748544d1bb77e417555ec0cbc4449effc9c1aae331460d7&" alt="Banner Pessoal">
 
 ## 🚀 Sobre Mim
 
