@@ -25,10 +25,13 @@ Aqui estão algumas das tecnologias com as quais tenho trabalhado:
 
 Abaixo estão alguns dos projetos que desenvolvi. Sinta-se à vontade para explorar!
 
-### 1. Nome do Projeto
-* **Descrição:** Uma breve descrição do que o projeto fiz, o problema que ele resolve e as tecnologias utilizadas.
+### 1. Python Project
+* **Descrição:** Um Projeto em Python, Testando as Funcionalidades.
 * **Link:** [Ver no GitHub](https://github.com/gustavormartins/My-First-Python-Script)
 
+## 2. Relatório de CLP website
+* **Descrição:** Fiz um relatório de CLP e SCADA.
+* **Link:** [Ver no GitHub](https://gustavormartins.github.io/report.github.io/)
 
 ## 📫 Como me encontrar
 
