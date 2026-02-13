@@ -1,0 +1,71 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Win-Optimize",
+      "category": "Infraestrutura",
+      "description": "Solução de automação para otimização de sistemas Windows, focada em redução de latência e remoção de componentes desnecessários para ambientes de alta performance.",
+      "link": "https://github.com/gustavormartins/Win-Optimize",
+      "tech": ["PowerShell", "Shell Script", "Sistemas Operacionais"]
+    },
+    {
+      "id": 2,
+      "title": "SmartSneaker",
+      "category": "Inovação & IoT",
+      "description": "Colaboração no desenvolvimento de interface para sistemas vestíveis, aplicando lógica de estados e integração front-end dinâmica.",
+      "link": "https://github.com/pamelaevelim/SmartSneaker-Project",
+      "tech": ["JavaScript", "UI/UX", "IoT Concept"]
+    },
+    {
+      "id": 3,
+      "title": "BlohshOs",
+      "category": "Administração Linux",
+      "description": "Distribuição Linux customizada para otimização de workflow de desenvolvimento, com foco em gerenciamento de recursos em hardware Xeon.",
+      "link": "#",
+      "tech": ["Kernel Tuning", "Bash", "Arch Linux"]
+    },
+    {
+      "id": 4,
+      "title": "Pinguim Nephalem",
+      "category": "Desenvolvimento Python",
+      "description": "Desenvolvimento de um agente para Discord integrado à API da Blizzard, focado em processamento de dados e automação de consultas de jogos.",
+      "link": "#",
+      "tech": ["Python", "REST API", "JSON"]
+    }
+  ]
+}{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Win-Optimize",
+      "category": "Infraestrutura",
+      "description": "Solução de automação para otimização de sistemas Windows, focada em redução de latência e remoção de componentes desnecessários para ambientes de alta performance.",
+      "link": "https://github.com/gustavormartins/Win-Optimize",
+      "tech": ["PowerShell", "Shell Script", "Sistemas Operacionais"]
+    },
+    {
+      "id": 2,
+      "title": "SmartSneaker",
+      "category": "Inovação & IoT",
+      "description": "Colaboração no desenvolvimento de interface para sistemas vestíveis, aplicando lógica de estados e integração front-end dinâmica.",
+      "link": "https://github.com/pamelaevelim/SmartSneaker-Project",
+      "tech": ["JavaScript", "UI/UX", "IoT Concept"]
+    },
+    {
+      "id": 3,
+      "title": "BlohshOs",
+      "category": "Administração Linux",
+      "description": "Distribuição Linux customizada para otimização de workflow de desenvolvimento, com foco em gerenciamento de recursos em hardware Xeon.",
+      "link": "#",
+      "tech": ["Kernel Tuning", "Bash", "Arch Linux"]
+    },
+    {
+      "id": 4,
+      "title": "Pinguim Nephalem",
+      "category": "Desenvolvimento Python",
+      "description": "Desenvolvimento de um agente para Discord integrado à API da Blizzard, focado em processamento de dados e automação de consultas de jogos.",
+      "link": "#",
+      "tech": ["Python", "REST API", "JSON"]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+/* Reset Profissional */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+:root {
+    --bg-deep: #020617;
+    --panel-bg: rgba(15, 23, 42, 0.8);
+    --neon-blue: #00b4d8;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(0, 180, 216, 0.2);
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+canvas#starfield {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: -1;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header Estilo HUD */
+header {
+    text-align: center;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 140px;
+    height: 140px;
+    border: 3px solid var(--neon-blue);
+    padding: 5px;
+    background: var(--bg-deep);
+    box-shadow: 0 0 30px rgba(0, 180, 216, 0.4);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.role-title {
+    color: var(--neon-blue);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Seções Profissionais */
+section {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+h2 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--neon-blue);
+    padding-left: 15px;
+}
+
+/* Grid de Projetos */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    background: rgba(0, 180, 216, 0.05);
+    border-color: var(--neon-blue);
+}
