@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Martins | Analista de Sistemas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Gustavo Martins | Dev & System Ops</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="starfield"></canvas>
 
-    <div class="main-wrapper">
-        <header>
-             <div id="profile-img-container"></div>
-            <h1>Gustavo Martins</h1>
-            <p class="role-subtitle">Análise e Desenvolvimento de Sistemas | Gestão Industrial</p>
+    <video autoplay muted loop id="bg-video">
+        <source src="assets/stars.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div> <img src="assets/blohsh.png" alt="Blohsh Logo" class="blohsh-char">
+
+    <div class="main-container">
+        <header class="glass-panel">
+            <div id="profile-wrapper">
+                </div>
+            <div class="header-content">
+                <h1 class="glitch" data-text="GUSTAVO MARTINS">GUSTAVO MARTINS</h1>
+                <p class="subtitle">ADS // ENERGISA // LINUX OPS</p>
+                <div class="social-links">
+                    <a href="https://github.com/gustavormartins" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/seu-linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:gustavoromaom178@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
         </header>
 
         <main>
-            <section class="enterprise-card">
-                <h2>RESUMO PROFISSIONAL</h2>
-                <p>Especialista em infraestrutura Linux e otimização de sistemas, com sólida formação em ADS e especialização em Gestão Industrial. Atualmente aplicado no setor de energia (Energisa), unindo visão estratégica industrial com soluções de software de alta eficiência.</p>
-            </section>
-
-            <section class="enterprise-card" id="projects-section">
-                <h2>PROJETOS & TECNOLOGIAS</h2>
-                <div id="project-grid"></div>
-            </section>
+            <h2 class="section-title"> > REPOSITÓRIOS_ATIVOS <span class="blink">_</span></h2>
+            <div id="repos-grid" class="grid-layout">
+                <div class="loading">Buscando dados no servidor...</div>
+            </div>
         </main>
 
         <footer>
-            <p>Engenharia de Software & Infraestrutura // 2026</p>
+            <p>SYSTEM.OP_MODE = "PROFESSIONAL"; // 2026</p>
         </footer>
     </div>
 
-    <script src="js/stars.js"></script> <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
