@@ -1,46 +1,1106 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Martins | Dev & System Ops</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gustavo Martins | Dev & System Ops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --green: #ccff00;
+  --green-dim: rgba(204,255,0,0.15);
+  --green-glow: rgba(204,255,0,0.4);
+  --black: #020202;
+  --surface: rgba(8,8,8,0.85);
+  --border: 1px solid rgba(204,255,0,0.25);
+  --text: #e8e8e8;
+  --muted: #666;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Bebas Neue', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom Cursor ── */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--green);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s;
+  mix-blend-mode: difference;
+}
+#cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.15s ease;
+  mix-blend-mode: difference;
+}
+
+/* ── Starfield Canvas ── */
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+/* ── Scanline Overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9990;
+}
+
+/* ── Blohsh SVG Character ── */
+#blohsh-char {
+  position: fixed;
+  bottom: -10px;
+  right: 30px;
+  width: 220px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 0 18px var(--green-glow));
+  animation: float 5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-18px) rotate(1deg); }
+}
+
+/* ── Layout ── */
+.wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 50px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  border: var(--border);
+  border-top: 3px solid var(--green);
+  padding: 40px 48px;
+  margin-bottom: 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: 'BLOHSH_OS';
+  position: absolute;
+  top: 12px; right: 20px;
+  font-size: 0.65rem;
+  color: var(--green);
+  opacity: 0.3;
+  letter-spacing: 4px;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px; width: 100%;
+  background: linear-gradient(90deg, var(--green), transparent);
+  opacity: 0.4;
+}
+
+.avatar-wrap {
+  position: relative;
+}
+
+#avatar {
+  width: 120px; height: 120px;
+  border: 2px solid var(--green);
+  object-fit: cover;
+  display: block;
+  image-rendering: crisp-edges;
+}
+
+.avatar-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--green-glow);
+  animation: pulse-border 3s ease infinite;
+}
+
+@keyframes pulse-border {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.1; transform: scale(1.04); }
+}
+
+.hero-content {}
+
+.hero-tag {
+  font-size: 0.65rem;
+  color: var(--green);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.9;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+h1 span { color: var(--green); }
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  pointer-events: none;
+}
+
+.glitch::before {
+  color: #ff2d78;
+  animation: glitch-a 4s infinite steps(1);
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+  left: 2px;
+}
+
+.glitch::after {
+  color: #00d4ff;
+  animation: glitch-b 4s infinite steps(1);
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+  left: -2px;
+}
+
+@keyframes glitch-a {
+  0%,95%,100% { opacity: 0; transform: none; }
+  96% { opacity: 1; transform: translate(-3px, 1px); }
+  97% { opacity: 0; }
+  98% { opacity: 1; transform: translate(2px, -1px); }
+  99% { opacity: 0; }
+}
+
+@keyframes glitch-b {
+  0%,93%,100% { opacity: 0; transform: none; }
+  94% { opacity: 1; transform: translate(3px, -2px); }
+  95% { opacity: 0; }
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.subtitle em {
+  color: var(--green);
+  font-style: normal;
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 1px;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.badge {
+  font-size: 0.62rem;
+  padding: 3px 10px;
+  border: 1px solid rgba(204,255,0,0.35);
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: rgba(204,255,0,0.05);
+}
+
+.socials a {
+  color: var(--muted);
+  font-size: 1.2rem;
+  margin-right: 18px;
+  transition: color 0.25s, text-shadow 0.25s;
+  text-decoration: none;
+}
+
+.socials a:hover {
+  color: var(--green);
+  text-shadow: 0 0 10px var(--green-glow);
+}
+
+/* ── Section Header ── */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+  margin-top: 70px;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  color: var(--green);
+}
+
+.section-head .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(204,255,0,0.4), transparent);
+}
+
+.section-head .num {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 3px;
+}
+
+/* ── Skills/About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.about-block {
+  background: var(--surface);
+  border: var(--border);
+  padding: 24px 28px;
+  position: relative;
+}
+
+.about-block h3 {
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+.about-block p {
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: #999;
+}
+
+.about-block p strong { color: var(--text); }
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  font-size: 0.62rem;
+  padding: 4px 12px;
+  border: 1px solid #222;
+  color: #aaa;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.pill:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+/* ── GitHub Repos Grid ── */
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.repo-card {
+  background: var(--surface);
+  border: var(--border);
+  padding: 22px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+
+.repo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--green);
+  transition: height 0.3s ease;
+}
+
+.repo-card:hover { 
+  border-color: rgba(204,255,0,0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px var(--green-dim);
+}
+
+.repo-card:hover::before { height: 100%; }
+
+.repo-lang-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.repo-card h3 {
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.repo-card p {
+  font-size: 0.73rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.repo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repo-link {
+  font-size: 0.65rem;
+  color: var(--green);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: text-shadow 0.2s;
+}
+
+.repo-link:hover { text-shadow: 0 0 8px var(--green-glow); }
+
+.repo-stars {
+  font-size: 0.65rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.repo-stars i { color: var(--green); }
+
+.loading-state {
+  grid-column: 1/-1;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  padding: 40px;
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.3; } }
+
+/* ── Projects ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: var(--border);
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--green);
+  transition: width 0.35s ease;
+}
+
+.project-card:hover { border-color: rgba(204,255,0,0.5); }
+.project-card:hover::after { width: 100%; }
+
+.project-cat {
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.project-card h3 {
+  font-size: 1.05rem;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.project-card p {
+  font-size: 0.75rem;
+  color: #777;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-tag {
+  font-size: 0.58rem;
+  padding: 2px 8px;
+  background: rgba(204,255,0,0.07);
+  border: 1px solid rgba(204,255,0,0.2);
+  color: rgba(204,255,0,0.7);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.project-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(204,255,0,0.3);
+  color: var(--green);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.project-link-btn:hover {
+  background: var(--green);
+  color: #000;
+}
+
+/* ── Contact ── */
+.contact-block {
+  background: var(--surface);
+  border: var(--border);
+  border-top: 3px solid var(--green);
+  padding: 40px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-block h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  letter-spacing: 4px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.contact-block p {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1px solid rgba(204,255,0,0.3);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+
+.contact-link:hover {
+  background: var(--green);
+  color: #000;
+  border-color: var(--green);
+}
+
+.contact-link i { font-size: 0.9rem; }
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+footer span { color: rgba(204,255,0,0.3); }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; }
+  .avatar-wrap { margin: 0 auto; }
+  .badge-row, .socials { justify-content: center; }
+  .about-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 2.8rem; }
+  #blohsh-char { width: 130px; right: 5px; }
+  .contact-block { padding: 28px 24px; }
+}
+</style>
 </head>
 <body>
 
-    <video autoplay muted loop id="bg-video">
-        <source src="assets/stars.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div> <img src="assets/blohsh.png" alt="Blohsh Logo" class="blohsh-char">
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-    <div class="main-container">
-        <header class="glass-panel">
-            <div id="profile-wrapper">
-                </div>
-            <div class="header-content">
-                <h1 class="glitch" data-text="GUSTAVO MARTINS">GUSTAVO MARTINS</h1>
-                <p class="subtitle">ADS // ENERGISA // LINUX OPS</p>
-                <div class="social-links">
-                    <a href="https://github.com/gustavormartins" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/seu-linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:gustavoromaom178@gmail.com"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </header>
+<!-- Starfield -->
+<canvas id="starfield"></canvas>
 
-        <main>
-            <h2 class="section-title"> > REPOSITÓRIOS_ATIVOS <span class="blink">_</span></h2>
-            <div id="repos-grid" class="grid-layout">
-                <div class="loading">Buscando dados no servidor...</div>
-            </div>
-        </main>
+<!-- Blohsh Character SVG -->
+<svg id="blohsh-char" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Body/hoodie shape -->
+  <ellipse cx="100" cy="320" rx="80" ry="22" fill="rgba(204,255,0,0.08)"/>
+  <!-- Shadow -->
+  <ellipse cx="100" cy="318" rx="70" ry="14" fill="rgba(204,255,0,0.05)" filter="url(#blur)"/>
+  <!-- Main body -->
+  <path d="M40 180 Q30 260 25 310 Q60 330 100 330 Q140 330 175 310 Q170 260 160 180 Q140 155 100 155 Q60 155 40 180Z"
+        fill="var(--green)" opacity="0.92"/>
+  <!-- Hoodie pocket -->
+  <path d="M70 260 Q100 280 130 260 L125 295 Q100 305 75 295 Z"
+        fill="rgba(0,0,0,0.35)"/>
+  <!-- Head -->
+  <ellipse cx="100" cy="110" rx="52" ry="58" fill="var(--green)" opacity="0.95"/>
+  <!-- Hood -->
+  <path d="M48 90 Q45 40 100 30 Q155 40 152 90 Q130 60 100 62 Q70 60 48 90Z"
+        fill="var(--green)" opacity="1"/>
+  <!-- Hood shadow inner -->
+  <path d="M55 100 Q55 55 100 50 Q145 55 145 100 Q130 72 100 73 Q70 72 55 100Z"
+        fill="rgba(0,0,0,0.2)"/>
+  <!-- Face / shadow area -->
+  <ellipse cx="100" cy="115" rx="36" ry="40" fill="rgba(0,0,0,0.55)"/>
+  <!-- Eyes -->
+  <ellipse cx="88" cy="108" rx="5" ry="6" fill="var(--green)" opacity="0.9"/>
+  <ellipse cx="112" cy="108" rx="5" ry="6" fill="var(--green)" opacity="0.9"/>
+  <!-- Pupil -->
+  <circle cx="89" cy="109" r="2.5" fill="#000"/>
+  <circle cx="113" cy="109" r="2.5" fill="#000"/>
+  <!-- Shine -->
+  <circle cx="90.5" cy="107.5" r="1" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="114.5" cy="107.5" r="1" fill="rgba(255,255,255,0.6)"/>
+  <!-- Mouth -->
+  <path d="M91 125 Q100 131 109 125" stroke="var(--green)" stroke-width="2" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- Left arm -->
+  <path d="M40 185 Q15 200 10 230 Q18 238 30 228 Q42 210 55 200Z"
+        fill="var(--green)" opacity="0.9"/>
+  <!-- Right arm -->
+  <path d="M160 185 Q185 200 190 230 Q182 238 170 228 Q158 210 145 200Z"
+        fill="var(--green)" opacity="0.9"/>
+  <!-- Glitch accent lines -->
+  <line x1="30" y1="195" x2="50" y2="195" stroke="rgba(0,212,255,0.5)" stroke-width="1"/>
+  <line x1="150" y1="210" x2="175" y2="210" stroke="rgba(255,45,120,0.5)" stroke-width="1"/>
+  <defs>
+    <filter id="blur"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+</svg>
 
-        <footer>
-            <p>SYSTEM.OP_MODE = "PROFESSIONAL"; // 2026</p>
-        </footer>
+<!-- Main -->
+<main class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="avatar-wrap">
+      <img id="avatar" src="https://github.com/gustavormartins.png" alt="Gustavo Martins" 
+           onerror="this.src='https://avatars.githubusercontent.com/u/0'">
     </div>
+    <div class="hero-content">
+      <p class="hero-tag">// Portfolio v2.0 — System Online</p>
+      <h1><span class="glitch" data-text="GUSTAVO MARTINS">GUSTAVO MARTINS</span></h1>
+      <p class="subtitle">
+        Dev & <em>System Ops</em> · ADS · <em>Energisa S/A</em>
+      </p>
+      <div class="badge-row">
+        <span class="badge">Linux Ops</span>
+        <span class="badge">Infraestrutura</span>
+        <span class="badge">Python</span>
+        <span class="badge">PowerShell</span>
+        <span class="badge">IoT</span>
+        <span class="badge">Aprendiz Industrial</span>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/gustavormartins" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/seu-linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:gustavoromaom178@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </header>
 
-    <script src="js/main.js"></script>
+  <!-- SOBRE -->
+  <section>
+    <div class="section-head">
+      <h2>// SOBRE</h2>
+      <div class="line"></div>
+      <span class="num">01</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-block">
+        <h3>Quem sou</h3>
+        <p>
+          Estudante de <strong>Análise e Desenvolvimento de Sistemas</strong> e 
+          aprendiz na <strong>Energisa S/A</strong> em Cataguases. Minha stack vai do 
+          kernel Linux até scripts de automação para ambientes corporativos. 
+          Apaixonado por performance, infraestrutura e tecnologia que resolve problemas reais.
+        </p>
+      </div>
+      <div class="about-block">
+        <h3>Stack técnica</h3>
+        <div class="skill-pills">
+          <span class="pill">Arch Linux</span>
+          <span class="pill">Bash / Shell</span>
+          <span class="pill">PowerShell</span>
+          <span class="pill">Python</span>
+          <span class="pill">HTML / CSS / JS</span>
+          <span class="pill">Rclone</span>
+          <span class="pill">Kernel Tuning</span>
+          <span class="pill">Git / GitHub</span>
+          <span class="pill">SCADA / CLP</span>
+          <span class="pill">IoT Concept</span>
+          <span class="pill">REST API</span>
+          <span class="pill">Discord.py</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS COMPLETOS -->
+  <section>
+    <div class="section-head">
+      <h2>// PROJETOS</h2>
+      <div class="line"></div>
+      <span class="num">02</span>
+    </div>
+    <div class="projects-grid" id="projects-container">
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Sistemas Operacionais</p>
+          <h3>BlohshOs</h3>
+          <p>Distribuição Linux customizada focada em otimização máxima de performance e criação de um workflow estelar. Ideal para arquiteturas entusiastas (Xeon/X99), com tuning de kernel e ambiente enxuto de desenvolvimento.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Arch Linux</span>
+            <span class="tech-tag">Kernel Tuning</span>
+            <span class="tech-tag">Bash</span>
+            <span class="tech-tag">Hardware X99</span>
+          </div>
+        </div>
+        <a href="#" class="project-link-btn" title="Em breve"><i class="fas fa-code-branch"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Infraestrutura · Windows</p>
+          <h3>Win-Optimize</h3>
+          <p>Conjunto de scripts avançados em PowerShell e Batch para remoção de bloatware, otimização de serviços e redução de latência em sistemas Windows. Extraindo o máximo de estabilidade e performance do hardware.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">PowerShell</span>
+            <span class="tech-tag">Batch</span>
+            <span class="tech-tag">Windows</span>
+            <span class="tech-tag">Automação</span>
+          </div>
+        </div>
+        <a href="https://github.com/gustavormartins/Win-Optimize" target="_blank" class="project-link-btn" title="Ver no GitHub"><i class="fab fa-github"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Infraestrutura · Cloud</p>
+          <h3>Migração Massiva · Rclone</h3>
+          <p>Projeto de infraestrutura real: transferência de 71.4 GB de dados do OneDrive para o Google Drive via linha de comando usando Rclone. Gerenciamento de credenciais OAuth, configuração de remotes e controle de integridade dos dados.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Rclone</span>
+            <span class="tech-tag">OneDrive</span>
+            <span class="tech-tag">Google Drive</span>
+            <span class="tech-tag">Shell</span>
+          </div>
+        </div>
+        <div class="project-link-btn" style="opacity:0.3; cursor:not-allowed;" title="Projeto privado"><i class="fas fa-lock"></i></div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Desenvolvimento Python</p>
+          <h3>Pinguim Nephalem</h3>
+          <p>Bot para Discord desenvolvido em Python com consumo de APIs da Blizzard. Foco na comunidade do Diablo III (Nephalem Rifts), processamento de dados de jogadores e automação de consultas em tempo real.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Discord.py</span>
+            <span class="tech-tag">REST API</span>
+            <span class="tech-tag">Blizzard API</span>
+            <span class="tech-tag">JSON</span>
+          </div>
+        </div>
+        <a href="#" class="project-link-btn" title="Em breve"><i class="fas fa-code"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Industrial · Software</p>
+          <h3>GimpLayer · Industrial Cataguases</h3>
+          <p>Projeto desenvolvido para a Industrial Cataguases S/A no setor têxtil. Escopo envolveu mapeamento e rastreabilidade de processos, aplicando conhecimentos de desenvolvimento diretamente no ambiente industrial.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Desenvolvimento</span>
+            <span class="tech-tag">Rastreabilidade</span>
+            <span class="tech-tag">Setor Têxtil</span>
+          </div>
+        </div>
+        <div class="project-link-btn" style="opacity:0.3; cursor:not-allowed;" title="Projeto corporativo"><i class="fas fa-building"></i></div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Web · IoT · SENAI</p>
+          <h3>SmartSneaker Project</h3>
+          <p>Conceito de IoT e tecnologia vestível desenvolvido como atividade no SENAI. Responsável pela reformulação do código front-end (HTML/CSS/JS) e interface de usuário (UI/UX) do projeto em colaboração com Pamela Evelim.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">HTML / CSS</span>
+            <span class="tech-tag">UI/UX</span>
+            <span class="tech-tag">IoT Concept</span>
+          </div>
+        </div>
+        <a href="https://github.com/pamelaevelim/SmartSneaker-Project" target="_blank" class="project-link-btn" title="Ver no GitHub"><i class="fab fa-github"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Web · Documentação</p>
+          <h3>Dashboard CLP &amp; SCADA</h3>
+          <p>Site documentando estudo de caso prático sobre automação industrial: Controladores Lógicos Programáveis (CLP) e sistemas supervisórios SCADA. Pesquisa técnica aplicada à realidade de uma elétrica de grande porte.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">HTML / CSS</span>
+            <span class="tech-tag">SCADA</span>
+            <span class="tech-tag">CLP</span>
+            <span class="tech-tag">Automação Industrial</span>
+          </div>
+        </div>
+        <a href="#" class="project-link-btn" title="Ver projeto"><i class="fas fa-external-link-alt"></i></a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-cat">Web · Front-End</p>
+          <h3>Site Romântico</h3>
+          <p>Projeto web construído do zero com HTML, CSS e JavaScript. Uma experiência interativa criada para ser um gesto romântico — demonstrando que código também pode ser uma linguagem de afeto.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS Animations</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+        </div>
+        <a href="#" class="project-link-btn" title="Ver projeto"><i class="fas fa-heart"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REPOSITÓRIOS GITHUB AO VIVO -->
+  <section>
+    <div class="section-head">
+      <h2>// GITHUB LIVE</h2>
+      <div class="line"></div>
+      <span class="num">03</span>
+    </div>
+    <div class="repos-grid" id="repos-grid">
+      <p class="loading-state">CONECTANDO AO SERVIDOR GITHUB...</p>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section style="margin-top:70px;">
+    <div class="contact-block">
+      <h2>VAMOS FALAR</h2>
+      <p>DISPONÍVEL PARA OPORTUNIDADES · PROJETOS · COLABORAÇÃO</p>
+      <div class="contact-links">
+        <a href="mailto:gustavoromaom178@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email</a>
+        <a href="https://github.com/gustavormartins" target="_blank" class="contact-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/seu-linkedin" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>GUSTAVO MARTINS · ADS · ENERGISA S/A · <span>CATAGUASES</span> · &copy; 2026</p>
+</footer>
+
+<script>
+// ── Cursor ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 5 + 'px';
+  cursor.style.top = my - 5 + 'px';
+});
+
+function animateCursor() {
+  rx += (mx - rx - 16) * 0.12;
+  ry += (my - ry - 16) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll('a, button, .repo-card, .project-card, .pill').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.transform = 'scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+  });
+});
+
+// ── Starfield Canvas ──
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const STAR_COUNT = 280;
+const stars = Array.from({ length: STAR_COUNT }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.5 + 0.2,
+  speed: Math.random() * 0.15 + 0.03,
+  opacity: Math.random() * 0.6 + 0.2,
+  twinkle: Math.random() * Math.PI * 2,
+  twinkleSpeed: Math.random() * 0.02 + 0.005,
+}));
+
+// A few bright "blohsh-green" stars
+const greenStars = Array.from({ length: 12 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 2 + 0.8,
+  speed: Math.random() * 0.08 + 0.02,
+  opacity: 0,
+  twinkle: Math.random() * Math.PI * 2,
+  twinkleSpeed: Math.random() * 0.015 + 0.008,
+}));
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Background gradient
+  const grad = ctx.createRadialGradient(
+    canvas.width * 0.5, canvas.height * 0.3, 0,
+    canvas.width * 0.5, canvas.height * 0.5, canvas.width * 0.75
+  );
+  grad.addColorStop(0, 'rgba(8, 8, 20, 1)');
+  grad.addColorStop(1, 'rgba(2, 2, 2, 1)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // White stars
+  stars.forEach(s => {
+    s.twinkle += s.twinkleSpeed;
+    const op = s.opacity * (0.5 + 0.5 * Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${op})`;
+    ctx.fill();
+    s.y += s.speed;
+    if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+  });
+
+  // Green accent stars
+  greenStars.forEach(s => {
+    s.twinkle += s.twinkleSpeed;
+    const op = 0.5 + 0.5 * Math.sin(s.twinkle);
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(204,255,0,${op * 0.8})`;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = 'rgba(204,255,0,0.4)';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    s.y += s.speed;
+    if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+  });
+
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ── GitHub API ──
+const GH_USER = 'gustavormartins';
+
+const LANG_COLORS = {
+  JavaScript: '#f1e05a', Python: '#3572A5', Shell: '#89e051',
+  PowerShell: '#012456', HTML: '#e34c26', CSS: '#563d7c',
+  Batchfile: '#C1F12E', 'Jupyter Notebook': '#DA5B0B',
+  TypeScript: '#2b7489', Lua: '#000080', default: '#ccff00'
+};
+
+async function loadRepos() {
+  const grid = document.getElementById('repos-grid');
+  try {
+    const res = await fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=12`);
+    if (!res.ok) throw new Error('GitHub API error');
+    const repos = await res.json();
+
+    if (!Array.isArray(repos) || repos.length === 0) {
+      grid.innerHTML = '<p class="loading-state">NENHUM REPOSITÓRIO ENCONTRADO.</p>';
+      return;
+    }
+
+    grid.innerHTML = '';
+    repos.forEach((repo, i) => {
+      const desc = repo.description || 'Projeto em desenvolvimento.';
+      const lang = repo.language || 'Dev';
+      const color = LANG_COLORS[lang] || LANG_COLORS.default;
+      const updatedDate = new Date(repo.updated_at).toLocaleDateString('pt-BR', { month:'short', year:'numeric' });
+
+      const card = document.createElement('div');
+      card.className = 'repo-card';
+      card.style.animationDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <div class="repo-meta">
+          <span class="repo-lang-dot" style="background:${color}"></span>
+          <span>${lang}</span>
+          <span style="margin-left:auto">${updatedDate}</span>
+        </div>
+        <h3>${repo.name}</h3>
+        <p>${desc.length > 110 ? desc.slice(0,110)+'…' : desc}</p>
+        <div class="repo-footer">
+          <a href="${repo.html_url}" target="_blank" rel="noopener" class="repo-link">VER CÓDIGO →</a>
+          <span class="repo-stars"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Entrance animation
+    grid.querySelectorAll('.repo-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 80 + i * 70);
+    });
+
+  } catch (e) {
+    grid.innerHTML = `<p class="loading-state" style="color:#ff6060;">ERRO: ${e.message.toUpperCase()}</p>`;
+  }
+}
+
+// Load avatar with fallback
+const avatarEl = document.getElementById('avatar');
+avatarEl.onerror = () => {
+  avatarEl.src = `https://ui-avatars.com/api/?name=GM&background=ccff00&color=000&size=200&bold=true&font-size=0.4`;
+};
+
+loadRepos();
+</script>
 </body>
 </html>
