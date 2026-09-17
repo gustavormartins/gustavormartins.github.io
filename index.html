@@ -17,41 +17,132 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
-    :root{--bg:#050505;--panel:#0a0a0a;--panel2:#111;--text:#f5f5f5;--muted:#8e8e8e;--line:#242424;--accent:#39ff14;--accent-soft:rgba(57,255,20,.10);--accent-strong:rgba(57,255,20,.18);--max:1160px;--mono:'JetBrains Mono',monospace;--sans:'Inter',system-ui,sans-serif}
-    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}body:selection{background:var(--accent);color:#000}a{color:inherit;text-decoration:none}.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:#000;padding:10px 14px;z-index:100}.skip:focus{left:8px}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(57,255,20,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,20,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 78%);z-index:-2}
-    body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 85% 12%,rgba(57,255,20,.08),transparent 28%),radial-gradient(circle at 15% 38%,rgba(57,255,20,.035),transparent 24%)}
+    :root{--bg:#030303;--panel:rgba(8,8,8,.84);--text:#f4f4f4;--muted:#8a8a8a;--line:#222;--accent:#39ff14;--accent-soft:rgba(57,255,20,.08);--max:1160px;--mono:'JetBrains Mono',monospace;--sans:'Inter',system-ui,sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+    body::selection{background:var(--accent);color:#000}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:#000;padding:10px 14px;z-index:100}.skip:focus{left:8px}
     .shell{width:min(calc(100% - 40px),var(--max));margin:auto}.mono{font-family:var(--mono)}
-    nav{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-family:var(--mono);font-weight:800;letter-spacing:-.04em;display:flex;align-items:center;gap:8px}.brand-mark{width:22px;height:22px;position:relative;display:inline-block}.brand-mark:before,.brand-mark:after{content:"";position:absolute;background:var(--accent);border-radius:2px}.brand-mark:before{width:6px;height:22px;left:8px;top:0;transform:rotate(45deg)}.brand-mark:after{width:22px;height:6px;left:0;top:8px;transform:rotate(-45deg)}.brand span:last-child{color:var(--accent)}.nav-links{display:flex;gap:22px;align-items:center}.nav-links a{font:500 .78rem var(--mono);color:var(--muted);transition:.2s}.nav-links a:hover,.nav-links a:focus{color:var(--accent)}.nav-cta{border:1px solid var(--accent);padding:9px 14px!important;color:var(--accent)!important;background:rgba(57,255,20,.04)}
-    .hero{padding:92px 0 86px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:58px;align-items:center}.eyebrow{font:600 .72rem var(--mono);color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:18px}.eyebrow .cursor{display:inline-block;width:8px;height:14px;background:var(--accent);margin-left:4px;vertical-align:-2px;animation:blink 1s steps(2,end) infinite}@keyframes blink{50%{opacity:0}}.hero h1{font-size:clamp(3rem,7vw,6.8rem);line-height:.9;letter-spacing:-.07em;max-width:900px}.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 28px rgba(57,255,20,.16)}.hero-copy{max-width:680px;margin-top:28px;color:#a7a7a7;font-size:1.05rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);padding:12px 17px;font-weight:650;font-size:.84rem;transition:.2s}.btn.primary{background:var(--accent);border-color:var(--accent);color:#000}.btn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 1px rgba(57,255,20,.18),0 10px 28px rgba(57,255,20,.08)}
-    .hero-visual{display:grid;grid-template-columns:1fr;gap:16px}.profile-panel{position:relative;border:1px solid #2a2a2a;background:linear-gradient(145deg,#111,#080808);padding:18px;overflow:hidden}.profile-panel:before{content:"GITHUB://gustavormartins";position:absolute;left:16px;top:12px;font:500 .62rem var(--mono);color:#5c5c5c;letter-spacing:.08em}.profile-frame{position:relative;margin-top:22px;aspect-ratio:1/1;display:grid;place-items:center;overflow:hidden;background:#090909;border:1px solid #1e1e1e}.profile-frame:before{content:"";position:absolute;inset:14px;border:1px dashed rgba(57,255,20,.24);border-radius:50%}.profile-frame:after{content:"";position:absolute;width:68%;height:68%;border:1px solid rgba(57,255,20,.08);border-radius:50%;box-shadow:0 0 60px rgba(57,255,20,.06) inset}.avatar{position:relative;width:72%;height:72%;object-fit:cover;z-index:2;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 0 7px #070707,0 0 32px rgba(57,255,20,.22)}.scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 12px rgba(57,255,20,.8);animation:scan 3.2s linear infinite}@keyframes scan{0%{top:18%}50%{top:82%}100%{top:18%}}.profile-meta{display:flex;justify-content:space-between;gap:10px;padding-top:14px;font:500 .64rem var(--mono);color:#757575}.profile-meta strong{color:var(--accent);font-weight:600}
-    .hero-card{border:1px solid #2a2a2a;background:linear-gradient(145deg,#0f0f0f,#080808);padding:22px;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;right:-18px;top:-18px;width:88px;height:88px;border:1px solid rgba(57,255,20,.12);transform:rotate(45deg)}.status{display:flex;align-items:center;gap:8px;color:#aaa;font:500 .72rem var(--mono);margin-bottom:24px}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}.terminal{font:400 .76rem/1.9 var(--mono);color:#707070}.terminal b{color:var(--text);font-weight:500}.terminal .green{color:var(--accent)}.terminal .dim{color:#484848}
-    section{padding:76px 0}.section-top{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}.section-num{font:500 .7rem var(--mono);color:var(--accent)}h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.045em}h2:after{content:"";display:inline-block;width:36px;height:3px;background:var(--accent);margin-left:14px;vertical-align:middle;box-shadow:0 0 12px rgba(57,255,20,.35)}.intro{max-width:740px;color:#999;margin-bottom:30px}
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{border:1px solid var(--line);background:var(--panel);padding:25px;position:relative}.card:before{content:"";position:absolute;left:0;top:0;width:36px;height:1px;background:var(--accent);opacity:.7}.card h3{font-size:1rem;margin-bottom:12px}.card p{color:#929292;font-size:.92rem}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font:500 .7rem var(--mono);color:#c5c5c5;border:1px solid #292929;padding:7px 10px;background:#0d0d0d;transition:.18s}.chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
-    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project{border:1px solid var(--line);background:var(--panel);padding:26px;display:flex;flex-direction:column;min-height:270px;transition:.22s;position:relative;overflow:hidden}.project:after{content:"";position:absolute;right:-34px;bottom:-34px;width:92px;height:92px;border:1px solid rgba(57,255,20,.07);transform:rotate(45deg)}.project:hover{border-color:#3f3f3f;transform:translateY(-3px)}.project.featured{border-color:rgba(57,255,20,.28);background:linear-gradient(145deg,rgba(57,255,20,.07),#0b0b0b)}.project-meta{font:500 .66rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}.project h3{font-size:1.25rem;margin-bottom:10px}.project p{color:#8d8d8d;font-size:.88rem}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:22px}.tag{font:500 .64rem var(--mono);padding:5px 8px;background:var(--accent-soft);color:#b8edab;border:1px solid rgba(57,255,20,.07)}.project-link{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font:600 .7rem var(--mono);color:var(--accent);width:max-content}.project-link:hover{text-decoration:underline}
-    .github-box{border:1px solid var(--line);background:linear-gradient(145deg,#0e0e0e,#090909);padding:30px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}.github-box:before{content:"git push origin main";position:absolute;right:22px;top:12px;font:500 .6rem var(--mono);color:#3e3e3e}.github-box p{color:#8d8d8d;max-width:700px}.github-box strong{color:var(--text)}
-    .contact{border:1px solid var(--line);background:linear-gradient(145deg,#101010,#080808);padding:52px;position:relative;overflow:hidden}.contact:after{content:"</>";position:absolute;right:5%;bottom:-15%;font:800 9rem var(--mono);color:rgba(57,255,20,.03)}.contact h2{max-width:750px}.contact p{color:#8e8e8e;max-width:620px;margin-top:16px}.contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.contact-links a{font:600 .72rem var(--mono);border:1px solid var(--line);padding:11px 14px;color:#bbb}.contact-links a:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* Animated Linux terminal background */
+    .terminal-bg{position:fixed;inset:0;z-index:-5;overflow:hidden;background:#020302;pointer-events:none;opacity:.95}
+    .terminal-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.97) 0%,rgba(3,3,3,.84) 38%,rgba(3,3,3,.89) 100%);z-index:2}
+    .terminal-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(57,255,20,.018) 4px);z-index:3;mix-blend-mode:screen}
+    .terminal-stream{position:absolute;inset:-12vh -4vw;display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:34px;transform:rotate(-3deg);filter:blur(.15px)}
+    .terminal-column{font:500 12px/2 var(--mono);color:rgba(57,255,20,.16);white-space:pre;animation:terminalFloat linear infinite}
+    .terminal-column:nth-child(1){animation-duration:24s}.terminal-column:nth-child(2){animation-duration:30s;animation-delay:-9s}.terminal-column:nth-child(3){animation-duration:27s;animation-delay:-15s}.terminal-column:nth-child(4){animation-duration:32s;animation-delay:-4s}
+    @keyframes terminalFloat{0%{transform:translateY(0)}50%{transform:translateY(-9vh)}100%{transform:translateY(0)}}
+    .terminal-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 0%,rgba(0,0,0,.34) 54%,rgba(0,0,0,.88) 100%);z-index:4}
+
+    /* Header */
+    nav{position:sticky;top:0;z-index:50;background:rgba(3,3,3,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(57,255,20,.12)}
+    .nav-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font:800 1rem var(--mono);letter-spacing:-.05em;display:inline-flex;align-items:center;color:#f2f2f2}
+    .brand span{color:var(--accent)}
+    .brand-cursor{display:inline-block;width:8px;height:17px;background:var(--accent);margin-left:6px;vertical-align:-2px;box-shadow:0 0 12px rgba(57,255,20,.55);animation:cursorBlink .85s steps(2,end) infinite}
+    @keyframes cursorBlink{50%{opacity:0}}
+    .nav-links{display:flex;gap:22px;align-items:center}.nav-links a{font:500 .78rem var(--mono);color:var(--muted);transition:.2s}.nav-links a:hover,.nav-links a:focus{color:var(--accent)}
+    .nav-cta{border:1px solid rgba(57,255,20,.55);padding:9px 14px!important;color:var(--accent)!important;background:rgba(57,255,20,.035)}
+
+    /* Hero */
+    .hero{min-height:calc(100vh - 70px);padding:74px 0 76px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr);gap:54px;align-items:center;position:relative}
+    .hero::before{content:"";position:absolute;left:-12vw;right:-12vw;top:16%;height:1px;background:linear-gradient(90deg,transparent,rgba(57,255,20,.14),transparent);pointer-events:none}
+    .eyebrow{font:600 .72rem var(--mono);color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:19px}.eyebrow::before{content:"gustavo@blohsh:~$ ";color:#666;letter-spacing:.03em}
+    .hero h1{font-size:clamp(3.1rem,7vw,6.9rem);line-height:.9;letter-spacing:-.075em;max-width:920px}.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 34px rgba(57,255,20,.17)}
+    .hero-copy{max-width:700px;margin-top:28px;color:#a0a0a0;font-size:1.03rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;gap:9px;border:1px solid #2b2b2b;padding:12px 17px;font-weight:650;font-size:.84rem;background:rgba(5,5,5,.62);transition:.2s}.btn.primary{background:var(--accent);border-color:var(--accent);color:#000}.btn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 1px rgba(57,255,20,.14),0 10px 28px rgba(57,255,20,.08)}
+
+    /* Right visual stack */
+    .hero-visual{display:grid;gap:16px;position:relative}
+    .brand-card{position:relative;min-height:340px;border:1px solid rgba(57,255,20,.17);background:linear-gradient(145deg,rgba(10,14,10,.92),rgba(5,7,5,.9));display:grid;place-items:center;overflow:hidden}
+    .brand-card::before{content:"BLOHSH // SYSTEM IDENTITY";position:absolute;left:18px;top:14px;font:600 .6rem var(--mono);letter-spacing:.13em;color:#555}.brand-card::after{content:"00 01 10 01 / 111 000 / 010 101";position:absolute;right:18px;bottom:14px;font:500 .57rem var(--mono);color:#353535}
+    .logo-halo{position:absolute;width:62%;aspect-ratio:1;border:1px dashed rgba(57,255,20,.18);border-radius:50%;animation:haloSpin 16s linear infinite}.logo-halo::after{content:"";position:absolute;inset:12%;border:1px solid rgba(57,255,20,.08);border-radius:50%}@keyframes haloSpin{to{transform:rotate(360deg)}}
+    .blohsh-logo{width:min(210px,48%);height:auto;z-index:2;filter:drop-shadow(0 0 13px rgba(57,255,20,.38));animation:logoFloat 4.8s ease-in-out infinite;transform-origin:center}
+    .blohsh-logo .logo-body{fill:var(--accent);animation:logoPulse 3.2s ease-in-out infinite}.blohsh-logo .logo-head{fill:var(--accent)}.blohsh-logo .logo-limb{fill:var(--accent);transform-box:fill-box;transform-origin:top center}.blohsh-logo .left-arm{animation:armLeft 3.6s ease-in-out infinite}.blohsh-logo .right-arm{animation:armRight 4s ease-in-out infinite}.blohsh-logo .left-leg{animation:legLeft 4.3s ease-in-out infinite}.blohsh-logo .right-leg{animation:legRight 4.1s ease-in-out infinite}
+    @keyframes logoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.018)}}@keyframes logoPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}@keyframes armLeft{0%,100%{transform:rotate(0)}50%{transform:rotate(2deg)}}@keyframes armRight{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg)}}@keyframes legLeft{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.5deg)}}@keyframes legRight{0%,100%{transform:rotate(0)}50%{transform:rotate(1.5deg)}}
+    .brand-scan{position:absolute;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 13px rgba(57,255,20,.7);opacity:.7;animation:brandScan 3.8s linear infinite}@keyframes brandScan{0%{top:18%;opacity:0}14%{opacity:.7}50%{top:82%;opacity:.7}86%{opacity:.7}100%{top:18%;opacity:0}}
+
+    .profile-panel{border:1px solid #252525;background:rgba(7,7,7,.87);padding:18px;position:relative;overflow:hidden}.profile-panel::before{content:"github.com/gustavormartins";position:absolute;left:16px;top:12px;font:600 .6rem var(--mono);color:#505050;letter-spacing:.08em}
+    .profile-frame{position:relative;margin-top:22px;aspect-ratio:1.52/1;display:grid;place-items:center;overflow:hidden;background:#070807;border:1px solid #191919}.profile-frame::before{content:"";position:absolute;inset:14px;border:1px dashed rgba(57,255,20,.18);border-radius:50%}.profile-frame::after{content:"";position:absolute;width:68%;height:68%;border:1px solid rgba(57,255,20,.07);border-radius:50%;box-shadow:0 0 60px rgba(57,255,20,.05) inset}
+    .avatar{position:relative;width:47%;height:72%;object-fit:cover;z-index:2;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 0 7px #060606,0 0 32px rgba(57,255,20,.2);animation:avatarBreathe 5s ease-in-out infinite}@keyframes avatarBreathe{50%{transform:scale(1.018)}}
+    .scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 12px rgba(57,255,20,.8);animation:scan 3.2s linear infinite}@keyframes scan{0%{top:17%}50%{top:83%}100%{top:17%}}
+    .profile-meta{display:flex;justify-content:space-between;gap:10px;padding-top:14px;font:500 .62rem var(--mono);color:#727272}.profile-meta strong{color:var(--accent);font-weight:600}
+
+    .hero-card{border:1px solid #252525;background:rgba(7,7,7,.88);padding:20px;position:relative;overflow:hidden}.hero-card::before{content:"LINUX // ONLINE";position:absolute;right:18px;top:12px;font:600 .58rem var(--mono);color:#3d3d3d}.status{display:flex;align-items:center;gap:8px;color:#aaa;font:500 .7rem var(--mono);margin-bottom:18px}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
+    .terminal{font:400 .73rem/1.9 var(--mono);color:#707070}.terminal b{color:var(--text);font-weight:500}.terminal .green{color:var(--accent)}.terminal .dim{color:#454545}.prompt{color:#5b5b5b}.prompt strong{color:var(--accent);font-weight:600}
+
+    section{padding:76px 0}.section-top{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}.section-num{font:500 .7rem var(--mono);color:var(--accent)}h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.045em}h2::after{content:"";display:inline-block;width:36px;height:3px;background:var(--accent);margin-left:14px;vertical-align:middle;box-shadow:0 0 12px rgba(57,255,20,.35)}.intro{max-width:740px;color:#999;margin-bottom:30px}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{border:1px solid var(--line);background:var(--panel);padding:25px;position:relative;backdrop-filter:blur(10px)}.card::before{content:"";position:absolute;left:0;top:0;width:36px;height:1px;background:var(--accent);opacity:.7}.card h3{font-size:1rem;margin-bottom:12px}.card p{color:#929292;font-size:.92rem}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font:500 .7rem var(--mono);color:#c5c5c5;border:1px solid #292929;padding:7px 10px;background:#0b0b0b;transition:.18s}.chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project{border:1px solid var(--line);background:var(--panel);padding:26px;display:flex;flex-direction:column;min-height:270px;transition:.22s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}.project::after{content:"";position:absolute;right:-34px;bottom:-34px;width:92px;height:92px;border:1px solid rgba(57,255,20,.07);transform:rotate(45deg)}.project:hover{border-color:#3f3f3f;transform:translateY(-3px)}.project.featured{border-color:rgba(57,255,20,.28);background:linear-gradient(145deg,rgba(57,255,20,.065),rgba(8,8,8,.9))}.project-meta{font:500 .66rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}.project h3{font-size:1.25rem;margin-bottom:10px}.project p{color:#8d8d8d;font-size:.88rem}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:22px}.tag{font:500 .64rem var(--mono);padding:5px 8px;background:var(--accent-soft);color:#b8edab;border:1px solid rgba(57,255,20,.07)}.project-link{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font:600 .7rem var(--mono);color:var(--accent);width:max-content}.project-link:hover{text-decoration:underline}
+    .github-box{border:1px solid var(--line);background:linear-gradient(145deg,rgba(14,14,14,.9),rgba(8,8,8,.9));padding:30px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}.github-box::before{content:"git push origin main";position:absolute;right:22px;top:12px;font:500 .6rem var(--mono);color:#3e3e3e}.github-box p{color:#8d8d8d;max-width:700px}.github-box strong{color:var(--text)}
+    .contact{border:1px solid var(--line);background:linear-gradient(145deg,rgba(16,16,16,.92),rgba(8,8,8,.92));padding:52px;position:relative;overflow:hidden}.contact::after{content:"</>";position:absolute;right:5%;bottom:-15%;font:800 9rem var(--mono);color:rgba(57,255,20,.03)}.contact h2{max-width:750px}.contact p{color:#8e8e8e;max-width:620px;margin-top:16px}.contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.contact-links a{font:600 .72rem var(--mono);border:1px solid var(--line);padding:11px 14px;color:#bbb}.contact-links a:hover{border-color:var(--accent);color:var(--accent)}
     footer{padding:45px 0 65px;border-top:1px solid var(--line);color:#666;font:400 .66rem var(--mono);display:flex;justify-content:space-between;gap:20px}footer span{color:#aaa}.footer-accent{color:var(--accent)!important}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:30px;padding-top:72px}.hero-visual{grid-template-columns:1fr 1fr;align-items:stretch}.hero-card{height:100%}.about,.projects{grid-template-columns:1fr}.nav-links{gap:12px}.nav-links a:not(.nav-cta){display:none}.contact{padding:32px 24px}}
-    @media(max-width:640px){.shell{width:min(calc(100% - 28px),var(--max))}.hero-visual{grid-template-columns:1fr}.hero h1{font-size:3.2rem}.hero-copy{font-size:.98rem}.github-box{align-items:flex-start;flex-direction:column}.profile-panel{max-width:420px}section{padding:58px 0}footer{flex-direction:column}.actions .btn{width:100%;justify-content:center}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project,.btn,.chip{transition:none}.scan,.eyebrow .cursor{animation:none}}
+
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:28px;min-height:auto;padding-top:72px}.hero-visual{grid-template-columns:1fr 1fr;align-items:stretch}.brand-card{min-height:310px}.hero-card{height:100%}.about,.projects{grid-template-columns:1fr}.nav-links{gap:12px}.nav-links a:not(.nav-cta){display:none}.contact{padding:32px 24px}.terminal-stream{grid-template-columns:repeat(2,minmax(280px,1fr))}}
+    @media(max-width:640px){.shell{width:min(calc(100% - 28px),var(--max))}.hero{padding-top:60px}.hero-visual{grid-template-columns:1fr}.brand-card{min-height:290px}.blohsh-logo{width:170px}.hero h1{font-size:3.2rem}.hero-copy{font-size:.98rem}.github-box{align-items:flex-start;flex-direction:column}.profile-panel{max-width:420px}section{padding:58px 0}footer{flex-direction:column}.actions .btn{width:100%;justify-content:center}.terminal-stream{grid-template-columns:1fr;opacity:.75}.terminal-column:nth-child(n+2){display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project,.btn,.chip{transition:none}.scan,.logo-halo,.blohsh-logo,.brand-scan,.brand-cursor,.terminal-column,.avatar{animation:none}}
   </style>
 </head>
 <body>
+  <div class="terminal-bg" aria-hidden="true">
+    <div class="terminal-stream">
+      <div class="terminal-column">gustavo@blohsh:~$ neofetch\nOS: BLOHSH DEV ENV\nKERNEL: Linux\nSHELL: fish\nWM: Hyprland\nCPU: developer\nSTATUS: online\n\n gustavo@blohsh:~$ git status\nOn branch main\nnothing to commit\n\n gustavo@blohsh:~$ python3 ./build.py\n[ ok ] compile\n[ ok ] bundle\n[ ok ] deploy\n\n gustavo@blohsh:~$</div>
+      <div class="terminal-column">gustavo@blohsh:~$ ls -la\ndrwxr-xr-x projects\ndrwxr-xr-x linux\ndrwxr-xr-x automation\ndrwxr-xr-x web\n-rw-r--r-- README.md\n-rw-r--r-- portfolio.html\n\n gustavo@blohsh:~$ echo "keep building"\nkeep building\n\n gustavo@blohsh:~$ systemctl status portfolio\n● portfolio.service - active\n  Active: running\n\n gustavo@blohsh:~$</div>
+      <div class="terminal-column">gustavo@blohsh:~$ htop\nPID  USER      CPU  MEM  COMMAND\n108  gustavo    7%   2%  code\n221  gustavo    3%   1%  git\n304  gustavo    2%   1%  python\n\n gustavo@blohsh:~$ git log --oneline\n9af21d4 refine-ui\n52b81fa add-linux-theme\n14c0de1 init-portfolio\n\n gustavo@blohsh:~$</div>
+      <div class="terminal-column">gustavo@blohsh:~$ cat /etc/blohsh.conf\nTHEME=neon-green\nACCENT=#39ff14\nFONT=JetBrains Mono\nMODE=developer\nANIMATION=enabled\n\n gustavo@blohsh:~$ ./animate.sh\nterminal ........ ok\nblohsh .......... ok\ncursor .......... ok\nprofile .......... ok\n\n gustavo@blohsh:~$</div>
+    </div>
+    <div class="terminal-vignette"></div>
+  </div>
+
   <a class="skip" href="#main">Pular para o conteúdo</a>
-  <nav aria-label="Navegação principal"><div class="shell nav-inner"><a class="brand" href="/" aria-label="Gustavo Martins, início"><i class="brand-mark" aria-hidden="true"></i><span>GM<span>.</span></span></a><div class="nav-links"><a href="#sobre">Sobre</a><a href="#projetos">Projetos</a><a href="#stack">Stack</a><a href="#contato" class="nav-cta">Contato</a></div></div></nav>
+  <nav aria-label="Navegação principal">
+    <div class="shell nav-inner">
+      <a class="brand" href="/" aria-label="Gustavo Martins, início">GM<span>.</span><i class="brand-cursor" aria-hidden="true"></i></a>
+      <div class="nav-links"><a href="#sobre">Sobre</a><a href="#projetos">Projetos</a><a href="#stack">Stack</a><a href="#contato" class="nav-cta">Contato</a></div>
+    </div>
+  </nav>
+
   <main id="main">
     <div class="shell">
       <header class="hero">
         <div>
-          <p class="eyebrow">software · automation · linux <span class="cursor" aria-hidden="true"></span></p>
+          <p class="eyebrow">software · automation · linux</p>
           <h1>Gustavo Romão <em>Martins</em></h1>
           <p class="hero-copy">Analista de sistemas com foco em desenvolvimento, automação, Linux e infraestrutura. Transformo problemas técnicos em soluções simples, funcionais e sustentáveis.</p>
           <div class="actions"><a class="btn primary" href="#projetos">Ver projetos <i class="fa-solid fa-arrow-down"></i></a><a class="btn" href="/linkedin" rel="noopener">LinkedIn <i class="fa-brands fa-linkedin"></i></a><a class="btn" href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub <i class="fa-brands fa-github"></i></a></div>
         </div>
+
         <div class="hero-visual">
-          <aside class="profile-panel" aria-label="Foto de perfil do GitHub"><div class="profile-frame"><img class="avatar" src="https://github.com/gustavormartins.png?size=640" alt="Foto de perfil de Gustavo Romão Martins" loading="eager"><span class="scan" aria-hidden="true"></span></div><div class="profile-meta"><span>github.com/<strong>gustavormartins</strong></span><span>PROFILE // ONLINE</span></div></aside>
-          <aside class="hero-card" aria-label="Resumo profissional"><div class="status"><span class="dot"></span> SYSTEM ONLINE</div><div class="terminal"><div><span class="green">$</span> whoami</div><div><b>gustavormartins</b></div><br><div><span class="green">$</span> focus</div><div>software / automation / linux</div><br><div><span class="green">$</span> stack</div><div>python / javascript / shell</div><br><div><span class="green">$</span> status</div><div><span class="green">available</span><span class="dim">_</span></div></div></aside>
+          <aside class="brand-card" aria-label="Identidade Blohsh">
+            <span class="logo-halo" aria-hidden="true"></span>
+            <svg class="blohsh-logo" viewBox="0 0 120 170" role="img" aria-label="Logo Blohsh estilizada">
+              <circle class="logo-head" cx="60" cy="20" r="14"></circle>
+              <rect class="logo-limb left-arm" x="27" y="42" width="17" height="66" rx="8.5"></rect>
+              <rect class="logo-body" x="42" y="39" width="36" height="76" rx="17"></rect>
+              <rect class="logo-limb right-arm" x="76" y="40" width="17" height="70" rx="8.5"></rect>
+              <rect class="logo-limb left-leg" x="43" y="102" width="16" height="58" rx="8"></rect>
+              <rect class="logo-limb right-leg" x="62" y="108" width="16" height="52" rx="8"></rect>
+            </svg>
+            <span class="brand-scan" aria-hidden="true"></span>
+          </aside>
+
+          <aside class="profile-panel" aria-label="Foto de perfil do GitHub">
+            <div class="profile-frame"><img class="avatar" src="https://github.com/gustavormartins.png?size=640" alt="Foto de perfil de Gustavo Romão Martins" loading="eager"><span class="scan" aria-hidden="true"></span></div>
+            <div class="profile-meta"><span>github.com/<strong>gustavormartins</strong></span><span>PROFILE // ONLINE</span></div>
+          </aside>
+
+          <aside class="hero-card" aria-label="Resumo profissional">
+            <div class="status"><span class="dot"></span> SYSTEM ONLINE</div>
+            <div class="terminal">
+              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ whoami</div><div><b>gustavormartins</b></div>
+              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ focus</div><div>software / automation / linux</div>
+              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ stack</div><div>python / javascript / shell</div>
+              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ status</div><div><span class="green">available</span><span class="dim">_</span></div>
+            </div>
+          </aside>
         </div>
       </header>
 
@@ -72,5 +163,25 @@
     </div>
   </main>
   <footer class="shell"><span>Gustavo Romão Martins · ADS · 2026</span><span class="mono">built with HTML / CSS / JS · <span class="footer-accent">blohsh.dev</span></span></footer>
+
+  <script>
+    const columns = document.querySelectorAll('.terminal-column');
+    const commands = ['git status','git pull origin main','npm run dev','python3 main.py','systemctl status ssh','fastfetch','ls -la','uname -a','top','git log --oneline'];
+    const prompt = 'gustavo@blohsh:~$ ';
+    columns.forEach((column,index)=>{
+      let tick=0;
+      setInterval(()=>{
+        tick++;
+        if(tick%3!==0) return;
+        const command=commands[Math.floor(Math.random()*commands.length)];
+        const line=document.createElement('div');
+        line.textContent=prompt+command;
+        line.style.opacity=(.08+Math.random()*.14).toFixed(2);
+        line.style.transform=`translateX(${(Math.random()-.5)*18}px)`;
+        column.appendChild(line);
+        while(column.childElementCount>18) column.removeChild(column.firstElementChild);
+      },2800+index*240);
+    });
+  </script>
 </body>
 </html>
