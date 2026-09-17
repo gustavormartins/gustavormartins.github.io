@@ -1,7 +1,8 @@
 {
   "redirects": [
     { "source": "/github", "destination": "https://github.com/gustavormartins", "permanent": false },
-    { "source": "/linkedin", "destination": "https://www.linkedin.com/in/gustavormartins/", "permanent": false }
+    { "source": "/linkedin", "destination": "https://www.linkedin.com/in/gustavoromaomartins2005/", "permanent": false },
+    { "source": "/email", "destination": "mailto:gustavoromaom178@hotmail.com", "permanent": false }
   ],
   "headers": [
     {
