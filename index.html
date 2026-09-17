@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#030303">
   <meta name="description" content="Portfólio de Gustavo Romão Martins — desenvolvimento de software, automação, Linux, infraestrutura e projetos web.">
   <meta name="author" content="Gustavo Romão Martins">
   <meta property="og:type" content="website">
@@ -17,91 +17,267 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
-    :root{--bg:#030303;--panel:rgba(8,8,8,.84);--text:#f4f4f4;--muted:#8a8a8a;--line:#222;--accent:#39ff14;--accent-soft:rgba(57,255,20,.08);--max:1160px;--mono:'JetBrains Mono',monospace;--sans:'Inter',system-ui,sans-serif}
+    :root{--bg:#030303;--panel:rgba(7,8,7,.88);--text:#f4f4f4;--muted:#898989;--line:#222;--accent:#39ff14;--accent-soft:rgba(57,255,20,.08);--max:1160px;--mono:'JetBrains Mono',monospace;--sans:'Inter',system-ui,sans-serif}
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
     body::selection{background:var(--accent);color:#000}
     a{color:inherit;text-decoration:none}
-    button{font:inherit}
-    .skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:#000;padding:10px 14px;z-index:100}.skip:focus{left:8px}
-    .shell{width:min(calc(100% - 40px),var(--max));margin:auto}.mono{font-family:var(--mono)}
+    .shell{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .mono{font-family:var(--mono)}
 
-    /* Animated Linux terminal background */
-    .terminal-bg{position:fixed;inset:0;z-index:-5;overflow:hidden;background:#020302;pointer-events:none;opacity:.95}
-    .terminal-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.97) 0%,rgba(3,3,3,.84) 38%,rgba(3,3,3,.89) 100%);z-index:2}
-    .terminal-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(57,255,20,.018) 4px);z-index:3;mix-blend-mode:screen}
-    .terminal-stream{position:absolute;inset:-12vh -4vw;display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:34px;transform:rotate(-3deg);filter:blur(.15px)}
-    .terminal-column{font:500 12px/2 var(--mono);color:rgba(57,255,20,.16);white-space:pre;animation:terminalFloat linear infinite}
-    .terminal-column:nth-child(1){animation-duration:24s}.terminal-column:nth-child(2){animation-duration:30s;animation-delay:-9s}.terminal-column:nth-child(3){animation-duration:27s;animation-delay:-15s}.terminal-column:nth-child(4){animation-duration:32s;animation-delay:-4s}
-    @keyframes terminalFloat{0%{transform:translateY(0)}50%{transform:translateY(-9vh)}100%{transform:translateY(0)}}
-    .terminal-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 0%,rgba(0,0,0,.34) 54%,rgba(0,0,0,.88) 100%);z-index:4}
+    /* Linux terminal environment */
+    .terminal-bg{position:fixed;inset:0;z-index:-20;overflow:hidden;background:#010201;pointer-events:none}
+    .terminal-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,2,1,.98) 0%,rgba(1,2,1,.84) 42%,rgba(1,2,1,.94) 100%);z-index:2}
+    .terminal-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(57,255,20,.018) 4px);z-index:3}
+    .terminal-stream{position:absolute;inset:-18vh -4vw;display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:36px;transform:rotate(-2.5deg);opacity:.78}
+    .terminal-column{font:500 12px/2.02 var(--mono);color:rgba(57,255,20,.12);white-space:pre;animation:terminalDrift linear infinite}
+    .terminal-column:nth-child(1){animation-duration:28s}.terminal-column:nth-child(2){animation-duration:34s;animation-delay:-8s}.terminal-column:nth-child(3){animation-duration:31s;animation-delay:-17s}.terminal-column:nth-child(4){animation-duration:36s;animation-delay:-24s}
+    @keyframes terminalDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-11vh)}}
+    .terminal-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,transparent 0%,rgba(0,0,0,.34) 47%,rgba(0,0,0,.9) 100%);z-index:4}
 
-    /* Header */
-    nav{position:sticky;top:0;z-index:50;background:rgba(3,3,3,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(57,255,20,.12)}
+    nav{position:sticky;top:0;z-index:50;background:rgba(3,3,3,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(57,255,20,.12)}
     .nav-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font:800 1rem var(--mono);letter-spacing:-.05em;display:inline-flex;align-items:center;color:#f2f2f2}
-    .brand span{color:var(--accent)}
-    .brand-cursor{display:inline-block;width:8px;height:17px;background:var(--accent);margin-left:6px;vertical-align:-2px;box-shadow:0 0 12px rgba(57,255,20,.55);animation:cursorBlink .85s steps(2,end) infinite}
+    .brand{display:inline-flex;align-items:center;gap:9px;font:800 1rem var(--mono);letter-spacing:-.055em;color:#f3f3f3}
+    .brand-logo{width:22px;height:27px;display:block;overflow:visible;filter:drop-shadow(0 0 7px rgba(57,255,20,.28));animation:brandLogoFloat 4.4s ease-in-out infinite;transform-origin:50% 55%}
+    .brand-logo .b{fill:var(--accent)}
+    .brand-logo .h{fill:var(--accent);transform-origin:50% 50%}
+    @keyframes brandLogoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.04)}}
+    .brand-text{display:inline-flex;align-items:center;color:#f3f3f3}
+    .brand-text .accent{color:var(--accent)}
+    .brand-cursor{display:inline-block;width:7px;height:16px;margin-left:5px;background:var(--accent);box-shadow:0 0 11px rgba(57,255,20,.55);animation:cursorBlink .82s steps(2,end) infinite}
     @keyframes cursorBlink{50%{opacity:0}}
-    .nav-links{display:flex;gap:22px;align-items:center}.nav-links a{font:500 .78rem var(--mono);color:var(--muted);transition:.2s}.nav-links a:hover,.nav-links a:focus{color:var(--accent)}
-    .nav-cta{border:1px solid rgba(57,255,20,.55);padding:9px 14px!important;color:var(--accent)!important;background:rgba(57,255,20,.035)}
+    .nav-links{display:flex;gap:22px;align-items:center}
+    .nav-links a{font:500 .78rem var(--mono);color:var(--muted);transition:.2s}
+    .nav-links a:hover,.nav-links a:focus{color:var(--accent)}
+    .nav-cta{border:1px solid rgba(57,255,20,.5);padding:9px 14px!important;color:var(--accent)!important;background:rgba(57,255,20,.03)}
 
-    /* Hero */
-    .hero{min-height:calc(100vh - 70px);padding:74px 0 76px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr);gap:54px;align-items:center;position:relative}
-    .hero::before{content:"";position:absolute;left:-12vw;right:-12vw;top:16%;height:1px;background:linear-gradient(90deg,transparent,rgba(57,255,20,.14),transparent);pointer-events:none}
-    .eyebrow{font:600 .72rem var(--mono);color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:19px}.eyebrow::before{content:"gustavo@blohsh:~$ ";color:#666;letter-spacing:.03em}
-    .hero h1{font-size:clamp(3.1rem,7vw,6.9rem);line-height:.9;letter-spacing:-.075em;max-width:920px}.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 34px rgba(57,255,20,.17)}
-    .hero-copy{max-width:700px;margin-top:28px;color:#a0a0a0;font-size:1.03rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-    .btn{display:inline-flex;align-items:center;gap:9px;border:1px solid #2b2b2b;padding:12px 17px;font-weight:650;font-size:.84rem;background:rgba(5,5,5,.62);transition:.2s}.btn.primary{background:var(--accent);border-color:var(--accent);color:#000}.btn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 1px rgba(57,255,20,.14),0 10px 28px rgba(57,255,20,.08)}
+    main{position:relative;z-index:1}
+    .hero{min-height:calc(100vh - 70px);padding:76px 0 80px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:54px;align-items:center;position:relative}
+    .hero::before{content:"";position:absolute;left:-12vw;right:-12vw;top:18%;height:1px;background:linear-gradient(90deg,transparent,rgba(57,255,20,.12),transparent);pointer-events:none}
+    .eyebrow{font:600 .71rem var(--mono);color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+    .eyebrow::before{content:"gustavo@blohsh:~$ ";color:#676767;letter-spacing:.02em}
+    .hero h1{font-size:clamp(3.1rem,7vw,6.8rem);line-height:.9;letter-spacing:-.075em;max-width:920px}
+    .hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 34px rgba(57,255,20,.17)}
+    .hero-copy{max-width:700px;margin-top:28px;color:#a0a0a0;font-size:1.03rem}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;gap:9px;border:1px solid #2b2b2b;padding:12px 17px;font-weight:650;font-size:.84rem;background:rgba(4,4,4,.68);transition:.2s}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#000}
+    .btn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 1px rgba(57,255,20,.14),0 10px 28px rgba(57,255,20,.08)}
 
-    /* Right visual stack */
-    .hero-visual{display:grid;gap:16px;position:relative}
-    .brand-card{position:relative;min-height:340px;border:1px solid rgba(57,255,20,.17);background:linear-gradient(145deg,rgba(10,14,10,.92),rgba(5,7,5,.9));display:grid;place-items:center;overflow:hidden}
-    .brand-card::before{content:"BLOHSH // SYSTEM IDENTITY";position:absolute;left:18px;top:14px;font:600 .6rem var(--mono);letter-spacing:.13em;color:#555}.brand-card::after{content:"00 01 10 01 / 111 000 / 010 101";position:absolute;right:18px;bottom:14px;font:500 .57rem var(--mono);color:#353535}
-    .logo-halo{position:absolute;width:62%;aspect-ratio:1;border:1px dashed rgba(57,255,20,.18);border-radius:50%;animation:haloSpin 16s linear infinite}.logo-halo::after{content:"";position:absolute;inset:12%;border:1px solid rgba(57,255,20,.08);border-radius:50%}@keyframes haloSpin{to{transform:rotate(360deg)}}
-    .blohsh-logo{width:min(210px,48%);height:auto;z-index:2;filter:drop-shadow(0 0 13px rgba(57,255,20,.38));animation:logoFloat 4.8s ease-in-out infinite;transform-origin:center}
-    .blohsh-logo .logo-body{fill:var(--accent);animation:logoPulse 3.2s ease-in-out infinite}.blohsh-logo .logo-head{fill:var(--accent)}.blohsh-logo .logo-limb{fill:var(--accent);transform-box:fill-box;transform-origin:top center}.blohsh-logo .left-arm{animation:armLeft 3.6s ease-in-out infinite}.blohsh-logo .right-arm{animation:armRight 4s ease-in-out infinite}.blohsh-logo .left-leg{animation:legLeft 4.3s ease-in-out infinite}.blohsh-logo .right-leg{animation:legRight 4.1s ease-in-out infinite}
-    @keyframes logoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.018)}}@keyframes logoPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}@keyframes armLeft{0%,100%{transform:rotate(0)}50%{transform:rotate(2deg)}}@keyframes armRight{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg)}}@keyframes legLeft{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.5deg)}}@keyframes legRight{0%,100%{transform:rotate(0)}50%{transform:rotate(1.5deg)}}
-    .brand-scan{position:absolute;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 13px rgba(57,255,20,.7);opacity:.7;animation:brandScan 3.8s linear infinite}@keyframes brandScan{0%{top:18%;opacity:0}14%{opacity:.7}50%{top:82%;opacity:.7}86%{opacity:.7}100%{top:18%;opacity:0}}
+    .hero-visual{display:grid;gap:16px}
+    .profile-panel{border:1px solid rgba(57,255,20,.12);background:rgba(6,7,6,.9);padding:18px;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+    .profile-panel::before{content:"GITHUB://PROFILE";position:absolute;left:16px;top:12px;font:600 .6rem var(--mono);color:#4d4d4d;letter-spacing:.11em}
+    .profile-frame{position:relative;margin-top:22px;aspect-ratio:1/1;display:grid;place-items:center;overflow:hidden;background:#050605;border:1px solid #1d1d1d}
+    .profile-frame::before{content:"";position:absolute;inset:13%;border:1px dashed rgba(57,255,20,.16);border-radius:50%;z-index:0}
+    .profile-frame::after{content:"";position:absolute;width:61%;height:61%;border:1px solid rgba(57,255,20,.07);border-radius:50%;box-shadow:0 0 80px rgba(57,255,20,.05) inset;z-index:0}
+    .avatar{position:relative;width:62%;height:62%;object-fit:cover;z-index:2;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 0 7px #050605,0 0 34px rgba(57,255,20,.23);animation:avatarPulse 5.5s ease-in-out infinite}
+    @keyframes avatarPulse{50%{transform:scale(1.014);box-shadow:0 0 0 7px #050605,0 0 42px rgba(57,255,20,.28)}}
+    .scan{position:absolute;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 12px rgba(57,255,20,.78);z-index:3;animation:scan 3.4s linear infinite}
+    @keyframes scan{0%{top:18%;opacity:0}15%{opacity:.78}50%{top:82%;opacity:.78}85%{opacity:.78}100%{top:18%;opacity:0}}
+    .profile-meta{display:flex;justify-content:space-between;gap:12px;padding-top:14px;font:500 .62rem var(--mono);color:#707070}
+    .profile-meta strong{color:var(--accent);font-weight:600}
 
-    .profile-panel{border:1px solid #252525;background:rgba(7,7,7,.87);padding:18px;position:relative;overflow:hidden}.profile-panel::before{content:"github.com/gustavormartins";position:absolute;left:16px;top:12px;font:600 .6rem var(--mono);color:#505050;letter-spacing:.08em}
-    .profile-frame{position:relative;margin-top:22px;aspect-ratio:1.52/1;display:grid;place-items:center;overflow:hidden;background:#070807;border:1px solid #191919}.profile-frame::before{content:"";position:absolute;inset:14px;border:1px dashed rgba(57,255,20,.18);border-radius:50%}.profile-frame::after{content:"";position:absolute;width:68%;height:68%;border:1px solid rgba(57,255,20,.07);border-radius:50%;box-shadow:0 0 60px rgba(57,255,20,.05) inset}
-    .avatar{position:relative;width:47%;height:72%;object-fit:cover;z-index:2;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 0 7px #060606,0 0 32px rgba(57,255,20,.2);animation:avatarBreathe 5s ease-in-out infinite}@keyframes avatarBreathe{50%{transform:scale(1.018)}}
-    .scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 12px rgba(57,255,20,.8);animation:scan 3.2s linear infinite}@keyframes scan{0%{top:17%}50%{top:83%}100%{top:17%}}
-    .profile-meta{display:flex;justify-content:space-between;gap:10px;padding-top:14px;font:500 .62rem var(--mono);color:#727272}.profile-meta strong{color:var(--accent);font-weight:600}
+    .hero-card{border:1px solid #242424;background:rgba(6,7,6,.9);padding:21px;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+    .hero-card::before{content:"LINUX // SESSION";position:absolute;right:18px;top:12px;font:600 .58rem var(--mono);color:#3d3d3d}
+    .status{display:flex;align-items:center;gap:8px;color:#aaa;font:500 .7rem var(--mono);margin-bottom:18px}
+    .dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
+    .terminal{font:400 .73rem/1.9 var(--mono);color:#707070}
+    .terminal b{color:#ececec;font-weight:500}
+    .terminal .green{color:var(--accent)}
+    .terminal .dim{color:#454545}
+    .terminal .comment{color:#4f4f4f}
 
-    .hero-card{border:1px solid #252525;background:rgba(7,7,7,.88);padding:20px;position:relative;overflow:hidden}.hero-card::before{content:"LINUX // ONLINE";position:absolute;right:18px;top:12px;font:600 .58rem var(--mono);color:#3d3d3d}.status{display:flex;align-items:center;gap:8px;color:#aaa;font:500 .7rem var(--mono);margin-bottom:18px}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
-    .terminal{font:400 .73rem/1.9 var(--mono);color:#707070}.terminal b{color:var(--text);font-weight:500}.terminal .green{color:var(--accent)}.terminal .dim{color:#454545}.prompt{color:#5b5b5b}.prompt strong{color:var(--accent);font-weight:600}
+    section{padding:76px 0}
+    .section-top{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+    .section-num{font:500 .7rem var(--mono);color:var(--accent)}
+    h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.045em}
+    h2::after{content:"";display:inline-block;width:36px;height:3px;background:var(--accent);margin-left:14px;vertical-align:middle;box-shadow:0 0 12px rgba(57,255,20,.35)}
+    .intro{max-width:740px;color:#999;margin-bottom:30px}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{border:1px solid var(--line);background:var(--panel);padding:25px;position:relative;backdrop-filter:blur(10px)}
+    .card::before{content:"";position:absolute;left:0;top:0;width:36px;height:1px;background:var(--accent);opacity:.7}
+    .card h3{font-size:1rem;margin-bottom:12px}
+    .card p{color:#929292;font-size:.92rem}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{font:500 .7rem var(--mono);color:#c5c5c5;border:1px solid #292929;padding:7px 10px;background:#0b0b0b;transition:.18s}
+    .chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 
-    section{padding:76px 0}.section-top{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}.section-num{font:500 .7rem var(--mono);color:var(--accent)}h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.045em}h2::after{content:"";display:inline-block;width:36px;height:3px;background:var(--accent);margin-left:14px;vertical-align:middle;box-shadow:0 0 12px rgba(57,255,20,.35)}.intro{max-width:740px;color:#999;margin-bottom:30px}
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{border:1px solid var(--line);background:var(--panel);padding:25px;position:relative;backdrop-filter:blur(10px)}.card::before{content:"";position:absolute;left:0;top:0;width:36px;height:1px;background:var(--accent);opacity:.7}.card h3{font-size:1rem;margin-bottom:12px}.card p{color:#929292;font-size:.92rem}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font:500 .7rem var(--mono);color:#c5c5c5;border:1px solid #292929;padding:7px 10px;background:#0b0b0b;transition:.18s}.chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
-    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project{border:1px solid var(--line);background:var(--panel);padding:26px;display:flex;flex-direction:column;min-height:270px;transition:.22s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}.project::after{content:"";position:absolute;right:-34px;bottom:-34px;width:92px;height:92px;border:1px solid rgba(57,255,20,.07);transform:rotate(45deg)}.project:hover{border-color:#3f3f3f;transform:translateY(-3px)}.project.featured{border-color:rgba(57,255,20,.28);background:linear-gradient(145deg,rgba(57,255,20,.065),rgba(8,8,8,.9))}.project-meta{font:500 .66rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}.project h3{font-size:1.25rem;margin-bottom:10px}.project p{color:#8d8d8d;font-size:.88rem}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:22px}.tag{font:500 .64rem var(--mono);padding:5px 8px;background:var(--accent-soft);color:#b8edab;border:1px solid rgba(57,255,20,.07)}.project-link{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font:600 .7rem var(--mono);color:var(--accent);width:max-content}.project-link:hover{text-decoration:underline}
-    .github-box{border:1px solid var(--line);background:linear-gradient(145deg,rgba(14,14,14,.9),rgba(8,8,8,.9));padding:30px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}.github-box::before{content:"git push origin main";position:absolute;right:22px;top:12px;font:500 .6rem var(--mono);color:#3e3e3e}.github-box p{color:#8d8d8d;max-width:700px}.github-box strong{color:var(--text)}
-    .contact{border:1px solid var(--line);background:linear-gradient(145deg,rgba(16,16,16,.92),rgba(8,8,8,.92));padding:52px;position:relative;overflow:hidden}.contact::after{content:"</>";position:absolute;right:5%;bottom:-15%;font:800 9rem var(--mono);color:rgba(57,255,20,.03)}.contact h2{max-width:750px}.contact p{color:#8e8e8e;max-width:620px;margin-top:16px}.contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.contact-links a{font:600 .72rem var(--mono);border:1px solid var(--line);padding:11px 14px;color:#bbb}.contact-links a:hover{border-color:var(--accent);color:var(--accent)}
-    footer{padding:45px 0 65px;border-top:1px solid var(--line);color:#666;font:400 .66rem var(--mono);display:flex;justify-content:space-between;gap:20px}footer span{color:#aaa}.footer-accent{color:var(--accent)!important}
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .project{border:1px solid var(--line);background:var(--panel);padding:26px;display:flex;flex-direction:column;min-height:270px;transition:.22s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+    .project::after{content:"";position:absolute;right:-34px;bottom:-34px;width:92px;height:92px;border:1px solid rgba(57,255,20,.07);transform:rotate(45deg)}
+    .project:hover{border-color:#3f3f3f;transform:translateY(-3px)}
+    .project.featured{border-color:rgba(57,255,20,.28);background:linear-gradient(145deg,rgba(57,255,20,.065),rgba(8,8,8,.9))}
+    .project-meta{font:500 .66rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
+    .project h3{font-size:1.25rem;margin-bottom:10px}
+    .project p{color:#8d8d8d;font-size:.88rem}
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:22px}
+    .tag{font:500 .64rem var(--mono);padding:5px 8px;background:var(--accent-soft);color:#b8edab;border:1px solid rgba(57,255,20,.07)}
+    .project-link{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font:600 .7rem var(--mono);color:var(--accent);width:max-content}
+    .project-link:hover{text-decoration:underline}
 
-    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:28px;min-height:auto;padding-top:72px}.hero-visual{grid-template-columns:1fr 1fr;align-items:stretch}.brand-card{min-height:310px}.hero-card{height:100%}.about,.projects{grid-template-columns:1fr}.nav-links{gap:12px}.nav-links a:not(.nav-cta){display:none}.contact{padding:32px 24px}.terminal-stream{grid-template-columns:repeat(2,minmax(280px,1fr))}}
-    @media(max-width:640px){.shell{width:min(calc(100% - 28px),var(--max))}.hero{padding-top:60px}.hero-visual{grid-template-columns:1fr}.brand-card{min-height:290px}.blohsh-logo{width:170px}.hero h1{font-size:3.2rem}.hero-copy{font-size:.98rem}.github-box{align-items:flex-start;flex-direction:column}.profile-panel{max-width:420px}section{padding:58px 0}footer{flex-direction:column}.actions .btn{width:100%;justify-content:center}.terminal-stream{grid-template-columns:1fr;opacity:.75}.terminal-column:nth-child(n+2){display:none}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project,.btn,.chip{transition:none}.scan,.logo-halo,.blohsh-logo,.brand-scan,.brand-cursor,.terminal-column,.avatar{animation:none}}
+    .github-box{border:1px solid var(--line);background:linear-gradient(145deg,#0e0e0e,#090909);padding:30px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+    .github-box::before{content:"git push origin main";position:absolute;right:22px;top:12px;font:500 .6rem var(--mono);color:#3e3e3e}
+    .github-box p{color:#8d8d8d;max-width:700px}
+    .github-box strong{color:var(--text)}
+
+    .contact{border:1px solid var(--line);background:linear-gradient(145deg,#101010,#080808);padding:52px;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+    .contact::after{content:"</>";position:absolute;right:5%;bottom:-15%;font:800 9rem var(--mono);color:rgba(57,255,20,.03)}
+    .contact h2{max-width:750px}
+    .contact p{color:#8e8e8e;max-width:620px;margin-top:16px}
+    .contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+    .contact-links a{font:600 .72rem var(--mono);border:1px solid var(--line);padding:11px 14px;color:#bbb}
+    .contact-links a:hover{border-color:var(--accent);color:var(--accent)}
+
+    footer{padding:45px 0 65px;border-top:1px solid var(--line);color:#666;font:400 .66rem var(--mono);display:flex;justify-content:space-between;gap:20px}
+    footer span{color:#aaa}.footer-accent{color:var(--accent)!important}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;gap:30px;padding-top:72px}
+      .about,.projects{grid-template-columns:1fr}
+      .nav-links{gap:12px}.nav-links a:not(.nav-cta){display:none}
+      .contact{padding:32px 24px}
+    }
+    @media(max-width:640px){
+      .shell{width:min(calc(100% - 28px),var(--max))}
+      .hero h1{font-size:3.2rem}
+      .hero-copy{font-size:.98rem}
+      .github-box{align-items:flex-start;flex-direction:column}
+      .profile-panel{max-width:420px}
+      section{padding:58px 0}
+      footer{flex-direction:column}
+      .actions .btn{width:100%;justify-content:center}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .btn,.chip,.project{transition:none}
+      .brand-logo,.brand-cursor,.scan,.avatar{animation:none}
+      .terminal-column{animation:none}
+    }
   </style>
 </head>
 <body>
   <div class="terminal-bg" aria-hidden="true">
     <div class="terminal-stream">
-      <div class="terminal-column">gustavo@blohsh:~$ neofetch\nOS: BLOHSH DEV ENV\nKERNEL: Linux\nSHELL: fish\nWM: Hyprland\nCPU: developer\nSTATUS: online\n\n gustavo@blohsh:~$ git status\nOn branch main\nnothing to commit\n\n gustavo@blohsh:~$ python3 ./build.py\n[ ok ] compile\n[ ok ] bundle\n[ ok ] deploy\n\n gustavo@blohsh:~$</div>
-      <div class="terminal-column">gustavo@blohsh:~$ ls -la\ndrwxr-xr-x projects\ndrwxr-xr-x linux\ndrwxr-xr-x automation\ndrwxr-xr-x web\n-rw-r--r-- README.md\n-rw-r--r-- portfolio.html\n\n gustavo@blohsh:~$ echo "keep building"\nkeep building\n\n gustavo@blohsh:~$ systemctl status portfolio\n● portfolio.service - active\n  Active: running\n\n gustavo@blohsh:~$</div>
-      <div class="terminal-column">gustavo@blohsh:~$ htop\nPID  USER      CPU  MEM  COMMAND\n108  gustavo    7%   2%  code\n221  gustavo    3%   1%  git\n304  gustavo    2%   1%  python\n\n gustavo@blohsh:~$ git log --oneline\n9af21d4 refine-ui\n52b81fa add-linux-theme\n14c0de1 init-portfolio\n\n gustavo@blohsh:~$</div>
-      <div class="terminal-column">gustavo@blohsh:~$ cat /etc/blohsh.conf\nTHEME=neon-green\nACCENT=#39ff14\nFONT=JetBrains Mono\nMODE=developer\nANIMATION=enabled\n\n gustavo@blohsh:~$ ./animate.sh\nterminal ........ ok\nblohsh .......... ok\ncursor .......... ok\nprofile .......... ok\n\n gustavo@blohsh:~$</div>
+      <pre class="terminal-column">gustavo@blohsh:~$ neofetch
+OS: Blohsh Linux
+Kernel: Linux x86_64
+Shell: fish
+WM: Hyprland
+Theme: neon-green
+
+ gustavo@blohsh:~$ git status
+On branch main
+Your branch is up to date
+nothing to commit, working tree clean
+
+ gustavo@blohsh:~$ python3 portfolio.py
+[OK] github profile loaded
+[OK] projects indexed
+[OK] environment online
+
+ gustavo@blohsh:~$ ./build.sh
+building portfolio...
+rendering UI...
+loading modules...
+100% complete
+
+ gustavo@blohsh:~$ echo "keep building"
+keep building</pre>
+      <pre class="terminal-column">gustavo@blohsh:~$ ls -la
+.drwxr-xr-x projects
+-rwxr-xr-x portfolio
+-rw-r--r-- README.md
+-rw-r--r-- index.html
+
+ gustavo@blohsh:~$ cat stack.txt
+python
+javascript
+html/css
+linux
+shell
+git/github
+rest-api
+power-apps
+iot
+cloud
+automation
+hyprland
+
+ gustavo@blohsh:~$ uptime
+portfolio.service active (running)
+
+ gustavo@blohsh:~$ git log --oneline
+feat: build portfolio
+feat: add github profile
+feat: add dev identity
+fix: terminal visuals
+
+ gustavo@blohsh:~$ _</pre>
+      <pre class="terminal-column">gustavo@blohsh:~$ cd ~/projects
+ gustavo@blohsh:~/projects$ find . -maxdepth 1 -type d
+./manejo-app
+./Blohsh_AI
+./blohshblast.github.io
+./WinOptmize
+./report.github.io
+./Blohsh-OS
+
+ gustavo@blohsh:~/projects$ systemctl status portfolio
+● portfolio.service - Portfolio
+   Active: active (running)
+
+ gustavo@blohsh:~$ curl github.com/gustavormartins
+HTTP/2 200
+profile: online
+
+ gustavo@blohsh:~$ echo $EDITOR
+nvim
+
+ gustavo@blohsh:~$ _</pre>
+      <pre class="terminal-column">gustavo@blohsh:~$ uname -a
+Linux blohsh 6.x x86_64 GNU/Linux
+
+ gustavo@blohsh:~$ df -h
+Filesystem  Size Used Avail
+/dev/root   128G  42G   86G
+
+ gustavo@blohsh:~$ ping -c 1 github.com
+1 packets transmitted, 1 received
+
+ gustavo@blohsh:~$ make
+cc: building modules...
+python: running tools...
+node: bundling assets...
+done.
+
+ gustavo@blohsh:~$ echo $USER
+Gustavo
+
+ gustavo@blohsh:~$ _</pre>
     </div>
     <div class="terminal-vignette"></div>
   </div>
 
-  <a class="skip" href="#main">Pular para o conteúdo</a>
   <nav aria-label="Navegação principal">
     <div class="shell nav-inner">
-      <a class="brand" href="/" aria-label="Gustavo Martins, início">GM<span>.</span><i class="brand-cursor" aria-hidden="true"></i></a>
-      <div class="nav-links"><a href="#sobre">Sobre</a><a href="#projetos">Projetos</a><a href="#stack">Stack</a><a href="#contato" class="nav-cta">Contato</a></div>
+      <a class="brand" href="/" aria-label="Gustavo Martins, início">
+        <svg class="brand-logo" viewBox="0 0 64 76" role="img" aria-label="Blohsh">
+          <circle class="b" cx="33" cy="10" r="8.5"/>
+          <rect class="b" x="21" y="20" width="24" height="34" rx="11"/>
+          <rect class="b" x="9" y="21" width="12" height="31" rx="6" transform="rotate(2 15 36.5)"/>
+          <rect class="b" x="43" y="21" width="12" height="31" rx="6" transform="rotate(-2 49 36.5)"/>
+          <rect class="b" x="22" y="50" width="10" height="25" rx="5"/>
+          <rect class="b" x="34" y="50" width="10" height="25" rx="5"/>
+        </svg>
+        <span class="brand-text">GM<span class="accent">.</span><span class="brand-cursor" aria-hidden="true"></span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#stack">Stack</a>
+        <a href="#contato" class="nav-cta">Contato</a>
+      </div>
     </div>
   </nav>
 
@@ -112,76 +288,95 @@
           <p class="eyebrow">software · automation · linux</p>
           <h1>Gustavo Romão <em>Martins</em></h1>
           <p class="hero-copy">Analista de sistemas com foco em desenvolvimento, automação, Linux e infraestrutura. Transformo problemas técnicos em soluções simples, funcionais e sustentáveis.</p>
-          <div class="actions"><a class="btn primary" href="#projetos">Ver projetos <i class="fa-solid fa-arrow-down"></i></a><a class="btn" href="/linkedin" rel="noopener">LinkedIn <i class="fa-brands fa-linkedin"></i></a><a class="btn" href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub <i class="fa-brands fa-github"></i></a></div>
+          <div class="actions">
+            <a class="btn primary" href="#projetos">Ver projetos <i class="fa-solid fa-arrow-down"></i></a>
+            <a class="btn" href="/linkedin" rel="noopener">LinkedIn <i class="fa-brands fa-linkedin"></i></a>
+            <a class="btn" href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub <i class="fa-brands fa-github"></i></a>
+          </div>
         </div>
 
         <div class="hero-visual">
-          <aside class="brand-card" aria-label="Identidade Blohsh">
-            <span class="logo-halo" aria-hidden="true"></span>
-            <svg class="blohsh-logo" viewBox="0 0 120 170" role="img" aria-label="Logo Blohsh estilizada">
-              <circle class="logo-head" cx="60" cy="20" r="14"></circle>
-              <rect class="logo-limb left-arm" x="27" y="42" width="17" height="66" rx="8.5"></rect>
-              <rect class="logo-body" x="42" y="39" width="36" height="76" rx="17"></rect>
-              <rect class="logo-limb right-arm" x="76" y="40" width="17" height="70" rx="8.5"></rect>
-              <rect class="logo-limb left-leg" x="43" y="102" width="16" height="58" rx="8"></rect>
-              <rect class="logo-limb right-leg" x="62" y="108" width="16" height="52" rx="8"></rect>
-            </svg>
-            <span class="brand-scan" aria-hidden="true"></span>
-          </aside>
-
           <aside class="profile-panel" aria-label="Foto de perfil do GitHub">
-            <div class="profile-frame"><img class="avatar" src="https://github.com/gustavormartins.png?size=640" alt="Foto de perfil de Gustavo Romão Martins" loading="eager"><span class="scan" aria-hidden="true"></span></div>
-            <div class="profile-meta"><span>github.com/<strong>gustavormartins</strong></span><span>PROFILE // ONLINE</span></div>
+            <div class="profile-frame">
+              <img class="avatar" src="https://github.com/gustavormartins.png?size=640" alt="Foto de perfil de Gustavo Romão Martins" loading="eager">
+              <span class="scan" aria-hidden="true"></span>
+            </div>
+            <div class="profile-meta">
+              <span>github.com/<strong>gustavormartins</strong></span>
+              <span>PROFILE // ONLINE</span>
+            </div>
           </aside>
 
           <aside class="hero-card" aria-label="Resumo profissional">
             <div class="status"><span class="dot"></span> SYSTEM ONLINE</div>
             <div class="terminal">
-              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ whoami</div><div><b>gustavormartins</b></div>
-              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ focus</div><div>software / automation / linux</div>
-              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ stack</div><div>python / javascript / shell</div>
-              <div class="prompt"><strong>gustavo@blohsh</strong>:~$ status</div><div><span class="green">available</span><span class="dim">_</span></div>
+              <div><span class="green">$</span> whoami</div>
+              <div><b>gustavormartins</b></div>
+              <br>
+              <div><span class="green">$</span> focus</div>
+              <div>software / automation / linux</div>
+              <br>
+              <div><span class="green">$</span> stack</div>
+              <div>python / javascript / shell</div>
+              <br>
+              <div><span class="green">$</span> status</div>
+              <div><span class="green">available</span><span class="dim">_</span></div>
             </div>
           </aside>
         </div>
       </header>
 
-      <section id="sobre"><div class="section-top"><span class="section-num">01</span><h2>Sobre</h2></div><p class="intro">Minha formação em Análise e Desenvolvimento de Sistemas se conecta com uma abordagem prática: entender o problema, construir a solução e deixar o processo melhor do que estava.</p><div class="about"><article class="card"><h3>Experiência</h3><p>Atuação no Grupo Energisa, em ambiente corporativo, desenvolvendo experiência em análise de processos, dados, comunicação entre áreas e soluções digitais. Também mantenho projetos independentes para aprofundar minha prática de desenvolvimento.</p></article><article class="card" id="stack"><h3>Stack & interesses</h3><div class="chips"><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">Linux</span><span class="chip">Shell</span><span class="chip">PowerShell</span><span class="chip">Git / GitHub</span><span class="chip">REST APIs</span><span class="chip">Power Apps</span><span class="chip">IoT</span><span class="chip">Cloud</span><span class="chip">Automação</span><span class="chip">Hyprland</span></div></article></div></section>
+      <section id="sobre">
+        <div class="section-top"><span class="section-num">01</span><h2>Sobre</h2></div>
+        <p class="intro">Minha formação em Análise e Desenvolvimento de Sistemas se conecta com uma abordagem prática: entender o problema, construir a solução e deixar o processo melhor do que estava.</p>
+        <div class="about">
+          <article class="card">
+            <h3>Experiência</h3>
+            <p>Atuação no Grupo Energisa, em ambiente corporativo, desenvolvendo experiência em análise de processos, dados, comunicação entre áreas e soluções digitais. Também mantenho projetos independentes para aprofundar minha prática de desenvolvimento.</p>
+          </article>
+          <article class="card" id="stack">
+            <h3>Stack & interesses</h3>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">Linux</span><span class="chip">Shell</span><span class="chip">PowerShell</span><span class="chip">Git / GitHub</span><span class="chip">REST APIs</span><span class="chip">Power Apps</span><span class="chip">IoT</span><span class="chip">Cloud</span><span class="chip">Automação</span><span class="chip">Hyprland</span>
+            </div>
+          </article>
+        </div>
+      </section>
 
-      <section id="projetos"><div class="section-top"><span class="section-num">02</span><h2>Projetos selecionados</h2></div><p class="intro">Projetos que demonstram diferentes partes da minha prática: software, web, automação, infraestrutura e experimentação.</p><div class="projects">
-        <article class="project featured"><div class="project-meta">Produto · Web · Full stack</div><h3>Manejo App</h3><p>Aplicação web em desenvolvimento, com frontend e backend separados e foco em transformar uma necessidade real em produto utilizável.</p><div class="tags"><span class="tag">Web</span><span class="tag">API</span><span class="tag">JavaScript</span><span class="tag">Python</span></div><a class="project-link" href="https://github.com/gustavormartins/manejo-app" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-        <article class="project"><div class="project-meta">IA · Experimentação</div><h3>Blohsh AI</h3><p>Projeto pessoal voltado à experimentação com inteligência artificial e construção de soluções próprias.</p><div class="tags"><span class="tag">AI</span><span class="tag">Python</span><span class="tag">Experimentação</span></div><a class="project-link" href="https://github.com/gustavormartins/Blohsh_AI" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-        <article class="project"><div class="project-meta">Web · Game</div><h3>Blohsh Blast</h3><p>Projeto web inspirado em jogos de puzzle, desenvolvido para explorar interação, responsividade e experiência mobile.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PWA</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-        <article class="project"><div class="project-meta">Automação · Windows</div><h3>WinOptmize</h3><p>Scripts para automação e manutenção de ambientes Windows, com foco em tarefas repetitivas e configuração do sistema.</p><div class="tags"><span class="tag">PowerShell</span><span class="tag">Batch</span><span class="tag">Windows</span></div><a class="project-link" href="https://github.com/gustavormartins/WinOptmize" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-        <article class="project"><div class="project-meta">Web · Documentação técnica</div><h3>CLP · SCADA · Inversor</h3><p>Relatório técnico em HTML e CSS sobre automação industrial, documentando conceitos de CLP, SCADA e inversor de frequência.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">SCADA</span><span class="tag">CLP</span></div><a class="project-link" href="https://github.com/gustavormartins/report.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-        <article class="project"><div class="project-meta">Conceito · Linux</div><h3>Blohsh OS</h3><p>Projeto conceitual de uma distribuição Linux própria, explorando Fedora minimal, Hyprland, automação e personalização de ambiente.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Fedora</span><span class="tag">Hyprland</span><span class="tag">Shell</span></div><span class="project-link" style="color:#777">Em desenvolvimento</span></article>
-      </div></section>
+      <section id="projetos">
+        <div class="section-top"><span class="section-num">02</span><h2>Projetos selecionados</h2></div>
+        <p class="intro">Projetos que demonstram diferentes partes da minha prática: software, web, automação, infraestrutura e experimentação.</p>
+        <div class="projects">
+          <article class="project featured"><div class="project-meta">Produto · Web · Full stack</div><h3>Manejo App</h3><p>Aplicação web em desenvolvimento, com frontend e backend separados e foco em transformar uma necessidade real em produto utilizável.</p><div class="tags"><span class="tag">Web</span><span class="tag">API</span><span class="tag">JavaScript</span><span class="tag">Python</span></div><a class="project-link" href="https://github.com/gustavormartins/manejo-app" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">IA · Experimentação</div><h3>Blohsh AI</h3><p>Projeto pessoal voltado à experimentação com inteligência artificial e construção de soluções próprias.</p><div class="tags"><span class="tag">AI</span><span class="tag">Python</span><span class="tag">Experimentação</span></div><a class="project-link" href="https://github.com/gustavormartins/Blohsh_AI" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">Web · Game</div><h3>Blohsh Blast</h3><p>Projeto web inspirado em jogos de puzzle, desenvolvido para explorar interação, responsividade e experiência mobile.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PWA</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">Automação · Windows</div><h3>WinOptmize</h3><p>Scripts para automação e manutenção de ambientes Windows, com foco em tarefas repetitivas e configuração do sistema.</p><div class="tags"><span class="tag">PowerShell</span><span class="tag">Batch</span><span class="tag">Windows</span></div><a class="project-link" href="https://github.com/gustavormartins/WinOptmize" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">Web · Documentação técnica</div><h3>CLP · SCADA · Inversor</h3><p>Relatório técnico em HTML e CSS sobre automação industrial, documentando conceitos de CLP, SCADA e inversor de frequência.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">SCADA</span><span class="tag">CLP</span></div><a class="project-link" href="https://github.com/gustavormartins/report.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">Conceito · Linux</div><h3>Blohsh OS</h3><p>Projeto conceitual de uma distribuição Linux própria, explorando Fedora minimal, Hyprland, automação e personalização de ambiente.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Fedora</span><span class="tag">Hyprland</span><span class="tag">Shell</span></div><span class="project-link" style="color:#777">Em desenvolvimento</span></article>
+        </div>
+      </section>
 
-      <section><div class="section-top"><span class="section-num">03</span><h2>GitHub</h2></div><div class="github-box"><p><strong>Meu código continua evoluindo.</strong><br>Veja repositórios, experimentos, histórico de desenvolvimento e projetos que ainda não entraram nesta seleção.</p><a class="btn primary" href="https://github.com/gustavormartins" target="_blank" rel="noopener">Abrir GitHub <i class="fa-brands fa-github"></i></a></div></section>
+      <section>
+        <div class="section-top"><span class="section-num">03</span><h2>GitHub</h2></div>
+        <div class="github-box">
+          <p><strong>Meu código continua evoluindo.</strong><br>Veja repositórios, experimentos, histórico de desenvolvimento e projetos que ainda não entraram nesta seleção.</p>
+          <a class="btn primary" href="https://github.com/gustavormartins" target="_blank" rel="noopener">Abrir GitHub <i class="fa-brands fa-github"></i></a>
+        </div>
+      </section>
 
-      <section id="contato"><div class="contact"><div class="section-top"><span class="section-num">04</span><h2>Vamos construir algo?</h2></div><p>Estou aberto a oportunidades, projetos de software, automação e colaboração técnica.</p><div class="contact-links"><a href="mailto:gustavoromaom178@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a><a href="/linkedin" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a></div></div></section>
+      <section id="contato">
+        <div class="contact">
+          <div class="section-top"><span class="section-num">04</span><h2>Vamos construir algo?</h2></div>
+          <p>Estou aberto a oportunidades, projetos de software, automação e colaboração técnica.</p>
+          <div class="contact-links"><a href="mailto:gustavoromaom178@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a><a href="/linkedin" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a></div>
+        </div>
+      </section>
     </div>
   </main>
-  <footer class="shell"><span>Gustavo Romão Martins · ADS · 2026</span><span class="mono">built with HTML / CSS / JS · <span class="footer-accent">blohsh.dev</span></span></footer>
 
-  <script>
-    const columns = document.querySelectorAll('.terminal-column');
-    const commands = ['git status','git pull origin main','npm run dev','python3 main.py','systemctl status ssh','fastfetch','ls -la','uname -a','top','git log --oneline'];
-    const prompt = 'gustavo@blohsh:~$ ';
-    columns.forEach((column,index)=>{
-      let tick=0;
-      setInterval(()=>{
-        tick++;
-        if(tick%3!==0) return;
-        const command=commands[Math.floor(Math.random()*commands.length)];
-        const line=document.createElement('div');
-        line.textContent=prompt+command;
-        line.style.opacity=(.08+Math.random()*.14).toFixed(2);
-        line.style.transform=`translateX(${(Math.random()-.5)*18}px)`;
-        column.appendChild(line);
-        while(column.childElementCount>18) column.removeChild(column.firstElementChild);
-      },2800+index*240);
-    });
-  </script>
+  <footer class="shell">
+    <span>Gustavo Romão Martins · ADS · 2026</span>
+    <span class="mono">built with HTML / CSS / JS · <span class="footer-accent">blohsh.dev</span></span>
+  </footer>
 </body>
 </html>
