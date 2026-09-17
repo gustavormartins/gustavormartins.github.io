@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    { "source": "/github", "destination": "https://github.com/gustavormartins", "permanent": false },
+    { "source": "/linkedin", "destination": "https://www.linkedin.com/in/gustavo-romao-martins/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    }
+  ]
+}
