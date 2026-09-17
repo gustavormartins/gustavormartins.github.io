@@ -1,7 +1,7 @@
 {
   "redirects": [
     { "source": "/github", "destination": "https://github.com/gustavormartins", "permanent": false },
-    { "source": "/linkedin", "destination": "https://www.linkedin.com/in/gustavo-romao-martins/", "permanent": false }
+    { "source": "/linkedin", "destination": "https://www.linkedin.com/in/gustavormartins/", "permanent": false }
   ],
   "headers": [
     {
