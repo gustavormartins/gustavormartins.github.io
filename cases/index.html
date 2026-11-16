@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050807">
+  <meta name="description" content="Estudos de caso de Gustavo Romão Martins: BlohshBlast, Salinha Linux Compat Kit, Replica Audio Player e Lista de Casa.">
+  <title>Projetos e estudos de caso — Gustavo Martins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/cases.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <nav aria-label="Navegação principal"><div class="wrap navin">
+    <a class="logo" href="../">GM<span>.</span> / BLOHSH®</a>
+    <a href="../#projetos">Voltar ao portfólio ↗</a>
+  </div></nav>
+  <main id="conteudo" class="wrap">
+    <header class="hero">
+      <div class="kicker">PORTFOLIO / SELECTED CASE STUDIES / 2026</div>
+      <h1>Ideias que viram <span>código.</span></h1>
+      <p class="lead">Não é um catálogo de repositórios. São quatro histórias de engenharia: contextos reais, decisões técnicas, limitações documentadas e trabalho em evolução.</p>
+      <div class="jump" aria-label="Ir para um projeto">
+        <a href="#blohshblast">01 BlohshBlast ↗</a>
+        <a href="#salinha">02 Salinha Linux ↗</a>
+        <a href="#replica">03 Replica Audio ↗</a>
+        <a href="#lista-de-casa">04 Lista de Casa ↗</a>
+      </div>
+    </header>
+    <div class="section-head"><h2>Projetos em perspectiva</h2><span>01—04 / CURADORIA</span></div>
+
+    <article class="case" id="blohshblast" aria-labelledby="title-blohshblast">
+      <div class="case-head"><div><p class="project-id">CASE 01 / GAME DEVELOPMENT</p><h3 id="title-blohshblast">BlohshBlast</h3></div><span class="state">FUNCIONAL / EVOLUÇÃO</span></div>
+      <p class="case-intro">Um puzzle de blocos responsivo que evoluiu de uma mecânica básica para uma experiência com modos de jogo, progressão, missões e instalação como PWA.</p>
+      <div class="detail-grid">
+        <section class="detail"><h4>O desafio</h4><p>Criar um jogo simples de entender, mas com interações confiáveis em mouse e toque, regras consistentes e progressão que incentivasse novas partidas.</p></section>
+        <section class="detail"><h4>O que foi construído</h4><p>Tabuleiro 8×8, arrastar e soltar, recordes locais, modos Classic/Zen/Hardcore/Daily, XP, skins, missões e cache offline do aplicativo.</p></section>
+        <section class="detail"><h4>Decisões e limites</h4><p>HTML, CSS e JavaScript para execução leve. Preferências e leaderboard são locais no navegador; ainda não existe ranking sincronizado entre jogadores.</p></section>
+      </div>
+      <div class="meta"><span>JavaScript</span><span>HTML / CSS</span><span>PWA</span><span>LocalStorage</span></div>
+      <div class="links"><a href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener noreferrer">Ver implementação no GitHub ↗</a><a href="../#contato">Conversar sobre o projeto ↗</a></div>
+    </article>
+
+    <article class="case" id="salinha" aria-labelledby="title-salinha">
+      <div class="case-head"><div><p class="project-id">CASE 02 / LINUX · TROUBLESHOOTING</p><h3 id="title-salinha">Salinha Linux Compat Kit</h3></div><span class="state">FERRAMENTA / DIAGNÓSTICO</span></div>
+      <p class="case-intro">Um kit comunitário de lançamento e diagnóstico para o AppImage da Salinha em sistemas Linux com KDE Plasma, Wayland e XWayland.</p>
+      <div class="detail-grid">
+        <section class="detail"><h4>O problema</h4><p>Mensagens de incompatibilidade entre Wayland e Vulkan, dificuldades com FUSE e falhas observadas no serviço de rede do Chromium dificultavam entender por que o app não iniciava.</p></section>
+        <section class="detail"><h4>A abordagem</h4><p>Scripts Bash para registrar logs, ajustar a seleção do backend gráfico, testar DNS/HTTPS e usar extração temporária do AppImage quando a montagem por FUSE falha.</p></section>
+        <section class="detail"><h4>Resultados e limites</h4><p>O fluxo de inicialização e os caminhos de diagnóstico foram documentados. A resolução completa do problema do serviço de rede não foi confirmada em ambiente real.</p></section>
+      </div>
+      <div class="meta"><span>Linux</span><span>Bash</span><span>Wayland / XWayland</span><span>FUSE</span><span>Logs</span></div>
+      <div class="links"><a href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener noreferrer">Ver scripts e documentação ↗</a><a href="https://github.com/gustavormartins/salinha-linux-compat-kit/blob/main/RELATORIO-TECNICO.md" target="_blank" rel="noopener noreferrer">Ler relatório técnico ↗</a></div>
+    </article>
+
+    <article class="case" id="replica" aria-labelledby="title-replica">
+      <div class="case-head"><div><p class="project-id">CASE 03 / RUST · DESKTOP ENGINEERING</p><h3 id="title-replica">Replica Audio Player</h3></div><span class="state prototype">BOOTSTRAP / EM DESENVOLVIMENTO</span></div>
+      <p class="case-intro">Projeto de um player de áudio nativo para Linux. O objetivo é desenvolver uma aplicação local-first, separando interface, reprodução, dados e persistência.</p>
+      <div class="detail-grid">
+        <section class="detail"><h4>A motivação</h4><p>Explorar arquitetura de aplicações desktop Linux com Rust e boas práticas de manutenção desde o início do ciclo de desenvolvimento.</p></section>
+        <section class="detail"><h4>Estágio atual</h4><p>Repositório com bootstrap mínimo, CI, formatação, Clippy, testes e auditoria de dependências. A interface GTK e o motor de reprodução ainda não foram implementados.</p></section>
+        <section class="detail"><h4>Próximo marco</h4><p>Construir uma janela funcional em GTK/Libadwaita, integrar reprodução de mídia local e adicionar persistência. Nada disso é apresentado aqui como concluído.</p></section>
+      </div>
+      <div class="meta"><span>Rust</span><span>Linux</span><span>CI/CD</span><span>DevSecOps</span><span>GTK planejado</span></div>
+      <div class="links"><a href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener noreferrer">Acompanhar no GitHub ↗</a></div>
+    </article>
+
+    <article class="case" id="lista-de-casa" aria-labelledby="title-lista-de-casa">
+      <div class="case-head"><div><p class="project-id">CASE 04 / FULL-STACK · WEB APP</p><h3 id="title-lista-de-casa">Lista de Casa</h3></div><span class="state prototype">PROTÓTIPO / USO PESSOAL</span></div>
+      <p class="case-intro">Aplicação criada para organizar lista de presentes e reservas de uma rifa, reunindo componentes de frontend e uma estrutura de backend Python.</p>
+      <div class="detail-grid">
+        <section class="detail"><h4>A necessidade</h4><p>Centralizar itens, buscas, status e interações em uma única experiência, em vez de depender de listas manuais dispersas.</p></section>
+        <section class="detail"><h4>Estrutura técnica</h4><p>Frontend React com Vite, backend FastAPI e SQLite. A documentação também descreve reservas e comprovantes com persistência local no navegador.</p></section>
+        <section class="detail"><h4>Limitação importante</h4><p>O controle administrativo documentado usa PIN no frontend, que não constitui autenticação segura. Antes de uso público com dados sensíveis, é necessária autenticação no backend.</p></section>
+      </div>
+      <div class="meta"><span>React</span><span>Vite</span><span>FastAPI</span><span>SQLite</span></div>
+      <div class="links"><a href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener noreferrer">Ver código e limitações ↗</a></div>
+    </article>
+
+    <div class="outro">
+      <span class="kicker">BUILD / LEARN / IMPROVE</span>
+      <h2>O processo também faz parte do resultado.</h2>
+      <p>Cada projeto segue evoluindo. O GitHub mantém o histórico completo; aqui estão as decisões e os aprendizados mais representativos.</p>
+      <div class="links"><a href="../#contato">Entre em contato ↗</a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer">Ver todos os repositórios ↗</a></div>
+    </div>
+  </main>
+  <footer><div class="wrap">© 2026 Gustavo Romão Martins · BLOHSH® · Projetos selecionados.</div></footer>
+</body>
+</html>
