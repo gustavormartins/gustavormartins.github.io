@@ -152,6 +152,24 @@
       .brand-logo,.brand-cursor,.scan,.avatar{animation:none}
       .terminal-column{animation:none}
     }
+
+    /* Portfolio 2.0 — editorial selection */
+    .selected-work{position:relative}
+    .selected-work .section-top{justify-content:space-between;flex-wrap:wrap}
+    .work-period{color:#6b856f;font:500 .8rem var(--mono);letter-spacing:0;vertical-align:middle}
+    .selected-work .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .selected-work .project{display:flex;flex-direction:column;min-height:310px;padding:30px;border:1px solid #26352a;background:linear-gradient(145deg,rgba(17,29,19,.85),rgba(4,7,5,.94));transition:border-color .25s,transform .25s}
+    .selected-work .project:hover{border-color:#39ff14;transform:translateY(-3px)}
+    .selected-work .project.featured{grid-column:span 2;min-height:275px;background:radial-gradient(ellipse at 90% 10%,rgba(57,255,20,.11),transparent 55%),#0b100d}
+    .selected-work .project-meta{color:#79bd80;font:600 .72rem var(--mono);letter-spacing:.08em}
+    .selected-work .project h3{font-size:clamp(1.65rem,3vw,2.65rem);letter-spacing:-.04em;margin:16px 0 9px}
+    .selected-work .project p{max-width:720px;color:#a8b7ab}
+    .selected-work .tags{margin-top:auto;padding-top:24px}
+    .selected-work .project-link{align-self:flex-start;margin-top:18px;color:#b5ffad}
+    .work-footnote{margin-top:23px;color:#829488;font-size:.86rem}
+    .work-footnote a{color:#39ff14;text-decoration:underline;text-underline-offset:4px}
+    @media(max-width:700px){.selected-work .projects{grid-template-columns:1fr}.selected-work .project.featured{grid-column:auto}.selected-work .project{min-height:0;padding:24px}.work-period{display:none}}
+    @media(prefers-reduced-motion:reduce){.selected-work .project{transition:none}.selected-work .project:hover{transform:none}}
   </style>
 </head>
 <body>
@@ -334,17 +352,16 @@ Gustavo
         </div>
       </section>
 
-      <section id="projetos">
-        <div class="section-top"><span class="section-num">02</span><h2>Projetos selecionados</h2></div>
-        <p class="intro">Projetos que demonstram diferentes partes da minha prática: software, web, automação, infraestrutura e experimentação.</p>
+      <section id="projetos" class="selected-work">
+        <div class="section-top"><span class="section-num">02</span><h2>Trabalhos em destaque<span class="work-period"> / 2026</span></h2></div>
+        <p class="intro">Uma seleção intencional de projetos. Cada um representa um problema diferente que resolvi ou estou explorando — do desenvolvimento web ao ecossistema Linux.</p>
         <div class="projects">
-          <article class="project featured"><div class="project-meta">Produto · Web · Full stack</div><h3>Manejo App</h3><p>Aplicação web em desenvolvimento, com frontend e backend separados e foco em transformar uma necessidade real em produto utilizável.</p><div class="tags"><span class="tag">Web</span><span class="tag">API</span><span class="tag">JavaScript</span><span class="tag">Python</span></div><a class="project-link" href="https://github.com/gustavormartins/manejo-app" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">IA · Experimentação</div><h3>Blohsh AI</h3><p>Projeto pessoal voltado à experimentação com inteligência artificial e construção de soluções próprias.</p><div class="tags"><span class="tag">AI</span><span class="tag">Python</span><span class="tag">Experimentação</span></div><a class="project-link" href="https://github.com/gustavormartins/Blohsh_AI" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">Web · Game</div><h3>Blohsh Blast</h3><p>Projeto web inspirado em jogos de puzzle, desenvolvido para explorar interação, responsividade e experiência mobile.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PWA</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">Automação · Windows</div><h3>WinOptmize</h3><p>Scripts para automação e manutenção de ambientes Windows, com foco em tarefas repetitivas e configuração do sistema.</p><div class="tags"><span class="tag">PowerShell</span><span class="tag">Batch</span><span class="tag">Windows</span></div><a class="project-link" href="https://github.com/gustavormartins/WinOptmize" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">Web · Documentação técnica</div><h3>CLP · SCADA · Inversor</h3><p>Relatório técnico em HTML e CSS sobre automação industrial, documentando conceitos de CLP, SCADA e inversor de frequência.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">SCADA</span><span class="tag">CLP</span></div><a class="project-link" href="https://github.com/gustavormartins/report.github.io" target="_blank" rel="noopener">Código no GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">Conceito · Linux</div><h3>Blohsh OS</h3><p>Projeto conceitual de uma distribuição Linux própria, explorando Fedora minimal, Hyprland, automação e personalização de ambiente.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Fedora</span><span class="tag">Hyprland</span><span class="tag">Shell</span></div><span class="project-link" style="color:#777">Em desenvolvimento</span></article>
+          <article class="project featured"><div class="project-meta">01 / GAME DEVELOPMENT · WEB</div><h3>BlohshBlast</h3><p>Jogo de puzzle responsivo com lógica de blocos, interação por arrastar e soltar e recordes salvos no navegador. Um laboratório de experiência e engenharia de interfaces.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Game Logic</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">02 / LINUX · OPEN SOURCE</div><h3>Salinha Linux Compat Kit</h3><p>Kit comunitário que diagnostica conectividade e contorna problemas de execução AppImage em ambientes Linux, incluindo FUSE, Vulkan e XWayland.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Diagnóstico</span></div><a class="project-link" href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">03 / DESKTOP · EM DESENVOLVIMENTO</div><h3>Replica Audio Player</h3><p>Projeto de player de áudio nativo para Linux. Atualmente em estágio inicial, com estrutura Rust e verificações de qualidade e segurança no desenvolvimento.</p><div class="tags"><span class="tag">Rust</span><span class="tag">Linux</span><span class="tag">DevSecOps</span></div><a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener">Acompanhar projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project"><div class="project-meta">04 / FULL STACK · WEB APP</div><h3>Lista de Casa</h3><p>Aplicação para lista de presentes e organização de reservas, combinando frontend React com backend Python e persistência em SQLite. Projeto de uso real e evolução contínua.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">SQLite</span></div><a class="project-link" href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
         </div>
+        <p class="work-footnote">Outros experimentos e ferramentas continuam disponíveis no <a href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub completo ↗</a>. Nem todo repositório precisa virar um case.</p>
       </section>
 
       <section>
