@@ -170,9 +170,32 @@
     .work-footnote a{color:#39ff14;text-decoration:underline;text-underline-offset:4px}
     @media(max-width:700px){.selected-work .projects{grid-template-columns:1fr}.selected-work .project.featured{grid-column:auto}.selected-work .project{min-height:0;padding:24px}.work-period{display:none}}
     @media(prefers-reduced-motion:reduce){.selected-work .project{transition:none}.selected-work .project:hover{transform:none}}
+
+    /* Portfolio 2.0 — voice, rhythm and accessibility */
+    .skip-link{position:fixed;top:-80px;left:16px;z-index:100;background:#39ff14;color:#000;padding:12px 16px;font:700 .75rem var(--mono)}
+    .skip-link:focus{top:14px}
+    :focus-visible{outline:2px solid #39ff14;outline-offset:4px}
+    .hero-line{display:block;color:#c8dacb;font-size:clamp(1.3rem,2.4vw,2.25rem);letter-spacing:-.04em;line-height:1.3;margin-top:.9em;font-weight:500}
+    .hero h1{max-width:760px}
+    .hero-copy{max-width:600px}
+    .hero>div:first-child{animation:heroIn .75s cubic-bezier(.2,.8,.3,1) both}
+    @keyframes heroIn{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+    .nav-links .nav-cases{color:#b7eac0}
+    .method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .method-step{background:linear-gradient(135deg,rgba(15,23,17,.96),rgba(6,9,7,.95));border:1px solid #243b28;padding:30px;min-height:248px}
+    .method-step span{color:#39ff14;font:600 .66rem var(--mono);letter-spacing:.1em}
+    .method-step h3{font-size:clamp(1.15rem,1.8vw,1.5rem);letter-spacing:-.045em;margin:22px 0 10px}
+    .method-step p{font-size:.88rem;color:#aabcae}
+    .selected-work .project.featured::before{content:"01";position:absolute;top:18px;right:28px;font:700 clamp(3rem,10vw,9rem)/1 var(--mono);color:rgba(57,255,20,.07);pointer-events:none}
+    .case-link{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font:650 .75rem var(--mono);color:#39ff14;margin-top:14px;border-bottom:1px solid rgba(57,255,20,.5);padding-bottom:5px}
+    .case-link:hover{color:#caffc0;border-color:#caffc0}
+    @media(max-width:900px){.method-grid{grid-template-columns:1fr}.method-step{min-height:0}.nav-links .nav-cases{display:inline-flex!important}}
+    @media(max-width:640px){.hero-line{font-size:1.2rem}.method-step{padding:24px}.nav-links{gap:10px}.selected-work .project.featured::before{font-size:4rem}}
+    @media(prefers-reduced-motion:reduce){.hero>div:first-child{animation:none}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
   <div class="terminal-bg" aria-hidden="true">
     <div class="terminal-stream">
       <pre class="terminal-column">gustavo@blohsh:~$ neofetch
@@ -284,6 +307,7 @@ Gustavo
       <div class="nav-links">
         <a href="#sobre">Sobre</a>
         <a href="#projetos">Projetos</a>
+        <a href="cases/" class="nav-cases">Cases</a>
         <a href="#stack">Stack</a>
         <a href="#contato" class="nav-cta">Contato</a>
       </div>
@@ -294,9 +318,9 @@ Gustavo
     <div class="shell">
       <header class="hero">
         <div>
-          <p class="eyebrow">software · automation · linux</p>
-          <h1>Gustavo Romão <em>Martins</em></h1>
-          <p class="hero-copy">Analista de sistemas com foco em desenvolvimento, automação, Linux e infraestrutura. Transformo problemas técnicos em soluções simples, funcionais e sustentáveis.</p>
+          <p class="eyebrow">software / open source / experiências digitais</p>
+          <h1>Gustavo Romão <em>Martins.</em><span class="hero-line">Do problema ao código.</span></h1>
+          <p class="hero-copy">Desenvolvedor de software com experiência em processos e automação. Crio aplicações, investigo desafios técnicos e transformo aprendizados em projetos reais — da web ao Linux.</p>
           <div class="actions">
             <a class="btn primary" href="#projetos">Ver projetos <i class="fa-solid fa-arrow-down"></i></a>
             <a class="btn" href="/linkedin" rel="noopener">LinkedIn <i class="fa-brands fa-linkedin"></i></a>
@@ -352,20 +376,30 @@ Gustavo
         </div>
       </section>
 
+      <section id="metodo" class="method">
+        <div class="section-top"><span class="section-num">02</span><h2>Como eu construo</h2></div>
+        <p class="intro">Antes da ferramenta, vem a pergunta certa. Minha abordagem une entendimento de processos e prática em software para resolver desafios com clareza.</p>
+        <div class="method-grid">
+          <article class="method-step"><span>01 / ENTENDER</span><h3>Investigar o contexto.</h3><p>Identificar restrições, reproduzir problemas, observar como as pessoas usam a solução e definir o que realmente precisa mudar.</p></article>
+          <article class="method-step"><span>02 / CONSTRUIR</span><h3>Escolher com intenção.</h3><p>Priorizar arquitetura compreensível, tecnologia adequada ao desafio e interfaces que funcionem antes de impressionar.</p></article>
+          <article class="method-step"><span>03 / EVOLUIR</span><h3>Testar e documentar.</h3><p>Registrar decisões, reconhecer limitações e melhorar cada versão com base em testes, manutenção e feedback.</p></article>
+        </div>
+      </section>
+
       <section id="projetos" class="selected-work">
-        <div class="section-top"><span class="section-num">02</span><h2>Trabalhos em destaque<span class="work-period"> / 2026</span></h2></div>
+        <div class="section-top"><span class="section-num">03</span><h2>Trabalhos em destaque<span class="work-period"> / 2026</span></h2></div>
         <p class="intro">Uma seleção intencional de projetos. Cada um representa um problema diferente que resolvi ou estou explorando — do desenvolvimento web ao ecossistema Linux.</p>
         <div class="projects">
-          <article class="project featured"><div class="project-meta">01 / GAME DEVELOPMENT · WEB</div><h3>BlohshBlast</h3><p>Jogo de puzzle responsivo com lógica de blocos, interação por arrastar e soltar e recordes salvos no navegador. Um laboratório de experiência e engenharia de interfaces.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Game Logic</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">02 / LINUX · OPEN SOURCE</div><h3>Salinha Linux Compat Kit</h3><p>Kit comunitário que diagnostica conectividade e contorna problemas de execução AppImage em ambientes Linux, incluindo FUSE, Vulkan e XWayland.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Diagnóstico</span></div><a class="project-link" href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">03 / DESKTOP · EM DESENVOLVIMENTO</div><h3>Replica Audio Player</h3><p>Projeto de player de áudio nativo para Linux. Atualmente em estágio inicial, com estrutura Rust e verificações de qualidade e segurança no desenvolvimento.</p><div class="tags"><span class="tag">Rust</span><span class="tag">Linux</span><span class="tag">DevSecOps</span></div><a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener">Acompanhar projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
-          <article class="project"><div class="project-meta">04 / FULL STACK · WEB APP</div><h3>Lista de Casa</h3><p>Aplicação para lista de presentes e organização de reservas, combinando frontend React com backend Python e persistência em SQLite. Projeto de uso real e evolução contínua.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">SQLite</span></div><a class="project-link" href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a></article>
+          <article class="project featured"><div class="project-meta">01 / GAME DEVELOPMENT · WEB</div><h3>BlohshBlast</h3><p>Jogo de puzzle responsivo com lógica de blocos, modos de jogo, progressão e suporte PWA. Um laboratório de experiência e engenharia de interfaces.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Game Logic</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#blohshblast" aria-label="Ler estudo de caso: blohshblast">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
+          <article class="project"><div class="project-meta">02 / LINUX · OPEN SOURCE</div><h3>Salinha Linux Compat Kit</h3><p>Kit comunitário de diagnóstico e lançamento de AppImage para Linux. Documenta testes de conectividade e alternativas para FUSE, Vulkan e XWayland; a falha de rede original ainda requer validação.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Diagnóstico</span></div><a class="project-link" href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#salinha" aria-label="Ler estudo de caso: salinha">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
+          <article class="project"><div class="project-meta">03 / DESKTOP · EM DESENVOLVIMENTO</div><h3>Replica Audio Player</h3><p>Projeto de futuro player nativo Linux: bootstrap em Rust, CI e verificações de qualidade. Interface gráfica e reprodução de áudio ainda não foram implementadas.</p><div class="tags"><span class="tag">Rust</span><span class="tag">Linux</span><span class="tag">DevSecOps</span></div><a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener">Acompanhar projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#replica" aria-label="Ler estudo de caso: replica">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
+          <article class="project"><div class="project-meta">04 / FULL STACK · WEB APP</div><h3>Lista de Casa</h3><p>Protótipo de lista de presentes e reservas, com React, FastAPI e SQLite. Em evolução, ainda requer autenticação segura no backend antes de uso público com dados sensíveis.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">SQLite</span></div><a class="project-link" href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#lista-de-casa" aria-label="Ler estudo de caso: lista-de-casa">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
         </div>
         <p class="work-footnote">Outros experimentos e ferramentas continuam disponíveis no <a href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub completo ↗</a>. Nem todo repositório precisa virar um case.</p>
       </section>
 
       <section>
-        <div class="section-top"><span class="section-num">03</span><h2>GitHub</h2></div>
+        <div class="section-top"><span class="section-num">04</span><h2>GitHub</h2></div>
         <div class="github-box">
           <p><strong>Meu código continua evoluindo.</strong><br>Veja repositórios, experimentos, histórico de desenvolvimento e projetos que ainda não entraram nesta seleção.</p>
           <a class="btn primary" href="https://github.com/gustavormartins" target="_blank" rel="noopener">Abrir GitHub <i class="fa-brands fa-github"></i></a>
@@ -374,7 +408,7 @@ Gustavo
 
       <section id="contato">
         <div class="contact">
-          <div class="section-top"><span class="section-num">04</span><h2>Vamos construir algo?</h2></div>
+          <div class="section-top"><span class="section-num">05</span><h2>Vamos construir algo?</h2></div>
           <p>Estou aberto a oportunidades, projetos de software, automação e colaboração técnica.</p>
           <div class="contact-links"><a href="mailto:gustavoromaom178@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a><a href="/linkedin" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a></div>
         </div>
@@ -384,7 +418,7 @@ Gustavo
 
   <footer class="shell">
     <span>Gustavo Romão Martins · ADS · 2026</span>
-    <span class="mono">built with HTML / CSS / JS · <span class="footer-accent">blohsh.dev</span></span>
+    <span class="mono">built with HTML / CSS / JS · <span class="footer-accent">BLOHSH®</span></span>
   </footer>
 </body>
 </html>
