@@ -77,11 +77,11 @@ try {
       }
     }
     if (shot.name === 'home-mobile') {
-      const button = page.getByRole('button', { name: 'Abrir menu' });
+      const button = page.locator('.mobile-nav-toggle');
       await button.click();
       if (await button.getAttribute('aria-expanded') !== 'true') failures.push('Mobile menu did not open');
       await page.locator('.mobile-nav-panel a[href="#trabalhos"]').click();
-      if (await page.getByRole('button', { name: 'Abrir menu' }).getAttribute('aria-expanded') !== 'false') {
+      if (await button.getAttribute('aria-expanded') !== 'false') {
         failures.push('Mobile menu did not close after navigation');
       }
     }
