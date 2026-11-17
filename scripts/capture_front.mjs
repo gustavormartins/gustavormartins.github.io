@@ -44,6 +44,26 @@ try {
     });
     await page.waitForTimeout(150);
 
+    // Only verify assets owned by this portfolio. External avatars and webfonts
+    // can be blocked in CI without indicating that a local asset is broken.
+    const brokenLocalImages = await page.evaluate(async () => {
+      const images = [...document.querySelectorAll('img')].filter(img => {
+        const source = img.getAttribute('src') || '';
+        return source.startsWith('assets/') ||
+          source.startsWith('../assets/') ||
+          source.startsWith('./assets/');
+      });
+      await Promise.all(images.map(async image => {
+        image.loading = 'eager';
+        try { await image.decode(); } catch { /* Report below */ }
+      }));
+      return images.filter(img => !img.complete || img.naturalWidth === 0)
+        .map(img => img.getAttribute('src'));
+    });
+    if (brokenLocalImages.length) {
+      issues.push(`Broken local images on ${shot.name}: ${brokenLocalImages.join(', ')}`);
+    }
+
     if (shot.anchor) {
       await page.evaluate(selector => {
         const element = document.querySelector(selector);
