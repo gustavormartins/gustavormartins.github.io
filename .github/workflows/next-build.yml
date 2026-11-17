@@ -1,7 +1,7 @@
 name: Next.js portfolio — build and privacy checks
 on:
   push:
-    branches: [feature/portfolio-next-motion]
+    branches: [main]
   pull_request:
     paths:
       - 'app/**'
