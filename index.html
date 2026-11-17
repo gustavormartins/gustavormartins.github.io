@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#030303">
+  <meta name="theme-color" content="#050807">
   <meta name="description" content="Portfólio de Gustavo Romão Martins — desenvolvimento de software, automação, Linux, infraestrutura e projetos web.">
   <meta name="author" content="Gustavo Romão Martins">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gustavo Romão Martins | Software & Infrastructure">
   <meta property="og:description" content="Projetos, experiência e stack técnica de Gustavo Romão Martins.">
-  <meta property="og:url" content="https://gustavormartins.github.io/">
-  <link rel="canonical" href="https://gustavormartins.github.io/">
+  <meta property="og:url" content="https://gustavormartins.vercel.app/">
+  <link rel="canonical" href="https://gustavormartins.vercel.app/">
   <title>Gustavo Romão Martins | Software & Infrastructure</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,6 +192,52 @@
     @media(max-width:900px){.method-grid{grid-template-columns:1fr}.method-step{min-height:0}.nav-links .nav-cases{display:inline-flex!important}}
     @media(max-width:640px){.hero-line{font-size:1.2rem}.method-step{padding:24px}.nav-links{gap:10px}.selected-work .project.featured::before{font-size:4rem}}
     @media(prefers-reduced-motion:reduce){.hero>div:first-child{animation:none}}
+
+    /* Front-end review: responsive navigation, calmer motion, stable identity */
+    html{scroll-padding-top:100px}
+    section[id],article[id]{scroll-margin-top:100px}
+    .mobile-nav{display:none}
+    .terminal-stream{opacity:.38}
+    .profile-meta{color:#a3b3a6}
+    .project-link,.case-link{max-width:100%}
+    .selected-work .project{isolation:isolate}
+    .selected-work .project:focus-within{border-color:#39ff14}
+    @media(max-width:900px){
+      .nav-inner{min-height:68px}
+      .nav-links{display:none}
+      .mobile-nav{display:block;position:relative}
+      .mobile-nav>summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;color:#c9edcc;font:600 .76rem var(--mono);border:1px solid #315636;background:#09110b;padding:10px 13px}
+      .mobile-nav>summary::-webkit-details-marker{display:none}
+      .mobile-nav[open]>summary{border-color:#39ff14}
+      .mobile-panel{position:absolute;right:0;top:calc(100% + 10px);z-index:100;display:flex;flex-direction:column;min-width:210px;padding:8px;background:#081109;border:1px solid #3f6845;box-shadow:0 18px 45px rgba(0,0,0,.5)}
+      .mobile-panel a{padding:13px 15px;font:600 .76rem var(--mono);color:#e1f3e2;white-space:nowrap}
+      .mobile-panel a:hover,.mobile-panel a:focus-visible{color:#39ff14;background:#15241a}
+    }
+    @media(max-width:640px){
+      .hero{min-height:0;padding-top:45px;padding-bottom:40px}
+      .hero h1{font-size:clamp(2.55rem,10.2vw,3.35rem)}
+      .hero-visual{display:grid;grid-template-columns:minmax(100px,.75fr) minmax(0,1.25fr);gap:12px}
+      .profile-panel{max-width:none;padding:10px}
+      .profile-panel::before{left:9px;top:6px;font-size:.47rem}
+      .profile-frame{margin-top:17px}
+      .avatar{width:72%;height:72%}
+      .profile-meta{display:none}
+      .hero-card{padding:15px;min-width:0}
+      .hero-card::before{right:9px;top:6px;font-size:.47rem}
+      .hero-card .status{margin-bottom:9px;font-size:.58rem}
+      .hero-card .terminal{font-size:.59rem;line-height:1.65;overflow-wrap:anywhere}
+      .terminal br{display:none}
+      .contact{padding:28px 20px}
+    }
+    @media(max-width:390px){
+      .hero-visual{grid-template-columns:100px minmax(0,1fr)}
+      .hero-card{padding:10px}
+      .hero-card .terminal{font-size:.54rem}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .hero>div:first-child{animation:none}
+      .selected-work .project:hover,.btn:hover{transform:none}
+    }
   </style>
 </head>
 <body>
@@ -300,17 +346,29 @@ Gustavo
 
   <nav aria-label="Navegação principal">
     <div class="shell nav-inner">
-      <a class="brand" href="/" aria-label="Gustavo Martins, início">
-        <img class="brand-logo" src="https://raw.githubusercontent.com/gustavormartins/gustavormartins.github.io/main/assets/blohsh-logo.png?v=20260921" alt="Blohsh" width="220" height="263" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.insertAdjacentHTML('afterend','<span class=&quot;brand-fallback&quot; aria-hidden=&quot;true&quot;>●</span>')">
+      <a class="brand" href="#main" aria-label="Gustavo Martins, voltar ao início">
+        <img class="brand-logo" src="assets/blohsh-logo.png" alt="" width="34" height="40" decoding="async">
         <span class="brand-text">GM<span class="accent">.</span><span class="brand-cursor" aria-hidden="true"></span></span>
       </a>
       <div class="nav-links">
         <a href="#sobre">Sobre</a>
+        <a href="#metodo">Processo</a>
         <a href="#projetos">Projetos</a>
         <a href="cases/" class="nav-cases">Cases</a>
         <a href="#stack">Stack</a>
         <a href="#contato" class="nav-cta">Contato</a>
       </div>
+      <details class="mobile-nav">
+        <summary aria-label="Abrir menu de navegação"><span>Menu</span><i class="fa-solid fa-bars" aria-hidden="true"></i></summary>
+        <div class="mobile-panel">
+          <a href="#sobre">Sobre</a>
+          <a href="#metodo">Processo</a>
+          <a href="#projetos">Projetos</a>
+          <a href="cases/">Estudos de caso</a>
+          <a href="#stack">Stack</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </details>
     </div>
   </nav>
 
@@ -420,5 +478,13 @@ Gustavo
     <span>Gustavo Romão Martins · ADS · 2026</span>
     <span class="mono">built with HTML / CSS / JS · <span class="footer-accent">BLOHSH®</span></span>
   </footer>
+  <script>
+    (() => {
+      const menu = document.querySelector(".mobile-nav");
+      if (!menu) return;
+      menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => menu.removeAttribute("open")));
+      document.addEventListener("keydown", event => { if (event.key === "Escape") menu.removeAttribute("open"); });
+    })();
+  </script>
 </body>
 </html>
