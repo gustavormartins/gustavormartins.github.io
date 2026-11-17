@@ -1,0 +1,61 @@
+name: Front-end visual snapshots
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'css/**'
+      - 'assets/**'
+      - '.github/workflows/visual-snapshots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Confirm headless browser
+        run: google-chrome --version
+
+      - name: Capture desktop and mobile views
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p snapshots
+          capture() {
+            local filename="$1" width="$2" height="$3" url="$4"
+            echo "Capturing ${filename}: ${width}x${height}"
+            google-chrome \
+              --headless=new \
+              --no-sandbox \
+              --disable-gpu \
+              --disable-dev-shm-usage \
+              --disable-extensions \
+              --hide-scrollbars \
+              --force-device-scale-factor=1 \
+              --virtual-time-budget=2000 \
+              --window-size="${width},${height}" \
+              --screenshot="snapshots/${filename}.png" \
+              "${url}" >/dev/null 2>&1
+            test -s "snapshots/${filename}.png"
+          }
+          ROOT="file://$PWD"
+          capture "home-desktop-1440" 1440 900 "$ROOT/index.html"
+          capture "home-mobile-390" 390 844 "$ROOT/index.html"
+          capture "home-mobile-320" 320 720 "$ROOT/index.html"
+          capture "projects-desktop-1440" 1440 900 "$ROOT/index.html#projetos"
+          capture "projects-mobile-390" 390 844 "$ROOT/index.html#projetos"
+          capture "case-desktop-1440" 1440 900 "$ROOT/cases/index.html#blohshblast"
+          capture "case-mobile-390" 390 844 "$ROOT/cases/index.html#blohshblast"
+          ls -lh snapshots/
+
+      - name: Upload review screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-review-snapshots
+          path: snapshots/*.png
+          retention-days: 14
