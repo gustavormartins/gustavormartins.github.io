@@ -239,6 +239,22 @@
       .hero>div:first-child{animation:none}
       .selected-work .project:hover,.btn:hover{transform:none}
     }
+
+    /* Project visuals: evidence-led rather than decorative stock imagery */
+    .project-diagnostic{background:linear-gradient(145deg,rgba(8,19,11,.98),rgba(6,9,7,.98))!important}
+    .diagnostic-visual{margin-top:25px;border:1px solid #345638;background:#060e08;border-radius:8px;overflow:hidden}
+    .diagnostic-heading{display:flex;align-items:center;justify-content:space-between;gap:9px;border-bottom:1px solid #2a442e;padding:10px 13px;color:#8cae92;font:500 .64rem var(--mono)}
+    .diagnostic-heading span:nth-child(2){margin-right:auto}
+    .diagnostic-dot{width:7px;height:7px;border-radius:50%;background:#39ff14;box-shadow:0 0 9px #39ff1450}
+    .diagnostic-flow{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:13px}
+    .diagnostic-node{padding:11px 12px;border:1px solid #243c29;background:#0c1810;min-width:0}
+    .diagnostic-node span{display:block;color:#39ff14;font:700 .64rem var(--mono);margin-bottom:6px}
+    .diagnostic-node strong{display:block;color:#e4f4e4;font-size:.78rem;font-weight:600}
+    .diagnostic-node small{display:block;margin-top:3px;color:#98b19c;font-size:.7rem;line-height:1.5}
+    .diagnostic-caption{padding:0 13px 12px!important;margin:0!important;color:#91a996!important;font-size:.7rem!important}
+    .diagnostic-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .diagnostic-links .project-link,.diagnostic-links .case-link{margin-top:16px}
+    @media(max-width:420px){.diagnostic-heading{font-size:.56rem}.diagnostic-flow{gap:6px;padding:9px}.diagnostic-node{padding:9px}.diagnostic-node strong{font-size:.72rem}}
   </style>
 </head>
 <body>
@@ -450,7 +466,26 @@ Gustavo
         <p class="intro">Uma seleção intencional de projetos. Cada um representa um problema diferente que resolvi ou estou explorando — do desenvolvimento web ao ecossistema Linux.</p>
         <div class="projects">
           <article class="project featured"><div class="project-meta">01 / GAME DEVELOPMENT · WEB</div><h3>BlohshBlast</h3><p>Jogo de puzzle responsivo com lógica de blocos, modos de jogo, progressão e suporte PWA. Um laboratório de experiência e engenharia de interfaces.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Game Logic</span></div><a class="project-link" href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#blohshblast" aria-label="Ler estudo de caso: blohshblast">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="project"><div class="project-meta">02 / LINUX · OPEN SOURCE</div><h3>Salinha Linux Compat Kit</h3><p>Kit comunitário de diagnóstico e lançamento de AppImage para Linux. Documenta testes de conectividade e alternativas para FUSE, Vulkan e XWayland; a falha de rede original ainda requer validação.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Diagnóstico</span></div><a class="project-link" href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#salinha" aria-label="Ler estudo de caso: salinha">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
+          <article class="project project-diagnostic">
+            <div class="project-meta">02 / LINUX · OPEN SOURCE</div>
+            <h3>Salinha Linux Compat Kit</h3>
+            <p>Diagnóstico reproduzível e launcher comunitário para AppImage no KDE/Wayland. Uma resposta prática a dificuldades com Vulkan, FUSE e execução do Electron.</p>
+            <div class="diagnostic-visual" role="group" aria-label="Fluxo técnico ilustrativo do kit de compatibilidade Linux">
+              <div class="diagnostic-heading"><span class="diagnostic-dot"></span><span>compatibility / pipeline</span><span>bash · linux</span></div>
+              <div class="diagnostic-flow">
+                <div class="diagnostic-node"><span>01</span><strong>Detectar sessão</strong><small>KDE · Wayland</small></div>
+                <div class="diagnostic-node"><span>02</span><strong>Ajustar backend</strong><small>XWayland quando disponível</small></div>
+                <div class="diagnostic-node"><span>03</span><strong>Fallback de montagem</strong><small>extração temporária se FUSE falhar</small></div>
+                <div class="diagnostic-node"><span>04</span><strong>Registrar evidências</strong><small>logs · DNS · HTTPS</small></div>
+              </div>
+              <p class="diagnostic-caption">Esquema do fluxo implementado — não é um log de execução.</p>
+            </div>
+            <div class="tags"><span class="tag">Bash</span><span class="tag">Linux</span><span class="tag">AppImage</span><span class="tag">Troubleshooting</span></div>
+            <div class="diagnostic-links">
+              <a class="project-link" href="https://github.com/gustavormartins/salinha-linux-compat-kit/blob/main/RELATORIO-TECNICO.md" target="_blank" rel="noopener noreferrer">Relatório técnico <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+              <a class="case-link" href="cases/#salinha">Estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </article>
           <article class="project"><div class="project-meta">03 / DESKTOP · EM DESENVOLVIMENTO</div><h3>Replica Audio Player</h3><p>Projeto de futuro player nativo Linux: bootstrap em Rust, CI e verificações de qualidade. Interface gráfica e reprodução de áudio ainda não foram implementadas.</p><div class="tags"><span class="tag">Rust</span><span class="tag">Linux</span><span class="tag">DevSecOps</span></div><a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener">Acompanhar projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#replica" aria-label="Ler estudo de caso: replica">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
           <article class="project"><div class="project-meta">04 / FULL STACK · WEB APP</div><h3>Lista de Casa</h3><p>Protótipo de lista de presentes e reservas, com React, FastAPI e SQLite. Em evolução, ainda requer autenticação segura no backend antes de uso público com dados sensíveis.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">SQLite</span></div><a class="project-link" href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#lista-de-casa" aria-label="Ler estudo de caso: lista-de-casa">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
         </div>
