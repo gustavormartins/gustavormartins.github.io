@@ -276,6 +276,19 @@
     .game-preview figcaption{padding:11px 13px;color:#88a78f;font:500 .63rem var(--mono)}
     @media(max-width:900px){.selected-work .project-game{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}}
     @media(max-width:640px){.selected-work .project-game{padding:21px!important}.game-copy h3{font-size:2.45rem!important}.game-facts{gap:18px}.game-preview-header{font-size:.52rem}.game-preview figcaption{font-size:.58rem}}
+
+    /* Mobile: show actual gameplay immediately after the project heading */
+    @media(max-width:900px){
+      .selected-work .project-game{display:flex!important;flex-direction:column;align-items:stretch}
+      .selected-work .project-game .game-copy{display:contents}
+      .selected-work .project-game .game-copy .project-meta{order:1}
+      .selected-work .project-game .game-copy h3{order:2}
+      .selected-work .project-game .game-preview{order:3}
+      .selected-work .project-game .game-copy>p{order:4}
+      .selected-work .project-game .game-facts{order:5}
+      .selected-work .project-game .game-copy .tags{order:6}
+      .selected-work .project-game .game-actions{order:7}
+    }
   </style>
 </head>
 <body>
@@ -504,7 +517,7 @@ Gustavo
             </div>
             <figure class="game-preview">
               <div class="game-preview-header"><span class="game-live-dot" aria-hidden="true"></span><span>Original gameplay capture</span><span>01 / 04</span></div>
-              <img src="assets/projects/blohshblast-gameplay.png" width="1160" height="780" alt="Captura real do BlohshBlast em funcionamento: tabuleiro 8 por 8 com peças verdes posicionadas e pontuação 90" loading="lazy" decoding="async">
+              <img src="assets/projects/blohshblast-gameplay.png" width="1160" height="780" alt="Captura real do BlohshBlast em funcionamento: tabuleiro 8 por 8 com peças verdes posicionadas durante uma partida" loading="eager" decoding="async">
               <figcaption>Interface real do projeto · captura com jogadas executadas</figcaption>
             </figure>
           </article>
