@@ -1,0 +1,45 @@
+name: Capture BlohshBlast project visuals
+on:
+  push:
+    branches: [feature/blohsh-portfolio-2-curadoria]
+    paths:
+      - 'scripts/capture_blohsh.mjs'
+      - '.github/workflows/capture-project-visuals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout real BlohshBlast source
+        run: git clone --depth 1 https://github.com/gustavormartins/blohshblast.github.io.git /tmp/blohshblast
+      - name: Install and build game
+        run: |
+          cd /tmp/blohshblast
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Install Playwright browser controller
+        run: npm install --no-save --package-lock=false playwright-core@1.56.1
+      - name: Start game and capture original UI
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/blohshblast
+          nohup npm run preview -- --host 127.0.0.1 --port 4173 >/tmp/game-preview.log 2>&1 &
+          cd "$GITHUB_WORKSPACE"
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/capture_blohsh.mjs
+          ls -lh project-artifacts/
+      - name: Upload genuine screenshots for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-blohshblast-screenshots
+          path: project-artifacts/*.png
+          if-no-files-found: warn
+          retention-days: 14
