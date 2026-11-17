@@ -155,7 +155,7 @@
 
     /* Portfolio 2.0 — editorial selection */
     .selected-work{position:relative}
-    .selected-work .section-top{justify-content:space-between;flex-wrap:wrap}
+    .selected-work .section-top{justify-content:flex-start;flex-wrap:wrap}
     .work-period{color:#6b856f;font:500 .8rem var(--mono);letter-spacing:0;vertical-align:middle}
     .selected-work .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
     .selected-work .project{display:flex;flex-direction:column;min-height:310px;padding:30px;border:1px solid #26352a;background:linear-gradient(145deg,rgba(17,29,19,.85),rgba(4,7,5,.94));transition:border-color .25s,transform .25s}
@@ -229,6 +229,7 @@
       .terminal br{display:none}
       .contact{padding:28px 20px}
     }
+    @media(max-width:640px){.selected-work .section-top h2{font-size:clamp(1.5rem,6vw,1.8rem)}}
     @media(max-width:390px){
       .hero-visual{grid-template-columns:100px minmax(0,1fr)}
       .hero-card{padding:10px}
