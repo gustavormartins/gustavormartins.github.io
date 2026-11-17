@@ -64,6 +64,22 @@ try {
     }
     const output = path.join(root, 'snapshots', shot.name + '.png');
     await page.screenshot({ path: output, fullPage: Boolean(shot.fullPage), animations: 'disabled' });
+    if (shot.name === 'home-mobile') {
+      const menu = page.locator('.mobile-nav');
+      await menu.locator('summary').click();
+      if (!(await menu.evaluate(element => element.open))) {
+        throw new Error('Mobile menu did not open');
+      }
+      await page.keyboard.press('Escape');
+      if (await menu.evaluate(element => element.open)) {
+        throw new Error('Mobile menu did not close on Escape');
+      }
+      await menu.locator('summary').click();
+      await menu.locator('a[href="#projetos"]').click();
+      if (await menu.evaluate(element => element.open)) {
+        throw new Error('Mobile menu did not close when navigating');
+      }
+    }
     console.log(`${shot.name}: ${shot.width}x${shot.height}, scrollY=${metrics.y}, pageHeight=${metrics.height}, overflow=${metrics.overflow}`);
     await context.close();
   }
