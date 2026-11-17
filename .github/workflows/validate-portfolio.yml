@@ -1,0 +1,40 @@
+name: Validate static portfolio
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'css/**'
+      - 'assets/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-portfolio.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pages and internal links
+        run: python3 scripts/validate_portfolio.py
+
+      - name: Install browser automation
+        if: github.ref != 'refs/heads/main'
+        run: npm install --no-save --package-lock=false playwright-core@1.56.1
+
+      - name: Capture front-end screenshots and check mobile overflow
+        if: github.ref != 'refs/heads/main'
+        run: node scripts/capture_front.mjs
+
+      - name: Upload responsive screenshots
+        if: github.ref != 'refs/heads/main' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-review-snapshots
+          path: snapshots/*.png
+          if-no-files-found: warn
+          retention-days: 14
