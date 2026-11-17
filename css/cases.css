@@ -49,3 +49,20 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0 2.5rem;color:#879b8b
 /* Front-end review: tighten small-screen nav and improve focus clarity */
 @media(max-width:480px){.navin{gap:.45rem}.logo{font-size:.69rem;letter-spacing:0}.navin>a:last-child{font-size:.63rem;padding:.55rem .6rem;line-height:1.3;text-align:right}}
 @media(max-width:330px){.navin{flex-wrap:wrap;padding:.6rem 0}.navin>a:last-child{margin-left:auto}}
+
+
+/* Case study evidence: real screenshots and technical architecture */
+.gameplay-evidence{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(225px,.65fr);align-items:center;gap:26px;margin:38px 0 8px;background:#061008;border:1px solid #305735;border-radius:12px;overflow:hidden}
+.gameplay-evidence img{display:block;width:100%;height:auto;max-height:460px;object-fit:cover;object-position:center;background:#000}
+.gameplay-evidence figcaption{color:#a6bca9;font-size:.86rem;line-height:1.85;padding:24px 28px 24px 0}
+.gameplay-evidence figcaption strong{display:block;color:#d7f6dc;font-size:.92rem;margin-bottom:9px}
+.technical-pipeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:38px 0 0;background:#07110a;border:1px solid #315337;border-radius:10px;overflow:hidden}
+.pipeline-step{position:relative;min-width:0;padding:24px 18px;background:linear-gradient(150deg,rgba(16,32,19,.75),rgba(7,17,10,.88))}
+.pipeline-step+.pipeline-step{border-left:1px solid #315337}
+.pipeline-step span{display:block;color:#39ff14;font:600 .63rem var(--mono);letter-spacing:.08em}
+.pipeline-step strong{display:block;margin-top:14px;font-size:1rem;color:#eef6ef}
+.pipeline-step small{display:block;color:#a6baa7;font-size:.76rem;line-height:1.6;margin-top:6px}
+.pipeline-note{font-size:.75rem;color:#8fae94;max-width:850px;margin:12px 0 6px}
+@media(max-width:950px){.technical-pipeline{grid-template-columns:repeat(2,minmax(0,1fr))}.pipeline-step:nth-child(3){border-left:0;border-top:1px solid #315337}.pipeline-step:nth-child(4){border-top:1px solid #315337}}
+@media(max-width:700px){.gameplay-evidence{grid-template-columns:1fr;gap:0}.gameplay-evidence figcaption{padding:17px 20px 22px}}
+@media(max-width:420px){.technical-pipeline{grid-template-columns:1fr}.pipeline-step+.pipeline-step{border-left:0;border-top:1px solid #315337}.pipeline-step{padding:17px 19px}}
