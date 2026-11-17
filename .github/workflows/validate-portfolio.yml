@@ -29,7 +29,7 @@ jobs:
             local name="$1" width="$2" height="$3" path="$4"
             echo "Capture: $name ($width x $height)"
             timeout 45s google-chrome \
-              --headless=new --no-sandbox --disable-gpu \
+              --headless=new --no-sandbox --disable-gpu --force-prefers-reduced-motion=reduce \
               --disable-dev-shm-usage --hide-scrollbars \
               --no-first-run --force-device-scale-factor=1 \
               --virtual-time-budget=1200 \
