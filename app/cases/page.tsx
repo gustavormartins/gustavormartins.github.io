@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight, Github, Terminal } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Code2, Terminal } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Estudos de caso',
@@ -68,7 +68,7 @@ export default function CasesPage() {
         {p.slug === 'replica' && <div className="case-replica-plan"><div className="case-replica-line"><span>NOW</span><strong>Rust bootstrap</strong><small>CI · Clippy · cargo-audit</small></div><div className="case-replica-line"><span>NEXT</span><strong>GTK4 &amp; Libadwaita</strong><small>Interface nativa</small></div><div className="case-replica-line"><span>LATER</span><strong>Playback &amp; SQLite</strong><small>Biblioteca de áudio local</small></div><p>ROADMAP TÉCNICO · ITENS FUTUROS NÃO SÃO FUNCIONALIDADES CONCLUÍDAS</p></div>}
         <div className="case-grid">{p.aspects.map(([title,description],i)=><div className="case-box" key={title}><span>{String(i+1).padStart(2,'0')} /</span><h3>{title}</h3><p>{description}</p></div>)}</div>
         <div className="chip-row">{p.tags.map(tag=><span key={tag}>{tag}</span>)}</div>
-        <div className="case-outlinks"><a href={p.repo} rel="noopener noreferrer" target="_blank"><Github size={16}/> VER REPOSITÓRIO <ArrowUpRight size={14}/></a>{p.slug === 'salinha' && <a href="https://github.com/gustavormartins/salinha-linux-compat-kit/blob/main/RELATORIO-TECNICO.md" rel="noopener noreferrer" target="_blank">RELATÓRIO TÉCNICO <ArrowUpRight size={14}/></a>}</div>
+        <div className="case-outlinks"><a href={p.repo} rel="noopener noreferrer" target="_blank"><Code2 size={16}/> VER REPOSITÓRIO <ArrowUpRight size={14}/></a>{p.slug === 'salinha' && <a href="https://github.com/gustavormartins/salinha-linux-compat-kit/blob/main/RELATORIO-TECNICO.md" rel="noopener noreferrer" target="_blank">RELATÓRIO TÉCNICO <ArrowUpRight size={14}/></a>}</div>
       </article>)}
       <div className="cases-bottom"><span className="section-index">BEYOND THE CODE</span><h2>Documentar também<br/><em>é engenharia.</em></h2><p>O histórico permanece no GitHub. Aqui, a seleção foca no que cada projeto ensina — sem divulgar projetos pessoais.</p><Link href="/#contato" className="btn btn-primary">ENTRE EM CONTATO <ArrowUpRight size={16}/></Link></div>
     </main>
