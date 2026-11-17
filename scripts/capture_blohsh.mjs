@@ -24,7 +24,20 @@ try {
   if(await classic.count() && await classic.first().isVisible()) {
     await classic.first().click();
   }
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(650);
+  // Fill the board with genuine in-game keyboard moves, not edited pixels.
+  const cells = page.locator('#board .cell');
+  const before = (await cells.count()) ? await page.locator('#score-display').textContent() : '0';
+  for(let i=0;i<3;i++){
+    const piece=page.locator('.rack-slot').nth(i);
+    if(await piece.count() && await piece.locator('.piece-preview').count()){
+      await piece.focus();
+      await piece.press('Enter');
+      await page.waitForTimeout(260);
+    }
+  }
+  console.log('Score before:',before,'after:',await page.locator('#score-display').textContent());
+  await page.waitForTimeout(350);
   const board=page.locator('#board');
   console.log('Board visible:',await board.isVisible(), 'cells:', await board.locator('*').count());
   if(await board.isVisible())await page.screenshot({path:out+'/blohshblast-gameplay.png',animations:'disabled'});
