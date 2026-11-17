@@ -2,20 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, MotionConfig, useReducedMotion, useScroll, useSpring } from 'motion/react';
+import { motion, MotionConfig, useScroll, useSpring } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CheckCircle2, Code2, Menu, Monitor, Terminal, X } from 'lucide-react';
 
 type Panel = 'code' | 'process';
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function Reveal({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const reduced = useReducedMotion();
   return (
     <motion.div className={className}
-      initial={reduced ? false : { opacity: 0, y: 26 }}
+      initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12, margin: '0px 0px -35px 0px' }}
-      transition={{ duration: 0.68, delay: reduced ? 0 : delay, ease }}
+      transition={{ duration: 0.68, delay, ease }}
     >{children}</motion.div>
   );
 }
@@ -96,28 +95,27 @@ function SalinhaDiagram() {
 }
 
 function Portfolio() {
-  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 150, damping: 30, restDelta: 0.001 });
   return (
     <MotionConfig reducedMotion="user">
       <a href="#conteudo" className="skip">Pular para o conteúdo</a>
-      {!reduced && <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />}
+      <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
       <div className="ambient-grid" aria-hidden="true"><div className="ambient-orb"/></div>
       <Header />
       <main id="conteudo">
         <section id="sobre" className="hero container">
           <div className="hero-copy">
-            <motion.div className="eyebrow" initial={reduced ? false : { opacity:0, y:12 }} animate={{opacity:1,y:0}} transition={{duration:.55}}><span className="eyebrow-line"/> SOFTWARE / LINUX / EXPERIÊNCIAS DIGITAIS</motion.div>
-            <motion.h1 aria-label="Do problema ao código." initial={reduced ? false : {opacity:0,y:48}} animate={{opacity:1,y:0}} transition={{duration:.86,ease}}><span>Do problema</span><br/><span>ao <em>código.</em></span></motion.h1>
-            <motion.p className="hero-description" initial={reduced ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.2}}>Sou Gustavo Martins. Exploro engenharia de software, automação e Linux para transformar problemas reais em soluções que fazem sentido.</motion.p>
-            <motion.div className="hero-actions" initial={reduced ? false : {opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.3}}>
+            <motion.div className="eyebrow" initial={{ opacity:0, y:12 }} animate={{opacity:1,y:0}} transition={{duration:.55}}><span className="eyebrow-line"/> SOFTWARE / LINUX / EXPERIÊNCIAS DIGITAIS</motion.div>
+            <motion.h1 aria-label="Do problema ao código." initial={{opacity:0,y:48}} animate={{opacity:1,y:0}} transition={{duration:.86,ease}}><span>Do problema</span><br/><span>ao <em>código.</em></span></motion.h1>
+            <motion.p className="hero-description" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.2}}>Sou Gustavo Martins. Exploro engenharia de software, automação e Linux para transformar problemas reais em soluções que fazem sentido.</motion.p>
+            <motion.div className="hero-actions" initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.3}}>
               <a href="#trabalhos" className="btn btn-primary">EXPLORAR PROJETOS <ArrowUpRight size={18}/></a>
               <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={18}/> GITHUB</a>
             </motion.div>
             <div className="hero-bottom"><span><span className="live-dot"/> ENGINEERING IN PROGRESS</span><a href="#trabalhos">SCROLL TO EXPLORE <ArrowDown size={15}/></a></div>
           </div>
-          <motion.div className="hero-preview" initial={reduced ? false : {opacity:0,x:45,rotate:2}} animate={{opacity:1,x:0,rotate:0}} transition={{duration:.9,delay:.22,ease}}>
+          <motion.div className="hero-preview" initial={{opacity:0,x:45,rotate:2}} animate={{opacity:1,x:0,rotate:0}} transition={{duration:.9,delay:.22,ease}}>
             <ConsolePreview />
             <div className="hero-preview-label">01 / DEVELOPMENT WORKSPACE</div>
           </motion.div>
