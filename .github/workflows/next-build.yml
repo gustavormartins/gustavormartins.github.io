@@ -41,6 +41,24 @@ jobs:
             exit 1
           fi
           echo "Next.js export, images and privacy checks passed."
+      - name: Start static export server
+        shell: bash
+        run: |
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory out >/tmp/next-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+      - name: Responsive visual and interaction checks
+        run: node scripts/capture_next.mjs
+      - name: Upload responsive snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-portfolio-visual-review
+          path: snapshots-next/*.png
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload build preview artifact
         uses: actions/upload-artifact@v4
         with:
