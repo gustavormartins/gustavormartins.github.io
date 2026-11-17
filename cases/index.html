@@ -39,6 +39,10 @@
     <article class="case" id="blohshblast" aria-labelledby="title-blohshblast">
       <div class="case-head"><div><p class="project-id">CASE 01 / GAME DEVELOPMENT</p><h3 id="title-blohshblast">BlohshBlast</h3></div><span class="state">FUNCIONAL / EVOLUÇÃO</span></div>
       <p class="case-intro">Um puzzle de blocos responsivo que evoluiu de uma mecânica básica para uma experiência com modos de jogo, progressão, missões e instalação como PWA.</p>
+      <figure class="gameplay-evidence">
+        <img src="../assets/projects/blohshblast-gameplay.png" width="1160" height="780" loading="lazy" decoding="async" alt="Captura de uma partida do BlohshBlast: tabuleiro com nove células ocupadas, peças no rack e 90 pontos no placar">
+        <figcaption><strong>Registro do projeto em funcionamento.</strong> Captura produzida do código-fonte com três colocações reais por teclado; não é uma imagem conceitual ou uma demonstração hospedada.</figcaption>
+      </figure>
       <div class="detail-grid">
         <section class="detail"><h4>O desafio</h4><p>Criar um jogo simples de entender, mas com interações confiáveis em mouse e toque, regras consistentes e progressão que incentivasse novas partidas.</p></section>
         <section class="detail"><h4>O que foi construído</h4><p>Tabuleiro 8×8, arrastar e soltar, recordes locais, modos Classic/Zen/Hardcore/Daily, XP, skins, missões e cache offline do aplicativo.</p></section>
@@ -51,6 +55,13 @@
     <article class="case" id="salinha" aria-labelledby="title-salinha">
       <div class="case-head"><div><p class="project-id">CASE 02 / LINUX · TROUBLESHOOTING</p><h3 id="title-salinha">Salinha Linux Compat Kit</h3></div><span class="state">FERRAMENTA / DIAGNÓSTICO</span></div>
       <p class="case-intro">Um kit comunitário de lançamento e diagnóstico para o AppImage da Salinha em sistemas Linux com KDE Plasma, Wayland e XWayland.</p>
+      <div class="technical-pipeline" aria-label="Resumo das etapas do kit de compatibilidade">
+        <div class="pipeline-step"><span>01 / AMBIENTE</span><strong>Wayland / KDE</strong><small>Identificar a sessão gráfica</small></div>
+        <div class="pipeline-step"><span>02 / BACKEND</span><strong>XWayland</strong><small>Selecionar X11 quando suportado</small></div>
+        <div class="pipeline-step"><span>03 / MONTAGEM</span><strong>Fallback FUSE</strong><small>Extrair AppImage temporariamente quando necessário</small></div>
+        <div class="pipeline-step"><span>04 / EVIDÊNCIA</span><strong>DNS / HTTPS</strong><small>Gerar logs para separar hipóteses</small></div>
+      </div>
+      <p class="pipeline-note">Diagrama técnico derivado do código e da documentação. A causa da falha do serviço de rede não foi determinada de forma conclusiva.</p>
       <div class="detail-grid">
         <section class="detail"><h4>O problema</h4><p>Mensagens de incompatibilidade entre Wayland e Vulkan, dificuldades com FUSE e falhas observadas no serviço de rede do Chromium dificultavam entender por que o app não iniciava.</p></section>
         <section class="detail"><h4>A abordagem</h4><p>Scripts Bash para registrar logs, ajustar a seleção do backend gráfico, testar DNS/HTTPS e usar extração temporária do AppImage quando a montagem por FUSE falha.</p></section>
