@@ -69,6 +69,20 @@ try {
     if (result.imageFailures.length) failures.push(shot.name + ': images ' + result.imageFailures.join(', '));
     if (result.personal) failures.push(shot.name + ': personal content found');
     if (pageErrors.length) failures.push(shot.name + ': JS errors ' + pageErrors.join('; '));
+    // Ensure all viewport-triggered reveals have actually been seen before a
+    // full-page snapshot. A single top-of-page capture hides lazy reveals.
+    if (['home-mobile', 'cases-mobile'].includes(shot.name)) {
+      await page.evaluate(async () => {
+        const height = document.documentElement.scrollHeight;
+        const step = Math.max(300, Math.round(window.innerHeight * .7));
+        for (let y = 0; y < height; y += step) {
+          window.scrollTo({ top: y, behavior: 'instant' });
+          await new Promise(resolve => setTimeout(resolve, 80));
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
+      await page.waitForTimeout(200);
+    }
     await page.screenshot({ path: path.join(outputs, shot.name + '.png'), animations: 'disabled', fullPage: ['home-mobile','cases-mobile'].includes(shot.name) });
     if (shot.name === 'home-desktop') {
       await page.getByRole('tab', { name: /02 \/ PROCESS/ }).click();
@@ -83,6 +97,14 @@ try {
       await page.locator('.mobile-nav-panel a[href="#trabalhos"]').click();
       if (await button.getAttribute('aria-expanded') !== 'false') {
         failures.push('Mobile menu did not close after navigation');
+      }
+      const simulator = page.locator('.ops-next');
+      await simulator.scrollIntoViewIfNeeded();
+      const before = await page.locator('.ops-event').innerText();
+      await simulator.click();
+      const after = await page.locator('.ops-event').innerText();
+      if (after === before || !after.includes('EVT-002')) {
+        failures.push('OpsLens synthetic simulation did not advance to the SLA event');
       }
     }
     await context.close();
