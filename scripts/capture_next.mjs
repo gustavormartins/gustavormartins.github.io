@@ -29,6 +29,9 @@ try {
       deviceScaleFactor: 1
     });
     const page = await context.newPage();
+    page.setDefaultTimeout(10000);
+    page.setDefaultNavigationTimeout(20000);
+    console.log('Scenario start:', shot.name);
     const pageErrors = [];
     page.on('pageerror', err => pageErrors.push(err.message));
     const response = await page.goto(origin + shot.route, { waitUntil: 'domcontentloaded' });
@@ -49,7 +52,11 @@ try {
     }
     const result = await page.evaluate(async () => {
       const ownImages = Array.from(document.images).filter(img => img.currentSrc.includes('/assets/'));
-      await Promise.all(ownImages.map(async img => { try { await img.decode(); } catch {} }));
+      ownImages.forEach(img => { img.loading = 'eager'; });
+      await Promise.race([
+        Promise.all(ownImages.map(async img => { try { await img.decode(); } catch {} })),
+        new Promise(resolve => setTimeout(resolve, 2500))
+      ]);
       return {
         overflow: document.documentElement.scrollWidth - window.innerWidth,
         imageFailures: ownImages.filter(img => !img.complete || img.naturalWidth === 0).map(img => img.src),
