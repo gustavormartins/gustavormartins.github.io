@@ -109,7 +109,7 @@ function Portfolio() {
         <section id="sobre" className="hero container">
           <div className="hero-copy">
             <motion.div className="eyebrow" initial={reduced ? false : { opacity:0, y:12 }} animate={{opacity:1,y:0}} transition={{duration:.55}}><span className="eyebrow-line"/> SOFTWARE / LINUX / EXPERIÊNCIAS DIGITAIS</motion.div>
-            <motion.h1 initial={reduced ? false : {opacity:0,y:48}} animate={{opacity:1,y:0}} transition={{duration:.86,ease}}><span>Do problema</span><br/><span>ao <em>código.</em></span></motion.h1>
+            <motion.h1 aria-label="Do problema ao código." initial={reduced ? false : {opacity:0,y:48}} animate={{opacity:1,y:0}} transition={{duration:.86,ease}}><span>Do problema</span><br/><span>ao <em>código.</em></span></motion.h1>
             <motion.p className="hero-description" initial={reduced ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.2}}>Sou Gustavo Martins. Exploro engenharia de software, automação e Linux para transformar problemas reais em soluções que fazem sentido.</motion.p>
             <motion.div className="hero-actions" initial={reduced ? false : {opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.3}}>
               <a href="#trabalhos" className="btn btn-primary">EXPLORAR PROJETOS <ArrowUpRight size={18}/></a>
@@ -156,14 +156,14 @@ function Portfolio() {
 
         <section id="python-lab" className="section-block container python-section">
           <Reveal className="python-panel">
-            <div className="python-info"><div className="section-index">03 / NEXT EXPERIMENT</div><span className="plan-badge">EM PLANEJAMENTO — AINDA NÃO PUBLICADO</span><h2>Próximo desafio:<br/><em>Python em produção.</em></h2><p>Estou estruturando o <strong>OpsLens</strong>: um laboratório de observabilidade e automação de processos com FastAPI, regras de alertas e dados simulados. A proposta é documentar desde os testes até a primeira API funcional.</p><div className="chip-row"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Pytest</span></div></div>
-            <div className="python-preview" aria-label="Diagrama conceitual do próximo projeto Python"><div className="python-node">EVENTS / LOGS</div><span>↓</span><div className="python-node active">PYTHON / FASTAPI</div><span>↓</span><div className="python-node">RULES / ALERTS</div><small>ARQUITETURA PROPOSTA · NÃO É UMA IMPLEMENTAÇÃO PRONTA</small></div>
+            <div className="python-info"><div className="section-index">03 / NEXT EXPERIMENT</div><span className="plan-badge">MVP LOCAL — AINDA NÃO PUBLICADO</span><h2>Próximo desafio:<br/><em>Python em produção.</em></h2><p>O <strong>Blohsh OpsLens</strong> já tem um MVP local em FastAPI: registra eventos simulados, aplica regras de alerta e fornece uma API consultável. Os testes estão passando; ainda faltam um repositório próprio e uma demonstração pública.</p><div className="chip-row"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Pytest</span></div></div>
+            <div className="python-preview" aria-label="Diagrama conceitual do próximo projeto Python"><div className="python-node">EVENTS / LOGS</div><span>↓</span><div className="python-node active">PYTHON / FASTAPI</div><span>↓</span><div className="python-node">RULES / ALERTS</div><small>API LOCAL FUNCIONAL · DASHBOARD E DEPLOY NÃO IMPLEMENTADOS</small></div>
           </Reveal>
         </section>
 
         <section id="contato" className="contact-section">
           <div className="container">
-            <Reveal><div className="section-index">04 / LET'S BUILD</div><h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2><p>Projetos web, automações e soluções técnicas. Gosto de conversar com quem tem um problema interessante para resolver.</p><div className="contact-actions"><a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-primary"><ArrowRight size={17}/> CONECTAR NO LINKEDIN <ArrowUpRight size={17}/></a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={17}/> VER GITHUB</a></div></Reveal>
+            <Reveal><div className="section-index">04 / LET'S BUILD</div><h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2><p>Projetos web, automações e soluções técnicas. Gosto de conversar com quem tem um problema interessante para resolver.</p><div className="contact-actions"><a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">CONECTAR NO LINKEDIN <ArrowUpRight size={17}/></a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={17}/> VER GITHUB</a></div></Reveal>
           </div>
         </section>
       </main>
