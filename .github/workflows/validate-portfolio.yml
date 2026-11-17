@@ -18,3 +18,38 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate pages and internal links
         run: python3 scripts/validate_portfolio.py
+
+      - name: Capture front-end screenshots
+        if: github.ref != 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p snapshots
+          capture() {
+            local name="$1" width="$2" height="$3" path="$4"
+            echo "Capture: $name ($width x $height)"
+            timeout 45s google-chrome \
+              --headless=new --no-sandbox --disable-gpu \
+              --disable-dev-shm-usage --hide-scrollbars \
+              --no-first-run --force-device-scale-factor=1 \
+              --virtual-time-budget=1200 \
+              --window-size="$width,$height" \
+              --screenshot="snapshots/$name.png" "file://$PWD/$path" 2>/dev/null
+            test -s "snapshots/$name.png"
+          }
+          capture home-desktop 1440 900 index.html
+          capture home-mobile 390 844 index.html
+          capture home-small 320 720 index.html
+          capture projects-desktop 1440 900 'index.html#projetos'
+          capture projects-mobile 390 844 'index.html#projetos'
+          capture case-desktop 1440 900 'cases/index.html#blohshblast'
+          capture case-mobile 390 844 'cases/index.html#blohshblast'
+
+      - name: Upload responsive screenshots
+        if: github.ref != 'refs/heads/main' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-review-snapshots
+          path: snapshots/*.png
+          if-no-files-found: warn
+          retention-days: 14
