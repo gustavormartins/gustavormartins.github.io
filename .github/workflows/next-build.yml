@@ -9,6 +9,7 @@ on:
       - 'tsconfig.json'
       - 'next.config.ts'
       - 'scripts/prepare-next-assets.mjs'
+      - 'scripts/capture_next.mjs'
       - '.github/workflows/next-build.yml'
   workflow_dispatch:
 permissions:
