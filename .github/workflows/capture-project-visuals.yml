@@ -1,13 +1,8 @@
 name: Capture BlohshBlast project visuals
 on:
-  push:
-    branches: [feature/blohsh-portfolio-2-curadoria]
-    paths:
-      - 'scripts/capture_blohsh.mjs'
-      - '.github/workflows/capture-project-visuals.yml'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   capture:
     runs-on: ubuntu-latest
@@ -30,23 +25,6 @@ jobs:
           done
           node scripts/capture_blohsh.mjs
           ls -lh project-artifacts/
-      - name: Save verified game screenshots in the portfolio branch
-        if: success() && github.ref == 'refs/heads/feature/blohsh-portfolio-2-curadoria'
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s project-artifacts/blohshblast-home.png
-          test -s project-artifacts/blohshblast-gameplay.png
-          mkdir -p assets/projects
-          cp project-artifacts/blohshblast-home.png assets/projects/blohshblast-home.png
-          cp project-artifacts/blohshblast-gameplay.png assets/projects/blohshblast-gameplay.png
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/projects/blohshblast-home.png assets/projects/blohshblast-gameplay.png
-          if ! git diff --cached --quiet; then
-            git commit -m "assets(portfolio): add authentic BlohshBlast screenshots"
-            git push origin HEAD:feature/blohsh-portfolio-2-curadoria
-          fi
       - name: Upload genuine screenshots for review
         if: always()
         uses: actions/upload-artifact@v4
