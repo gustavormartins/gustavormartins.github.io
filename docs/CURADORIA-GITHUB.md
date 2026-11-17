@@ -10,10 +10,9 @@ O portfólio não deve ser uma listagem automática dos repositórios por data d
 
 1. [BlohshBlast](https://github.com/gustavormartins/blohshblast.github.io) — jogo web funcional, evolução de produto, PWA.
 2. [Salinha Linux Compat Kit](https://github.com/gustavormartins/salinha-linux-compat-kit) — troubleshooting e Bash com relatório técnico; não afirmar correção completa da falha de rede.
-3. [Lista de Casa](https://github.com/gustavormartins/Lista-de-Casa) — exemplo de React/FastAPI/SQLite; divulgar como protótipo, requer autenticação de backend.
-4. [Replica Audio Player](https://github.com/gustavormartins/Replica-audio-player) — arquitetura e DevSecOps em Rust; bootstrap inicial, ainda sem playback funcional.
-5. [Portfólio](https://github.com/gustavormartins/gustavormartins.github.io) — identidade e qualidade da interface.
-6. [WinOptmize](https://github.com/gustavormartins/WinOptmize) — somente após testar comportamentos destrutivos, revisar README e corrigir erros e scripts de risco.
+3. [Replica Audio Player](https://github.com/gustavormartins/Replica-audio-player) — arquitetura e DevSecOps em Rust; bootstrap inicial, ainda sem playback funcional.
+4. [Portfólio](https://github.com/gustavormartins/gustavormartins.github.io) — identidade e qualidade da interface.
+5. [WinOptmize](https://github.com/gustavormartins/WinOptmize) — somente após testar comportamentos destrutivos, revisar README e corrigir erros e scripts de risco.
 
 > A seleção acima é uma proposta de pins, não foi aplicada no perfil do GitHub.
 
@@ -23,7 +22,6 @@ O portfólio não deve ser uma listagem automática dos repositórios por data d
 |---|---|
 | `blohshblast.github.io` | Destaque; mostrar fase atual, link para demo quando validada |
 | `salinha-linux-compat-kit` | Destaque; documentar condições de reprodução e limitações |
-| `Lista-de-Casa` | Destaque como protótipo; revisar PIN no frontend e fluxo de autenticação |
 | `Replica-audio-player` | Destaque como WIP; não representar funcionalidades planejadas como prontas |
 | `gustavormartins.github.io` | Destaque e melhoria contínua; esta branch reúne o redesign |
 | `WinOptmize` | Reserva para pin; auditar segurança/efeitos colaterais |
@@ -35,7 +33,6 @@ O portfólio não deve ser uma listagem automática dos repositórios por data d
 | `My-First-Python-Script` | Manter como marco de aprendizado; não precisa ser pin |
 | `Index000` | Revisar conteúdo e utilidade; possível experimento histórico |
 | `minha-lista` | Revisar se vazio ou duplicado; não apagar sem conferir histórico |
-| `para-a-bia` | Verificar conteúdo pessoal e exposição pública; avaliar privacidade com o proprietário |
 
 ## Checklist antes de divulgar um projeto
 
@@ -53,7 +50,6 @@ O portfólio não deve ser uma listagem automática dos repositórios por data d
 
 - O portfólio principal renderiza os projetos diretamente no HTML; `json/projects.json` contém itens antigos, links com `#` e nomes que não correspondem à curadoria.
 - `js/main.js` busca repositórios por atualizações, não pela curadoria; não há indicação de que esteja ativo no HTML atual. **Não remover sem validar dependências.**
-- O README de `Lista-de-Casa` documenta um PIN exposto no frontend, que não é um controle de acesso seguro. Priorizar autenticação no servidor e verificação de credenciais/dados de usuários antes de ampliar exposição.
 - O `Replica-audio-player` é explicitamente um bootstrap, não um player de áudio funcional.
 - O relatório do `salinha-linux-compat-kit` não confirma a correção da falha original de rede. Comunicar esse limite.
 
