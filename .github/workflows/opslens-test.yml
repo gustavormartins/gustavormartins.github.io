@@ -1,7 +1,7 @@
 name: OpsLens Python — synthetic API tests
 on:
   push:
-    branches: [feature/portfolio-next-motion]
+    branches: [main]
     paths:
       - 'labs/opslens/**'
       - '.github/workflows/opslens-test.yml'
