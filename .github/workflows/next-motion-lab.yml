@@ -1,0 +1,27 @@
+name: Next.js Motion Lab checks
+on:
+  push:
+    branches: [feature/portfolio-next-motion-lab]
+    paths:
+      - 'next-app/**'
+      - '.github/workflows/next-motion-lab.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: next-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
