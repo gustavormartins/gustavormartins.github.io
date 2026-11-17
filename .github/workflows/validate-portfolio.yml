@@ -1,13 +1,16 @@
 name: Validate static portfolio
 on:
   push:
-    branches: [main, feature/blohsh-portfolio-2-curadoria]
+    branches: [main]
   pull_request:
+    branches: [main]
     paths:
       - '**/*.html'
       - 'css/**'
-      - 'scripts/validate_portfolio.py'
+      - 'assets/**'
+      - 'scripts/**'
       - '.github/workflows/validate-portfolio.yml'
+  workflow_dispatch:
 
 jobs:
   validate:
