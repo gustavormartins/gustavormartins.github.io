@@ -15,11 +15,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Checkout real BlohshBlast source
         run: git clone --depth 1 https://github.com/gustavormartins/blohshblast.github.io.git /tmp/blohshblast
-      - name: Install and build game
-        run: |
-          cd /tmp/blohshblast
-          npm install --no-audit --no-fund
-          npm run build
       - name: Install Playwright browser controller
         run: npm install --no-save --package-lock=false playwright-core@1.56.1
       - name: Start game and capture original UI
@@ -27,7 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           cd /tmp/blohshblast
-          nohup npm run preview -- --host 127.0.0.1 --port 4173 >/tmp/game-preview.log 2>&1 &
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory /tmp/blohshblast >/tmp/game-preview.log 2>&1 &
           cd "$GITHUB_WORKSPACE"
           for i in $(seq 1 30); do
             if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
