@@ -9,6 +9,7 @@ const browser = await chromium.launch({
   args: ['--no-sandbox', '--disable-dev-shm-usage'],
 });
 const root = process.cwd();
+const issues = [];
 await mkdir(path.join(root, 'snapshots'), { recursive: true });
 
 const shots = [
@@ -32,7 +33,7 @@ try {
     });
     const page = await context.newPage();
     const fileUrl = pathToFileURL(path.join(root, shot.file)).href;
-    await page.goto(fileUrl, { waitUntil: 'load' });
+    await page.goto(fileUrl, { waitUntil: 'domcontentloaded' });
 
     // Wait for images and fonts where possible, then freeze scrolling at the target.
     await page.evaluate(async () => {
@@ -59,7 +60,7 @@ try {
       height: document.documentElement.scrollHeight,
     }));
     if (metrics.overflow > 2) {
-      throw new Error(`Horizontal overflow on ${shot.name}: ${metrics.overflow}px`);
+      issues.push(`Horizontal overflow on ${shot.name}: ${metrics.overflow}px`);
     }
     const output = path.join(root, 'snapshots', shot.name + '.png');
     await page.screenshot({ path: output, fullPage: Boolean(shot.fullPage), animations: 'disabled' });
@@ -68,4 +69,7 @@ try {
   }
 } finally {
   await browser.close();
+}
+if (issues.length) {
+  throw new Error(issues.join('\n'));
 }
