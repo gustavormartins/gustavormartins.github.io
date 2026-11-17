@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, MotionConfig, useReducedMotion, useScroll, useSpring } from 'motion/react';
-import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CheckCircle2, Code2, Github, Linkedin, Menu, Monitor, Terminal, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CheckCircle2, Code2, Menu, Monitor, Terminal, X } from 'lucide-react';
 
 type Panel = 'code' | 'process';
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -113,7 +113,7 @@ function Portfolio() {
             <motion.p className="hero-description" initial={reduced ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.2}}>Sou Gustavo Martins. Exploro engenharia de software, automação e Linux para transformar problemas reais em soluções que fazem sentido.</motion.p>
             <motion.div className="hero-actions" initial={reduced ? false : {opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.3}}>
               <a href="#trabalhos" className="btn btn-primary">EXPLORAR PROJETOS <ArrowUpRight size={18}/></a>
-              <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Github size={18}/> GITHUB</a>
+              <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={18}/> GITHUB</a>
             </motion.div>
             <div className="hero-bottom"><span><span className="live-dot"/> ENGINEERING IN PROGRESS</span><a href="#trabalhos">SCROLL TO EXPLORE <ArrowDown size={15}/></a></div>
           </div>
@@ -131,15 +131,15 @@ function Portfolio() {
             <Reveal className="work-card game-card">
               <div className="work-head"><span>01 / GAME DEVELOPMENT</span><span className="status-dot">FUNCIONAL / EVOLUÇÃO</span></div>
               <div className="game-card-grid">
-                <div className="work-copy"><h3>Blohsh<span className="green">Blast.</span></h3><p>Um puzzle 8×8 que evoluiu para uma experiência com modos de jogo, progressão e recursos PWA.</p><div className="metrics"><div><strong>8 × 8</strong><small>GRID</small></div><div><strong>4</strong><small>MODOS</small></div><div><strong>PWA</strong><small>OFFLINE</small></div></div><div className="chip-row"><span>JavaScript</span><span>Game Logic</span><span>Web</span></div><div className="card-links"><Link href="/cases/#blohshblast">ESTUDO DE CASO <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener noreferrer">REPOSITÓRIO <Github size={14}/></a></div></div>
+                <div className="work-copy"><h3>Blohsh<span className="green">Blast.</span></h3><p>Um puzzle 8×8 que evoluiu para uma experiência com modos de jogo, progressão e recursos PWA.</p><div className="metrics"><div><strong>8 × 8</strong><small>GRID</small></div><div><strong>4</strong><small>MODOS</small></div><div><strong>PWA</strong><small>OFFLINE</small></div></div><div className="chip-row"><span>JavaScript</span><span>Game Logic</span><span>Web</span></div><div className="card-links"><Link href="/cases/#blohshblast">ESTUDO DE CASO <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/blohshblast.github.io" target="_blank" rel="noopener noreferrer">REPOSITÓRIO <Code2 size={14}/></a></div></div>
                 <div className="screenshot-wrap"><div className="window-caption"><span className="live-dot"/> ORIGINAL GAMEPLAY <span>REAL CAPTURE</span></div><img src="/assets/projects/blohshblast-gameplay.png" alt="Captura real do tabuleiro do jogo BlohshBlast com blocos verdes durante uma partida" width="1160" height="780" loading="eager"/><small>Captura realizada a partir da interface do projeto.</small></div>
               </div>
             </Reveal>
             <Reveal className="work-card secondary-card" delay={.08}>
-              <div className="work-head"><span>02 / LINUX · OPEN SOURCE</span><span>DIAGNOSTIC</span></div><h3>Salinha Linux<br/><em>Compat Kit.</em></h3><p>Kit comunitário para diagnosticar AppImage e problemas de inicialização no KDE/Wayland, com logs e fallback de montagem.</p><SalinhaDiagram/><div className="chip-row"><span>Bash</span><span>Linux</span><span>FUSE</span><span>XWayland</span></div><div className="card-links"><Link href="/cases/#salinha">ABRIR CASE <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener noreferrer">CÓDIGO <Github size={14}/></a></div>
+              <div className="work-head"><span>02 / LINUX · OPEN SOURCE</span><span>DIAGNOSTIC</span></div><h3>Salinha Linux<br/><em>Compat Kit.</em></h3><p>Kit comunitário para diagnosticar AppImage e problemas de inicialização no KDE/Wayland, com logs e fallback de montagem.</p><SalinhaDiagram/><div className="chip-row"><span>Bash</span><span>Linux</span><span>FUSE</span><span>XWayland</span></div><div className="card-links"><Link href="/cases/#salinha">ABRIR CASE <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/salinha-linux-compat-kit" target="_blank" rel="noopener noreferrer">CÓDIGO <Code2 size={14}/></a></div>
             </Reveal>
             <Reveal className="work-card secondary-card" delay={.16}>
-              <div className="work-head"><span>03 / RUST · LINUX</span><span className="wip-status">EARLY DEVELOPMENT</span></div><h3>Replica<br/><em>Audio Player.</em></h3><p>Um laboratório de arquitetura desktop nativa com Rust. O bootstrap e as verificações de CI já existem; reprodução e interface GTK4 ainda estão planejadas.</p><ReplicaIllustration/><div className="chip-row"><span>Rust</span><span>CI / Clippy</span><span>GTK4 planejado</span></div><div className="card-links"><Link href="/cases/#replica">ARQUITETURA E ROADMAP <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener noreferrer">CÓDIGO <Github size={14}/></a></div>
+              <div className="work-head"><span>03 / RUST · LINUX</span><span className="wip-status">EARLY DEVELOPMENT</span></div><h3>Replica<br/><em>Audio Player.</em></h3><p>Um laboratório de arquitetura desktop nativa com Rust. O bootstrap e as verificações de CI já existem; reprodução e interface GTK4 ainda estão planejadas.</p><ReplicaIllustration/><div className="chip-row"><span>Rust</span><span>CI / Clippy</span><span>GTK4 planejado</span></div><div className="card-links"><Link href="/cases/#replica">ARQUITETURA E ROADMAP <ArrowUpRight size={15}/></Link><a href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener noreferrer">CÓDIGO <Code2 size={14}/></a></div>
             </Reveal>
           </div>
         </section>
@@ -163,7 +163,7 @@ function Portfolio() {
 
         <section id="contato" className="contact-section">
           <div className="container">
-            <Reveal><div className="section-index">04 / LET'S BUILD</div><h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2><p>Projetos web, automações e soluções técnicas. Gosto de conversar com quem tem um problema interessante para resolver.</p><div className="contact-actions"><a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-primary"><Linkedin size={17}/> CONECTAR NO LINKEDIN <ArrowUpRight size={17}/></a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Github size={17}/> VER GITHUB</a></div></Reveal>
+            <Reveal><div className="section-index">04 / LET'S BUILD</div><h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2><p>Projetos web, automações e soluções técnicas. Gosto de conversar com quem tem um problema interessante para resolver.</p><div className="contact-actions"><a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-primary"><ArrowRight size={17}/> CONECTAR NO LINKEDIN <ArrowUpRight size={17}/></a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={17}/> VER GITHUB</a></div></Reveal>
           </div>
         </section>
       </main>
