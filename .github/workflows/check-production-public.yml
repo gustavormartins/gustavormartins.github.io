@@ -23,5 +23,12 @@ jobs:
             echo "PUBLIC HTTP $url"
             curl --silent --show-error --location --max-time 20 --output /dev/null --write-out 'status=%{http_code} redirect=%{url_effective} bytes=%{size_download}\n' "$url" || true
           done
+      - name: Check static export paths and headers
+        shell: bash
+        run: |
+          for p in / /index.html /cases/ /cases/index.html /_next/ /assets/blohsh-logo.png /favicon.ico; do
+            echo "PATH $p"
+            curl --silent --show-error --max-time 15 -o /dev/null -D - "https://gustavormartins.vercel.app$p" | grep -Ei '^(HTTP/|x-vercel|location:|content-type:)' || true
+          done
       - name: Check browser errors and assets
         run: node scripts/check-production-public.mjs
