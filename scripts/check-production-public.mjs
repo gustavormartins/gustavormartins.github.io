@@ -3,6 +3,7 @@ const hosts = [
   'https://gustavormartins.vercel.app/',
   'https://gustavormartins.vercel.app/cases/',
   'https://gustavormartins.vercel.app/recrutador/',
+  'https://gustavormartins.vercel.app/jogar/',
   'https://gustavormartins-github-pxegejdos-gustavormartins-projects.vercel.app/',
 ];
 const failures = [];
@@ -73,9 +74,43 @@ for (const url of hosts) {
         if (!mail.includes('Convite para oportunidade em desenvolvimento de software')) failures.push('Recruiter deep-link did not preselect the email template');
         console.log('RECRUITER_MODE_OK',JSON.stringify({width,projects,mailPreview:mail.startsWith('mailto:'),url:page.url()}));
       }
+      if (url === 'https://gustavormartins.vercel.app/jogar/') {
+        if (await page.locator('.playable-frame').count()) failures.push('BlohshBlast iframe loaded without user consent');
+        await page.locator('.playable-start-button').click();
+        const frame = page.frameLocator('.playable-frame');
+        await frame.locator('#board .cell').first().waitFor({state:'attached',timeout:18000});
+        const result = await frame.locator('#board').evaluate(board => {
+          const engine = window.BlohshBlastLegacyRuntime;
+          const product = window.BlohshBlastPhase3;
+          if (!engine || !product) return {ok:false};
+          product.startGame('classic');
+          const before = engine.getState().score;
+          const placed = engine.placeFirstAvailable(0);
+          return {ok:true,cols:board.querySelectorAll('.cell').length,placed,before,after:engine.getState().score};
+        });
+        if (!result.ok || result.cols !== 64 || !result.placed || result.after <= result.before) {
+          failures.push('Public BlohshBlast gameplay failed: '+JSON.stringify(result));
+        }
+        if (page.url() !== url) failures.push('Game demo navigated away from its route without user action');
+        console.log('PRODUCTION_GAME_OK',JSON.stringify({width,result}));
+      }
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
   }
+}
+const directPage = await browser.newPage({viewport:{width:390,height:800}});
+try {
+  const directResponse = await directPage.goto('https://gustavormartins.vercel.app/jogar/blohshblast/',{waitUntil:'domcontentloaded',timeout:25000});
+  if (directResponse?.status() !== 200) {
+    failures.push('Full-screen game route returned HTTP '+directResponse?.status());
+  } else {
+    await directPage.locator('#board .cell').first().waitFor({state:'attached',timeout:12000});
+    console.log('PRODUCTION_STANDALONE_GAME_OK','https://gustavormartins.vercel.app/jogar/blohshblast/');
+  }
+} catch(error) {
+  failures.push('Direct full-screen game failed: '+String(error));
+} finally {
+  await directPage.close();
 }
 await browser.close();
 if (failures.length) { console.error('PRODUCTION CHECK FAILED', failures); process.exitCode = 1; } else { console.log('PRODUCTION PUBLIC ROUTES OK'); }
