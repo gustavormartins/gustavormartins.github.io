@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight, BriefcaseBusiness, CheckCircle2, Code2, FileText, Github, Mail, Terminal } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, BriefcaseBusiness, CheckCircle2, Code2, FileText, Mail, Terminal } from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { PrintProfileButton } from '@/components/PrintProfileButton';
 import './recruiter.css';
@@ -104,7 +104,7 @@ export default function RecruiterMode() {
             </div>
             <p className="recruiter-print-contact">Contato profissional: gustavoromaom178@hotmail.com · GitHub: github.com/gustavormartins · LinkedIn: linkedin.com/in/gustavoromaomartins2005/</p>
             <div className="recruiter-public-links" aria-label="Perfis profissionais">
-              <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer"><Github size={16} aria-hidden="true"/> GITHUB <ArrowUpRight size={13} aria-hidden="true"/></a>
+              <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer"><Code2 size={16} aria-hidden="true"/> GITHUB <ArrowUpRight size={13} aria-hidden="true"/></a>
               <a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer"><BriefcaseBusiness size={16} aria-hidden="true"/> LINKEDIN <ArrowUpRight size={13} aria-hidden="true"/></a>
               <Link href="/cases/"><Code2 size={16} aria-hidden="true"/> ESTUDOS DE CASO <ArrowUpRight size={13} aria-hidden="true"/></Link>
             </div>
