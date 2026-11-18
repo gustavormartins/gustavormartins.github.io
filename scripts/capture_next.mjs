@@ -143,6 +143,44 @@ try {
         failures.push('OpsLens synthetic simulation did not advance to the SLA event');
       }
     }
+    if (shot.name === 'home-desktop' || shot.name === 'home-mobile') {
+      const funnel = page.locator('.contact-funnel');
+      await funnel.scrollIntoViewIfNeeded();
+      if (await page.locator('.funnel-send').count()) {
+        failures.push(shot.name + ': mail composer is exposed before category selection');
+      }
+      await page.locator('.funnel-option').first().click();
+      await page.locator('.funnel-field input').first().fill('Pessoa de Teste');
+      await page.locator('.funnel-field textarea').fill('Preciso de uma aplicação web com acesso por login.');
+      const mailto = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+      if (!mailto.startsWith('mailto:gustavoromaom178@hotmail.com?') ||
+          !mailto.includes('Proposta de site ou aplicação web') ||
+          !mailto.includes('Pessoa de Teste') ||
+          !mailto.includes('Preciso de uma aplicação web')) {
+        failures.push(shot.name + ': site demand generated an invalid email draft');
+      }
+      await funnel.screenshot({
+        path: path.join(outputs, 'contact-web-' + shot.name + '.png'),
+        animations: 'disabled'
+      });
+      await page.locator('.funnel-back').click();
+      if (await page.locator('.funnel-send').count()) {
+        failures.push(shot.name + ': email composer remains visible after going back');
+      }
+      await page.locator('.funnel-option').nth(4).click();
+      const recruitmentDraft = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+      if (!recruitmentDraft.includes('Convite para oportunidade em desenvolvimento de software') ||
+          !recruitmentDraft.includes('Recrutamento') ||
+          !recruitmentDraft.includes('Vaga ou oportunidade:')) {
+        failures.push(shot.name + ': recruiter email template is invalid');
+      }
+      await funnel.screenshot({
+        path: path.join(outputs, 'contact-recruiter-' + shot.name + '.png'),
+        animations: 'disabled'
+      });
+      const contactWidth = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      if (contactWidth > 2) failures.push(shot.name + ': contact funnel causes overflow ' + contactWidth);
+    }
     await context.close();
   }
 } finally {
