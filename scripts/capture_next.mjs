@@ -190,6 +190,21 @@ try {
       if (!heading.includes('Do problema') || !heading.includes('código')) {
         failures.push(shot.name + ': professional summary missing');
       }
+      const education = page.locator('.recruiter-education-card');
+      if (await education.count() !== 1) {
+        failures.push(shot.name + ': ADS degree is missing');
+      } else {
+        const detail = await education.innerText();
+        if (!detail.includes('Análise e Desenvolvimento de Sistemas') ||
+            !detail.includes('Universidade Estácio de Sá') ||
+            !detail.includes('Tecnólogo') ||
+            !detail.includes('Concluído em dezembro de 2025')) {
+          failures.push(shot.name + ': completed ADS degree details are incorrect');
+        }
+      }
+      if (!(await page.locator('.recruiter-summary').innerText()).includes('ADS · Tecnólogo concluído')) {
+        failures.push(shot.name + ': education omitted from 60-second summary');
+      }
       if (await page.locator('.recruiter-project').count() !== 3) {
         failures.push(shot.name + ': expected three curated evidence projects');
       }

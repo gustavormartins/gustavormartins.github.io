@@ -198,3 +198,20 @@
  .recruiter-extra p{margin:4px 0!important}
  a{color:#145923!important}
 }
+
+/* ADS is a verified, completed higher-education degree, highlighted before work history. */
+.recruiter-education-card{grid-column:1/-1;background:linear-gradient(110deg,#152d19,#09170d 75%);border-color:#4d8156;position:relative;overflow:hidden}
+.recruiter-education-card::after{content:"ADS";position:absolute;right:25px;top:8px;pointer-events:none;font:800 clamp(70px,11vw,132px)/1 var(--sans);letter-spacing:-.09em;color:rgba(57,255,20,.055)}
+.recruiter-education-card>h3{position:relative;font-size:clamp(25px,3vw,35px);max-width:850px}
+.recruiter-education-card>p{position:relative}
+.recruiter-education-card>p:last-child{margin-top:10px;max-width:800px}
+@media(max-width:620px){
+ .recruiter-education-card::after{font-size:78px;right:16px;top:16px}
+ .recruiter-education-card h3{font-size:25px;line-height:1.25}
+}
+@media print{
+ .recruiter-education-card{grid-column:1/-1!important;background:#f2f8f3!important;border-color:#abc8b0!important;page-break-inside:avoid!important}
+ .recruiter-education-card::after{display:none!important}
+ .recruiter-education-card h3{font-size:19pt!important;max-width:100%!important}
+ .recruiter-education-card p{color:#233e29!important}
+}

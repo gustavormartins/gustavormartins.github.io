@@ -93,7 +93,7 @@ export default function RecruiterMode() {
             <span className="recruiter-kicker"><span className="recruiter-signal" aria-hidden="true"/> RECRUITER VIEW / LEITURA RÁPIDA</span>
             <h1>Do problema<br/>ao <em>código.</em></h1>
             <p className="recruiter-hero-lead">
-              Sou <strong>Gustavo Martins</strong>. Atuo em processos e operações e desenvolvo projetos públicos para aprofundar minha prática em software, backend, automação e Linux.
+              Sou <strong>Gustavo Martins</strong>, tecnólogo em <strong>Análise e Desenvolvimento de Sistemas</strong> pela Universidade Estácio de Sá. Atuo em processos e operações e desenvolvo projetos públicos de backend, automação e Linux.
             </p>
             <p className="recruiter-hero-subtitle">
               Busco oportunidades para crescer em desenvolvimento de software, contribuindo com investigação técnica, aprendizado contínuo e código documentado.
@@ -114,6 +114,7 @@ export default function RecruiterMode() {
             <div className="recruiter-summary-content">
               <span className="recruiter-code-comment">// O essencial em 60 segundos</span>
               <div className="recruiter-summary-line"><span>FOCO</span><strong>Desenvolvimento de software</strong></div>
+              <div className="recruiter-summary-line"><span>FORMAÇÃO</span><strong>ADS · Tecnólogo concluído</strong></div>
               <div className="recruiter-summary-line"><span>PRÁTICA</span><strong>Python · Linux · Web</strong></div>
               <div className="recruiter-summary-line"><span>EXPERIÊNCIA</span><strong>Processos e operações</strong></div>
               <div className="recruiter-summary-line"><span>PROJETOS</span><strong>Backend · Sistemas · Interfaces</strong></div>
@@ -131,8 +132,15 @@ export default function RecruiterMode() {
         </div>
 
         <section className="container recruiter-section" id="experiencia">
-          <div className="recruiter-section-heading"><span>01 / CONTEXTO</span><h2>Experiência que conversa<br/><em>com desenvolvimento.</em></h2></div>
+          <div className="recruiter-section-heading"><span>01 / FORMAÇÃO E EXPERIÊNCIA</span><h2>Formação em tecnologia.<br/><em>Experiência em processos.</em></h2></div>
           <div className="recruiter-experience-grid">
+            <div className="recruiter-experience-card recruiter-education-card">
+              <span className="recruiter-card-eyebrow">FORMAÇÃO SUPERIOR · CONCLUÍDA</span>
+              <h3>Análise e Desenvolvimento de Sistemas</h3>
+              <p className="recruiter-experience-role">Tecnólogo · Universidade Estácio de Sá</p>
+              <p>Julho de 2023 – dezembro de 2025 · Concluído em dezembro de 2025.</p>
+              <p>Formação superior diretamente relacionada à área de desenvolvimento de software e sistemas.</p>
+            </div>
             <div className="recruiter-experience-card">
               <span className="recruiter-card-eyebrow">ATUAÇÃO PROFISSIONAL</span>
               <h3>Energisa</h3>
@@ -146,7 +154,7 @@ export default function RecruiterMode() {
               <p>Formação orientada à melhoria contínua, processos e organização do trabalho. Em paralelo, evoluo projetos públicos em desenvolvimento de software.</p>
             </div>
           </div>
-          <p className="recruiter-accuracy">Experiência apresentada conforme o estágio atual de formação e atuação — não equivale a experiência profissional prévia como desenvolvedor contratado.</p>
+          <p className="recruiter-accuracy">ADS concluído em dezembro de 2025. Atuação profissional em processos e operações; projetos públicos demonstram prática em desenvolvimento, sem caracterizar experiência profissional prévia como desenvolvedor contratado.</p>
         </section>
 
         <section className="container recruiter-section" id="competencias">
