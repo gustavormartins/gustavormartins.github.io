@@ -164,6 +164,7 @@
  .recruiter-page{color:#0d190f!important;background:#fff!important;overflow:visible!important}
  .recruiter-page .container{width:100%!important;max-width:none!important}
  .recruiter-header,.recruiter-ambient,.recruiter-actions,.recruiter-public-links,.recruiter-final,.recruiter-footer,.recruiter-page .skip{display:none!important}
+ .recruiter-print-button{display:none!important}
  .recruiter-print-contact{display:block!important;color:#263d2a!important;margin:12px 0 0!important;font:9pt var(--mono)!important;overflow-wrap:anywhere}
  .recruiter-hero{display:block!important;min-height:0!important;padding:0 0 14px!important}
  .recruiter-kicker,.recruiter-section-heading>span,.recruiter-card-eyebrow{color:#145c23!important}
