@@ -4,6 +4,7 @@ const hosts = [
   'https://gustavormartins.vercel.app/cases/',
   'https://gustavormartins-github-pxegejdos-gustavormartins-projects.vercel.app/',
 ];
+const failures = [];
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome',
   headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage']
@@ -32,8 +33,10 @@ for (const url of hosts) {
         brokenImages:[...document.images].filter(x=>x.complete&&x.naturalWidth===0).map(x=>x.src).slice(0,8),
       }));
       console.log('DIAG',JSON.stringify({url,width,http:response?.status(),finalUrl:page.url(),...result,errors:issues.slice(0,12),requestFailures:requestFailures.slice(0,10),badResponses:badResponses.slice(0,15)}));
+      if (url.includes('gustavormartins.vercel.app') && (response?.status() !== 200 || !result.heading || /vercel|login|not_found/i.test(result.heading))) failures.push(`${url} ${width}px did not serve the portfolio`);
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
   }
 }
 await browser.close();
+if (failures.length) { console.error('PRODUCTION CHECK FAILED', failures); process.exitCode = 1; } else { console.log('PRODUCTION PUBLIC ROUTES OK'); }
