@@ -41,6 +41,27 @@ for (const url of hosts) {
         if (!result.branding?.watermark?.includes('blohsh-logo.png')) failures.push(`${url}: original Blohsh mark missing`);
         if (result.branding?.right > width+2) failures.push(`${url}: wordmark exceeds viewport`);
       }
+      if (url === 'https://gustavormartins.vercel.app/' && width === 390) {
+        const options = page.locator('.funnel-option');
+        if (await options.count() !== 6) {
+          failures.push('Expected six intent options on the public homepage');
+        } else {
+          if (await page.locator('.funnel-send').count()) failures.push('Mail draft visible before choosing a demand');
+          await options.first().click();
+          const webDraft = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+          if (!webDraft.startsWith('mailto:gustavoromaom178@hotmail.com?') ||
+              !webDraft.includes('Proposta de site ou aplicação web')) {
+            failures.push('Website offer mailto is incorrect on production');
+          }
+          await page.locator('.funnel-back').click();
+          await page.locator('.funnel-option').nth(4).click();
+          const recruiterDraft = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+          if (!recruiterDraft.includes('Convite para oportunidade em desenvolvimento de software')) {
+            failures.push('Recruiter mailto is incorrect on production');
+          }
+          console.log('CONTACT_FUNNEL_OK', JSON.stringify({options: 6, webMailto: webDraft.startsWith('mailto:'), recruiterMailto: recruiterDraft.startsWith('mailto:')}));
+        }
+      }
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
   }
