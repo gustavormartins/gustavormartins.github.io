@@ -1,0 +1,68 @@
+name: Next.js portfolio — build and privacy checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'next.config.ts'
+      - 'scripts/prepare-next-assets.mjs'
+      - 'scripts/capture_next.mjs'
+      - '.github/workflows/next-build.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Build Next.js static export
+        run: npm run build
+      - name: Type-check TypeScript
+        run: npm run typecheck
+      - name: Verify privacy and exported pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s out/index.html
+          test -s out/cases/index.html
+          test -s out/assets/projects/blohshblast-gameplay.png
+          test -s out/assets/blohsh-logo.png
+          if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html; then
+            echo "Personal project leaked into public Next.js pages."
+            exit 1
+          fi
+          echo "Next.js export, images and privacy checks passed."
+      - name: Start static export server
+        shell: bash
+        run: |
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory out >/tmp/next-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+      - name: Responsive visual and interaction checks
+        run: node scripts/capture_next.mjs
+      - name: Upload responsive snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-portfolio-visual-review
+          path: snapshots-next/*.png
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload build preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-portfolio-export
+          path: out/
+          retention-days: 7
