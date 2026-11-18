@@ -18,7 +18,10 @@ const scenarios = [
   { name: 'projects-desktop', route: '/#trabalhos', width: 1440, height: 900, reduce: true },
   { name: 'projects-mobile', route: '/#trabalhos', width: 390, height: 844, reduce: true },
   { name: 'cases-desktop', route: '/cases/', width: 1440, height: 900, reduce: true },
-  { name: 'cases-mobile', route: '/cases/', width: 390, height: 844, reduce: true }
+  { name: 'cases-mobile', route: '/cases/', width: 390, height: 844, reduce: true },
+  { name: 'recruiter-desktop', route: '/recrutador/', width: 1440, height: 900, reduce: false },
+  { name: 'recruiter-mobile', route: '/recrutador/', width: 390, height: 844, reduce: true },
+  { name: 'recruiter-small', route: '/recrutador/', width: 320, height: 720, reduce: true }
 ];
 
 try {
@@ -119,7 +122,7 @@ try {
       });
       await page.waitForTimeout(200);
     }
-    await page.screenshot({ path: path.join(outputs, shot.name + '.png'), animations: 'disabled', fullPage: ['home-mobile','cases-mobile'].includes(shot.name) });
+    await page.screenshot({ path: path.join(outputs, shot.name + '.png'), animations: 'disabled', fullPage: ['home-mobile','cases-mobile','recruiter-mobile'].includes(shot.name) });
     if (shot.name === 'home-desktop') {
       await page.getByRole('tab', { name: /02 \/ PROCESS/ }).click();
       if (await page.getByRole('tab', { name: /02 \/ PROCESS/ }).getAttribute('aria-selected') !== 'true') {
@@ -181,6 +184,38 @@ try {
       });
       const contactWidth = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       if (contactWidth > 2) failures.push(shot.name + ': contact funnel causes overflow ' + contactWidth);
+    }
+    if (shot.name.startsWith('recruiter-')) {
+      const heading = await page.locator('main h1').innerText();
+      if (!heading.includes('Do problema') || !heading.includes('código')) {
+        failures.push(shot.name + ': professional summary missing');
+      }
+      if (await page.locator('.recruiter-project').count() !== 3) {
+        failures.push(shot.name + ': expected three curated evidence projects');
+      }
+      if (await page.locator('.recruiter-print-button').count() !== 2) {
+        failures.push(shot.name + ': print-to-PDF controls missing');
+      }
+      await page.getByRole('link', { name: /CONVIDAR PARA ENTREVISTA/ }).first().click();
+      await page.locator('.funnel-send').waitFor({ state: 'visible' });
+      const recruitMailto = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+      if (!recruitMailto.includes('Convite para oportunidade em desenvolvimento de software')) {
+        failures.push(shot.name + ': recruitment intent was not preselected');
+      }
+      if (page.url().includes('mailto:')) {
+        failures.push(shot.name + ': email should not send/open until explicit choice');
+      }
+      await page.goBack();
+      await page.locator('.recruiter-print-button').first().waitFor({state:'visible'});
+      await page.emulateMedia({ media: 'print' });
+      const printInfo = await page.evaluate(() => ({
+        printHidden: getComputedStyle(document.querySelector('.recruiter-print-button')).display === 'none',
+        contactVisible: getComputedStyle(document.querySelector('.recruiter-print-contact')).display !== 'none'
+      }));
+      if (!printInfo.printHidden || !printInfo.contactVisible) {
+        failures.push(shot.name + ': printable profile hides button or contact incorrectly');
+      }
+      await page.emulateMedia({media:'screen'});
     }
     await context.close();
   }

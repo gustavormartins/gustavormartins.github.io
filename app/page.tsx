@@ -28,14 +28,15 @@ function Header() {
     { href: '#trabalhos', text: 'Projetos' },
     { href: '#processo', text: 'Processo' },
     { href: '#python-lab', text: 'Python Lab' },
-    { href: '#contato', text: 'Contato' }
+    { href: '#contato', text: 'Contato' },
+    { href: '/recrutador/', text: 'Recrutadores' }
   ];
   return (
     <header className="site-header">
       <nav className="container nav-inner" aria-label="Navegação principal">
         <BrandLogo />
         <div className="desktop-nav">{links.map(l => <a key={l.href} href={l.href}>{l.text}</a>)}</div>
-        <a className="nav-action" href="#contato">VAMOS CONVERSAR <ArrowUpRight size={15} aria-hidden="true" /></a>
+        <Link className="nav-action" href="/recrutador/">MODO RECRUTADOR <ArrowUpRight size={15} aria-hidden="true" /></Link>
         <button className="mobile-nav-toggle" type="button" aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? 'Fechar menu' : 'Abrir menu'} onClick={() => setOpen(v => !v)}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
       </nav>
       {open && <div className="mobile-nav-panel" id="mobile-nav">{links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.text}<ArrowUpRight size={15}/></a>)}</div>}
@@ -149,6 +150,7 @@ function Portfolio() {
               <a href="#trabalhos" className="btn btn-primary">EXPLORAR PROJETOS <ArrowUpRight size={18}/></a>
               <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={18}/> GITHUB</a>
             </motion.div>
+            <Link href="/recrutador/" className="hero-recruiter-link"><span>RECRUTANDO?</span> ACESSE O PERFIL TÉCNICO EM 60 SEGUNDOS <ArrowUpRight size={15} aria-hidden="true"/></Link>
             <div className="hero-bottom"><span><span className="live-dot"/> ENGINEERING IN PROGRESS</span><a href="#trabalhos">SCROLL TO EXPLORE <ArrowDown size={15}/></a></div>
           </div>
           <motion.div className="hero-preview" initial={{opacity:0,x:45,rotate:2}} animate={{opacity:1,x:0,rotate:0}} transition={{duration:.9,delay:.22,ease}}>
@@ -208,6 +210,7 @@ function Portfolio() {
                   <span>PARA CLIENTES E RECRUTADORES</span>
                   <strong>Do problema à conversa.</strong>
                   <p>Compartilhe o contexto. Eu prefiro entender o desafio antes de falar de solução.</p>
+                  <Link href="/recrutador/" className="contact-recruiter-profile">AVALIAR PERFIL PARA VAGAS <ArrowUpRight size={14} aria-hidden="true"/></Link>
                 </div>
               </div>
               <ContactFunnel />
