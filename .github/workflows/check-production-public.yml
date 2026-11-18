@@ -1,0 +1,27 @@
+name: Diagnose production site (read-only)
+on:
+  push:
+    branches: [diagnostic/production-site-20261118]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser automation
+        run: npm install --no-save --package-lock=false --ignore-scripts playwright-core@1.56.1
+      - name: Check public HTTP response
+        shell: bash
+        run: |
+          for url in https://gustavormartins.vercel.app/ https://gustavormartins.vercel.app/cases/; do
+            echo "PUBLIC HTTP $url"
+            curl --silent --show-error --location --max-time 20 --output /dev/null --write-out 'status=%{http_code} redirect=%{url_effective} bytes=%{size_download}\n' "$url" || true
+          done
+      - name: Check browser errors and assets
+        run: node scripts/check-production-public.mjs
