@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { BrandLogo } from '@/components/BrandLogo';
+import { ContactFunnel } from '@/components/ContactFunnel';
 import { motion, MotionConfig, useScroll, useSpring } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CheckCircle2, Code2, Menu, Monitor, Terminal, X } from 'lucide-react';
 
@@ -196,7 +197,34 @@ function Portfolio() {
 
         <section id="contato" className="contact-section">
           <div className="container">
-            <Reveal><div className="section-index">04 / LET'S BUILD</div><h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2><p>Projetos web, automações e soluções técnicas. Gosto de conversar com quem tem um problema interessante para resolver.</p><div className="contact-actions"><a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">CONECTAR NO LINKEDIN <ArrowUpRight size={17}/></a><a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={17}/> VER GITHUB</a></div></Reveal>
+            <Reveal>
+              <div className="section-index">04 / LET'S BUILD</div>
+              <div className="contact-intro">
+                <div>
+                  <h2>Tem uma ideia?<br/><em>Vamos construir.</em></h2>
+                  <p>Precisa de um site, uma automação ou alguém para seu time? Escolha o tipo de contato e receba um e-mail pronto para revisar e enviar.</p>
+                </div>
+                <div className="contact-recruiter-note">
+                  <span>PARA CLIENTES E RECRUTADORES</span>
+                  <strong>Do problema à conversa.</strong>
+                  <p>Compartilhe o contexto. Eu prefiro entender o desafio antes de falar de solução.</p>
+                </div>
+              </div>
+              <ContactFunnel />
+              <div className="contact-proof">
+                <div className="contact-proof-header"><span>ANTES DE ENTRAR EM CONTATO</span><strong>Veja como eu trabalho.</strong></div>
+                <a href="/cases/" className="contact-proof-link"><span><strong>Estudos de caso</strong><small>Desafios, decisões e limites documentados</small></span><ArrowUpRight size={17} aria-hidden="true"/></a>
+                <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="contact-proof-link"><span><strong>Código público</strong><small>Repositórios e histórico de desenvolvimento</small></span><ArrowUpRight size={17} aria-hidden="true"/></a>
+                <a href="https://github.com/gustavormartins/gustavormartins.github.io/tree/main/labs/opslens" target="_blank" rel="noopener noreferrer" className="contact-proof-link"><span><strong>Python em prática</strong><small>API experimental, testes e documentação</small></span><ArrowUpRight size={17} aria-hidden="true"/></a>
+              </div>
+              <div className="contact-social">
+                <p>Prefere uma conversa profissional por outra plataforma?</p>
+                <div className="contact-actions">
+                  <a href="https://www.linkedin.com/in/gustavoromaomartins2005/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LINKEDIN <ArrowUpRight size={17}/></a>
+                  <a href="https://github.com/gustavormartins" target="_blank" rel="noopener noreferrer" className="btn btn-secondary"><Code2 size={17}/> GITHUB</a>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
       </main>
