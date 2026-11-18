@@ -2,6 +2,7 @@ import { chromium } from 'playwright-core';
 const hosts = [
   'https://gustavormartins.vercel.app/',
   'https://gustavormartins.vercel.app/cases/',
+  'https://gustavormartins.vercel.app/recrutador/',
   'https://gustavormartins-github-pxegejdos-gustavormartins-projects.vercel.app/',
 ];
 const failures = [];
@@ -61,6 +62,16 @@ for (const url of hosts) {
           }
           console.log('CONTACT_FUNNEL_OK', JSON.stringify({options: 6, webMailto: webDraft.startsWith('mailto:'), recruiterMailto: recruiterDraft.startsWith('mailto:')}));
         }
+      }
+      if (url === 'https://gustavormartins.vercel.app/recrutador/') {
+        const projects = await page.locator('.recruiter-project').count();
+        if (projects !== 3) failures.push('Expected exactly 3 evidence-led recruiter projects');
+        if (!result.text.includes('RECRUITER VIEW')) failures.push('Recruiter hero copy missing');
+        await page.getByRole('link', {name: /CONVIDAR PARA ENTREVISTA/}).first().click();
+        await page.locator('.funnel-send').waitFor({state:'visible',timeout:12000});
+        const mail = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
+        if (!mail.includes('Convite para oportunidade em desenvolvimento de software')) failures.push('Recruiter deep-link did not preselect the email template');
+        console.log('RECRUITER_MODE_OK',JSON.stringify({width,projects,mailPreview:mail.startsWith('mailto:'),url:page.url()}));
       }
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
