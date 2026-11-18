@@ -6,6 +6,8 @@ on:
     paths:
       - 'app/**'
       - 'components/**'
+      - 'public/jogar/blohshblast/**'
+      - 'scripts/test_blohshblast_demo.mjs'
       - 'package.json'
       - 'tsconfig.json'
       - 'next.config.ts'
@@ -37,6 +39,15 @@ jobs:
           test -s out/index.html
           test -s out/cases/index.html
           test -s out/recrutador/index.html
+          test -s out/jogar/index.html
+          test -s out/jogar/blohshblast/index.html
+          test -s out/jogar/blohshblast/legacy-game.js
+          test -s out/jogar/blohshblast/phase3.js
+          test -s out/jogar/blohshblast/logo-official.svg
+          if grep -q './src/main.ts' out/jogar/blohshblast/index.html; then
+            echo "Standalone demo references an unbuilt TypeScript entrypoint."
+            exit 1
+          fi
           test -s out/assets/projects/blohshblast-gameplay.png
           test -s out/assets/blohsh-logo.png
           if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html out/recrutador/index.html; then
@@ -54,6 +65,8 @@ jobs:
           done
       - name: Responsive visual and interaction checks
         run: node scripts/capture_next.mjs
+      - name: Test actual BlohshBlast game and score progression
+        run: node scripts/test_blohshblast_demo.mjs
       - name: Upload responsive snapshots
         if: always()
         uses: actions/upload-artifact@v4
