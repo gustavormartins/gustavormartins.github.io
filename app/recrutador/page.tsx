@@ -180,6 +180,7 @@ export default function RecruiterMode() {
                 <h3>{project.name}</h3>
                 <p>{project.summary}</p>
                 <div className="recruiter-project-evidence">{project.evidence.map(tag=><span key={tag}>{tag}</span>)}</div>
+                {project.name === 'BlohshBlast' && <Link href="/jogar/" className="recruiter-demo-link">▶ EXPERIMENTAR JOGO <ArrowUpRight size={15} aria-hidden="true"/></Link>}
                 <a href={project.repo} target="_blank" rel="noopener noreferrer">{project.linkText} <ArrowUpRight size={15} aria-hidden="true"/></a>
               </article>
             ))}

@@ -215,3 +215,9 @@
  .recruiter-education-card h3{font-size:19pt!important;max-width:100%!important}
  .recruiter-education-card p{color:#233e29!important}
 }
+
+
+/* Invite technical reviewers to exercise the same game they can inspect. */
+.recruiter-project>a.recruiter-demo-link{display:inline-flex;align-items:center;gap:8px;background:#39ff14;color:#061309!important;padding:11px 12px;margin:16px 0 8px;border:1px solid #39ff14;font:800 10px var(--mono)}
+.recruiter-project>a.recruiter-demo-link:hover{background:#b6ffab}
+@media print{.recruiter-project>a.recruiter-demo-link{display:none!important}}

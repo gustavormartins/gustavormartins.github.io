@@ -1,0 +1,52 @@
+name: BlohshBlast — real gameplay verification
+on:
+  push:
+    branches: [feature/blohshblast-playable-showcase, main]
+    paths:
+      - 'public/jogar/blohshblast/**'
+      - 'app/jogar/**'
+      - 'components/PlayableBlohshBlast.tsx'
+      - 'scripts/test_blohshblast_demo.mjs'
+      - '.github/workflows/blohshblast-demo.yml'
+  pull_request:
+    paths:
+      - 'public/jogar/blohshblast/**'
+      - 'app/jogar/**'
+      - 'components/PlayableBlohshBlast.tsx'
+      - 'scripts/test_blohshblast_demo.mjs'
+      - '.github/workflows/blohshblast-demo.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gameplay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Build self-hosted portfolio and game
+        run: npm run build
+      - name: Start static export
+        shell: bash
+        run: |
+          set -euo pipefail
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory out >/tmp/blohsh-demo-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/jogar/ >/dev/null; then break; fi
+            sleep 1
+          done
+      - name: Play actual game, place pieces and check mobile
+        run: node scripts/test_blohshblast_demo.mjs
+      - name: Preserve real gameplay screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blohshblast-playable-review
+          path: snapshots-next/blohshblast-live-*.png
+          if-no-files-found: warn
+          retention-days: 14

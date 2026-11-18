@@ -490,3 +490,9 @@ html{scroll-behavior:auto}
  .contact-social{align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.funnel-option,.funnel-field input,.funnel-field textarea,.contact-proof-link{transition:none}.funnel-option:hover{transform:none}}
+
+
+/* Clear primary action for the actual, hosted BlohshBlast demo. */
+.card-links a.game-play-link{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;background:#39ff14;color:#061008;border:1px solid #39ff14;font-weight:800;box-shadow:0 0 20px rgba(57,255,20,.09);transition:background .2s ease,color .2s ease}
+.card-links a.game-play-link:hover{background:#c0ffb6;color:#041006}
+@media(prefers-reduced-motion:reduce){.card-links a.game-play-link{transition:none}}
