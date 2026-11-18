@@ -42,6 +42,42 @@ try {
     }
     await page.locator('main').waitFor({ state: 'visible' });
     await page.waitForTimeout(400);
+    // Brand must display correct live text, an actual animated caret, and
+    // the existing Blohsh watermark without overflowing the navigation.
+    const brand = page.locator('.brand-lockup');
+    if (await brand.count() !== 1 || !await brand.isVisible()) {
+      failures.push(shot.name + ': branded link is missing');
+    } else {
+      const brandMetrics = await brand.evaluate(node => {
+        const caret = node.querySelector('.brand-terminal-cursor');
+        const watermark = node.querySelector('.brand-blohsh-watermark');
+        const rect = node.getBoundingClientRect();
+        return {
+          text: node.textContent || '',
+          right: rect.right,
+          caretAnimation: caret ? getComputedStyle(caret).animationName : 'missing',
+          watermarkImage: watermark ? getComputedStyle(watermark).backgroundImage : 'missing'
+        };
+      });
+      if (!brandMetrics.text.includes('Gustavo Martins Dev') || !brandMetrics.text.includes('BLOHSH')) {
+        failures.push(shot.name + ': incorrect brand text');
+      }
+      if (shot.reduce && brandMetrics.caretAnimation !== 'none') {
+        failures.push(shot.name + ': cursor ignored reduced motion');
+      }
+      if (!shot.reduce && brandMetrics.caretAnimation === 'none') {
+        failures.push(shot.name + ': terminal cursor does not blink');
+      }
+      if (!brandMetrics.watermarkImage.includes('blohsh-logo.png')) {
+        failures.push(shot.name + ': Blohsh watermark is missing');
+      }
+      if (brandMetrics.right > shot.width + 2) {
+        failures.push(shot.name + ': brand overflows header');
+      }
+      if (shot.name === 'home-desktop' || shot.name === 'home-mobile' || shot.name === 'home-small') {
+        await page.locator('.site-header').screenshot({ path: path.join(outputs, 'brand-' + shot.name + '.png'), animations: 'disabled' });
+      }
+    }
     if (shot.route.includes('#')) {
       await page.evaluate(() => {
         const hash = decodeURIComponent(window.location.hash);
