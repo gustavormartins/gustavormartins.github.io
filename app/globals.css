@@ -322,3 +322,57 @@ html{scroll-behavior:auto}
 @media(max-width:700px){.ops-body{padding:16px}.ops-head{padding:12px}.ops-head small{font-size:8px}.ops-event{padding:15px}.ops-event-heading strong{font-size:20px}.ops-data{gap:5px}.ops-data b{font-size:10px}}
 @media(max-width:360px){.ops-head small{display:none}.ops-data{grid-template-columns:1fr}.ops-data>span{display:flex;justify-content:space-between;gap:10px}.ops-data b{margin:0}}
 @media(prefers-reduced-motion:reduce){.ops-meter span,.screenshot-wrap img,.work-card{transition:none}.game-card:hover .screenshot-wrap img{transform:none}}
+
+
+/* GM | GUSTAVO MARTINS DEV / BLOHSH — responsive terminal-style wordmark.
+   The Blohsh icon is the existing portfolio image, layered behind live text.
+   Native CSS blinking keeps the cursor animated, unlike a static banner. */
+.brand-lockup{display:inline-flex;align-items:center;gap:12px;min-width:0;max-width:100%;flex:0 1 auto;isolation:isolate}
+.brand-monogram{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;color:#f8fff7;font:800 34px/1 var(--sans);letter-spacing:-.095em;white-space:nowrap}
+.brand-terminal-cursor{display:inline-block;width:3px;height:32px;flex:0 0 auto;background:var(--green);box-shadow:0 0 9px rgba(57,255,20,.85),0 0 20px rgba(57,255,20,.35);animation:brand-blink 1.06s steps(1,end) infinite}
+@keyframes brand-blink{0%,48%{opacity:1}50%,98%{opacity:0}100%{opacity:1}}
+.brand-vertical-rule{display:block;flex:0 0 1px;height:36px;background:linear-gradient(180deg,transparent,#39ff14a0,transparent)}
+.brand-nameplate{position:relative;z-index:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;min-width:0;padding:7px 7px 7px 0}
+.brand-blohsh-watermark{position:absolute;z-index:-1;pointer-events:none;right:3%;top:50%;width:66px;height:75px;transform:translateY(-50%);background:url('/assets/blohsh-logo.png') center/contain no-repeat;opacity:.22;filter:sepia(1) saturate(8) hue-rotate(62deg) brightness(.8);mix-blend-mode:screen}
+.brand-name-title{position:relative;display:block;color:#f6fff5;font:800 12px/1.08 var(--sans);letter-spacing:.035em;text-transform:uppercase;white-space:nowrap}
+.brand-name-signature{position:relative;display:block;color:var(--green);font:700 10px/1.1 var(--mono);letter-spacing:.4em;white-space:nowrap;text-shadow:0 0 10px rgba(57,255,20,.20)}
+.brand-lockup:hover .brand-name-title{color:#fff}
+@media(min-width:961px) and (max-width:1180px){
+ .brand-lockup{gap:9px}
+ .brand-monogram{font-size:30px}
+ .brand-terminal-cursor{height:28px}
+ .brand-name-title{font-size:10px}
+ .brand-name-signature{font-size:9px}
+ .nav-inner{gap:15px}
+}
+@media(max-width:700px){
+ .brand-lockup{gap:10px}
+ .brand-monogram{font-size:29px}
+ .brand-terminal-cursor{height:28px}
+ .brand-vertical-rule{height:32px}
+ .brand-name-title{font-size:11px}
+ .brand-name-signature{font-size:9px;letter-spacing:.34em}
+ .brand-blohsh-watermark{width:56px;height:66px}
+}
+@media(max-width:420px){
+ .brand-lockup{gap:7px}
+ .brand-monogram{gap:3px;font-size:25px}
+ .brand-terminal-cursor{width:2px;height:25px}
+ .brand-vertical-rule{height:28px}
+ .brand-nameplate{gap:4px;padding-right:0}
+ .brand-name-title{font-size:9.8px;letter-spacing:0}
+ .brand-name-signature{font-size:8px;letter-spacing:.33em}
+ .brand-blohsh-watermark{width:51px;height:58px;opacity:.2}
+ .nav-inner{gap:12px}
+}
+@media(max-width:350px){
+ .brand-lockup{gap:6px}
+ .brand-monogram{font-size:23px}
+ .brand-name-title{font-size:9px}
+ .brand-name-signature{font-size:7.5px}
+ .nav-inner{gap:8px}
+ .mobile-nav-toggle{width:40px;height:40px;flex:0 0 40px}
+}
+@media(prefers-reduced-motion:reduce){
+ .brand-terminal-cursor{animation:none;opacity:1}
+}
