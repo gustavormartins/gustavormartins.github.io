@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, BriefcaseBusiness, Braces, Check, Copy, Globe2, Handshake, Mail, Terminal, Workflow } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -129,6 +129,13 @@ export function ContactFunnel() {
   const [description, setDescription] = useState('');
   const [details, setDetails] = useState('');
   const [copied, setCopied] = useState(false);
+
+  // A recruiter CTA deep-link can preselect its demand; the user still reviews
+  // and explicitly chooses to open the email, and nothing is sent by the site.
+  useEffect(() => {
+    const intent = new URLSearchParams(window.location.search).get('demanda');
+    if (intent === 'recruitment') setChosen('recruitment');
+  }, []);
 
   const demand = demands.find(item => item.id === chosen);
   const draft = demand ? makeDraft(demand, name, organization, description, details) : null;
