@@ -1,7 +1,7 @@
 /* Game demonstration is scoped and isolated from the main portfolio. */
 .play-demo-page{min-height:100vh;background:#050807;color:#f0fff0;overflow-x:clip}
 .play-demo-page .container{max-width:1250px}
-.play-demo-header{position:sticky;top:0;z-index:30;background:rgba(5,8,7,.93);backdrop-filter:blur(15px);border-bottom:1px solid #26472b}
+.play-demo-header{position:relative;z-index:30;background:rgba(5,8,7,.93);backdrop-filter:blur(15px);border-bottom:1px solid #26472b}
 .play-demo-header-inner{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .play-demo-header nav{display:flex;align-items:center;gap:25px}
 .play-demo-header nav a{display:inline-flex;align-items:center;gap:8px;color:#c2d9c5;font:700 11px var(--mono);letter-spacing:.02em}
