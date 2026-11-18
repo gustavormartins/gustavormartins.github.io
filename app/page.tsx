@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { BrandLogo } from '@/components/BrandLogo';
 import { motion, MotionConfig, useScroll, useSpring } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, AudioLines, CheckCircle2, Code2, Menu, Monitor, Terminal, X } from 'lucide-react';
 
@@ -31,7 +32,7 @@ function Header() {
   return (
     <header className="site-header">
       <nav className="container nav-inner" aria-label="Navegação principal">
-        <Link href="/" className="brand" aria-label="Gustavo Martins, início"><span className="brand-square">G<span>M</span></span><span className="brand-word">BLOHSH<span className="green">®</span></span></Link>
+        <BrandLogo />
         <div className="desktop-nav">{links.map(l => <a key={l.href} href={l.href}>{l.text}</a>)}</div>
         <a className="nav-action" href="#contato">VAMOS CONVERSAR <ArrowUpRight size={15} aria-hidden="true" /></a>
         <button className="mobile-nav-toggle" type="button" aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? 'Fechar menu' : 'Abrir menu'} onClick={() => setOpen(v => !v)}>{open ? <X size={22}/> : <Menu size={22}/>}</button>

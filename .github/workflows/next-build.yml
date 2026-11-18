@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'app/**'
+      - 'components/**'
       - 'package.json'
       - 'tsconfig.json'
       - 'next.config.ts'

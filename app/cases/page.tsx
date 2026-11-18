@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BrandLogo } from '@/components/BrandLogo';
 import { ArrowLeft, ArrowUpRight, Code2, Terminal } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -51,7 +52,7 @@ export default function CasesPage() {
     <a href="#conteudo" className="skip">Pular para o conteúdo</a>
     <header className="site-header">
       <nav className="container nav-inner" aria-label="Navegação principal">
-        <Link href="/" className="brand"><span className="brand-square">G<span>M</span></span><span className="brand-word">BLOHSH<span className="green">®</span></span></Link>
+        <BrandLogo />
         <Link className="nav-action" href="/#trabalhos"><ArrowLeft size={15}/> VOLTAR AO PORTFÓLIO</Link>
         <Link className="cases-back-mobile" href="/#trabalhos"><ArrowLeft size={18}/> VOLTAR</Link>
       </nav>
