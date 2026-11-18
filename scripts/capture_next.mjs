@@ -168,6 +168,7 @@ try {
         failures.push(shot.name + ': email composer remains visible after going back');
       }
       await page.locator('.funnel-option').nth(4).click();
+      if (await page.locator('.funnel-field textarea').inputValue() !== '') failures.push(shot.name + ': stale project details leaked into recruiter message');
       const recruitmentDraft = decodeURIComponent(await page.locator('.funnel-send').getAttribute('href') || '');
       if (!recruitmentDraft.includes('Convite para oportunidade em desenvolvimento de software') ||
           !recruitmentDraft.includes('Recrutamento') ||
