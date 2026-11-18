@@ -1,0 +1,10 @@
+# Next.js and node artifacts
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+public/assets/

@@ -289,6 +289,26 @@
       .selected-work .project-game .game-copy .tags{order:6}
       .selected-work .project-game .game-actions{order:7}
     }
+
+/* Replica architecture illustration: explicit conceptual art, not product screenshot */
+.replica-project{background:radial-gradient(circle at 85% 8%,rgba(57,255,20,.10),transparent 58%),#071008!important}
+.replica-architecture{margin:23px 0 7px;min-width:0}
+.replica-window{border:1px solid #385442;border-radius:10px;background:#071109;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.28)}
+.replica-window-bar{padding:10px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #263c2a;color:#c8e6ca;font:500 .62rem var(--mono)}
+.replica-window-bar strong{font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.replica-window-bar>span:last-child{margin-left:auto;color:#39ff14}
+.replica-dots{color:#8b9b89;white-space:nowrap;font-size:.50rem}
+.replica-window-content{padding:20px;display:flex;align-items:center;gap:17px;min-width:0}
+.replica-disc{flex:0 0 85px;height:85px;border-radius:50%;border:1px solid #4e8656;background:repeating-radial-gradient(circle,#132c19 0 2px,#071109 3px 7px);display:grid;place-items:center;box-shadow:0 0 21px rgba(57,255,20,.14)}
+.replica-disc span{height:17px;width:17px;border-radius:50%;background:#39ff14;border:5px solid #102717}
+.replica-plan{display:flex;flex-direction:column;gap:8px;min-width:0}
+.replica-eyebrow,.replica-roadmap{font:500 .57rem var(--mono);color:#8eab94}
+.replica-plan strong{font-size:.9rem;color:#e6fae7}
+.replica-signal{display:flex;align-items:center;gap:3px;height:24px}
+.replica-signal i{width:3px;height:var(--h,9px);background:#39ff14;opacity:.8;display:block;border-radius:2px}
+.replica-signal i:nth-child(3n){--h:19px}.replica-signal i:nth-child(4n){--h:13px}.replica-signal i:nth-child(5n){--h:23px}
+.replica-disclaimer{display:block;color:#89a48e;font-size:.69rem;margin-top:8px;line-height:1.5}
+@media(max-width:450px){.replica-window-content{padding:12px;gap:10px}.replica-disc{flex-basis:64px;height:64px}.replica-plan strong{font-size:.78rem}.replica-roadmap{font-size:.5rem}}
   </style>
 </head>
 <body>
@@ -541,8 +561,30 @@ Gustavo
               <a class="case-link" href="cases/#salinha">Estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </article>
-          <article class="project"><div class="project-meta">03 / DESKTOP · EM DESENVOLVIMENTO</div><h3>Replica Audio Player</h3><p>Projeto de futuro player nativo Linux: bootstrap em Rust, CI e verificações de qualidade. Interface gráfica e reprodução de áudio ainda não foram implementadas.</p><div class="tags"><span class="tag">Rust</span><span class="tag">Linux</span><span class="tag">DevSecOps</span></div><a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener">Acompanhar projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#replica" aria-label="Ler estudo de caso: replica">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
-          <article class="project"><div class="project-meta">04 / FULL STACK · WEB APP</div><h3>Lista de Casa</h3><p>Protótipo de lista de presentes e reservas, com React, FastAPI e SQLite. Em evolução, ainda requer autenticação segura no backend antes de uso público com dados sensíveis.</p><div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">SQLite</span></div><a class="project-link" href="https://github.com/gustavormartins/Lista-de-Casa" target="_blank" rel="noopener">Explorar código <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="case-link" href="cases/#lista-de-casa" aria-label="Ler estudo de caso: lista-de-casa">Ler estudo de caso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></article>
+          <article class="project replica-project">
+  <div class="project-meta">03 / SYSTEMS ENGINEERING · RUST</div>
+  <h3>Replica Audio Player</h3>
+  <p>Experimento open-source para explorar aplicações desktop nativas no Linux. O projeto já conta com bootstrap Rust, integração contínua, Clippy e auditoria de dependências; a interface GTK4 e a reprodução ainda fazem parte do roadmap.</p>
+  <div class="replica-architecture" role="group" aria-label="Arquitetura planejada do Replica Audio Player">
+    <div class="replica-window">
+      <div class="replica-window-bar"><span class="replica-dots">● ● ●</span><strong>Replica / Architecture preview</strong><span>WIP</span></div>
+      <div class="replica-window-content">
+        <div class="replica-disc" aria-hidden="true"><span></span></div>
+        <div class="replica-plan">
+          <span class="replica-eyebrow">LOCAL-FIRST AUDIO / LINUX</span>
+          <strong>Rust application core</strong>
+          <div class="replica-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="replica-roadmap">GTK4 / Libadwaita · Playback · SQLite</span>
+        </div>
+      </div>
+    </div>
+    <small class="replica-disclaimer">Representação conceitual da arquitetura — não é uma captura de um player funcional.</small>
+  </div>
+  <div class="tags"><span class="tag">Rust</span><span class="tag">CI / Clippy</span><span class="tag">Linux</span><span class="tag">GTK4 planejado</span></div>
+  <a class="project-link" href="https://github.com/gustavormartins/Replica-audio-player" target="_blank" rel="noopener noreferrer">Repositório e CI <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+  <a class="case-link" href="cases/#replica" aria-label="Ler o estudo de caso do Replica Audio Player">Roadmap técnico <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+</article>
+          
         </div>
         <p class="work-footnote">Outros experimentos e ferramentas continuam disponíveis no <a href="https://github.com/gustavormartins" target="_blank" rel="noopener">GitHub completo ↗</a>. Nem todo repositório precisa virar um case.</p>
       </section>

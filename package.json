@@ -1,0 +1,27 @@
+{
+  "name": "blohsh-portfolio-next",
+  "version": "3.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/prepare-next-assets.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/prepare-next-assets.mjs",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "motion": "14.14.0",
+    "lucide-react": "1.73.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.9.3",
+    "playwright-core": "1.56.1"
+  }
+}
