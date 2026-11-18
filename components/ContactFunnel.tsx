@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, BriefcaseBusiness, Braces, Check, Code2, Copy, Globe2, Handshake, Mail, Terminal, Workflow } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, BriefcaseBusiness, Braces, Check, Copy, Globe2, Handshake, Mail, Terminal, Workflow } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 type DemandId = 'web' | 'automation' | 'integrations' | 'linux' | 'recruitment' | 'partnership';
@@ -134,6 +134,12 @@ export function ContactFunnel() {
   const draft = demand ? makeDraft(demand, name, organization, description, details) : null;
 
   const choose = (id: DemandId) => {
+    // Keep identity details, but never mix project-specific descriptions
+    // into a different request type (especially recruitment).
+    if (id !== chosen) {
+      setDescription('');
+      setDetails('');
+    }
     setChosen(id);
     setCopied(false);
   };
