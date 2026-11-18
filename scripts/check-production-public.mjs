@@ -31,9 +31,16 @@ for (const url of hosts) {
         overflow:document.documentElement.scrollWidth-window.innerWidth,
         scripts:[...document.scripts].length,
         brokenImages:[...document.images].filter(x=>x.complete&&x.naturalWidth===0).map(x=>x.src).slice(0,8),
+        branding:(()=>{const brand=document.querySelector('.brand-lockup');const cursor=brand?.querySelector('.brand-terminal-cursor');const watermark=brand?.querySelector('.brand-blohsh-watermark');return brand?{text:brand.textContent?.trim(),cursorAnimation:cursor?getComputedStyle(cursor).animationName:null,watermark:watermark?getComputedStyle(watermark).backgroundImage:null,right:brand.getBoundingClientRect().right}:null;})(),
       }));
       console.log('DIAG',JSON.stringify({url,width,http:response?.status(),finalUrl:page.url(),...result,errors:issues.slice(0,12),requestFailures:requestFailures.slice(0,10),badResponses:badResponses.slice(0,15)}));
       if (url.includes('gustavormartins.vercel.app') && (response?.status() !== 200 || !result.heading || /vercel|login|not_found/i.test(result.heading))) failures.push(`${url} ${width}px did not serve the portfolio`);
+      if (url.startsWith('https://gustavormartins.vercel.app/')) {
+        if (!result.branding?.text?.includes('Gustavo Martins Dev') || !result.branding.text.includes('BLOHSH')) failures.push(`${url}: new GM/BLOHSH wordmark missing`);
+        if (result.branding?.cursorAnimation !== 'brand-blink') failures.push(`${url}: blinking terminal cursor missing`);
+        if (!result.branding?.watermark?.includes('blohsh-logo.png')) failures.push(`${url}: original Blohsh mark missing`);
+        if (result.branding?.right > width+2) failures.push(`${url}: wordmark exceeds viewport`);
+      }
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
   }
