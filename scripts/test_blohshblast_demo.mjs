@@ -43,7 +43,7 @@ try {
     }
     await page.locator('.playable-start-button').click();
     const iframe = page.frameLocator('.playable-frame');
-    await iframe.locator('#board .cell').first().waitFor();
+    await iframe.locator('#board .cell').first().waitFor({state:'attached'});
     await iframe.locator('[data-pc-action="play"]').waitFor();
     const before = await iframe.locator('#score-display').innerText();
     await iframe.locator('[data-pc-action="play"]').click();
@@ -94,7 +94,7 @@ try {
   if (!direct || direct.status() !== 200) {
     throw new Error('Direct full screen game route returned '+direct?.status());
   }
-  await standalone.locator('#board .cell').first().waitFor();
+  await standalone.locator('#board .cell').first().waitFor({state:'attached'});
   if (!await standalone.locator('[data-pc-action="play"]').isVisible()) {
     throw new Error('Original game menu not visible in standalone mode');
   }
