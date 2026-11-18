@@ -79,6 +79,10 @@ for (const url of hosts) {
         await page.locator('.playable-start-button').click();
         const frame = page.frameLocator('.playable-frame');
         await frame.locator('#board .cell').first().waitFor({state:'attached',timeout:18000});
+        await page.waitForFunction(() => {
+          const runtime = document.querySelector('iframe.playable-frame')?.contentWindow;
+          return Boolean(runtime?.BlohshBlastLegacyRuntime && runtime?.BlohshBlastPhase3);
+        }, null, {timeout:25000});
         const result = await frame.locator('#board').evaluate(board => {
           const engine = window.BlohshBlastLegacyRuntime;
           const product = window.BlohshBlastPhase3;
