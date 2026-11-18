@@ -36,9 +36,10 @@ jobs:
           set -euo pipefail
           test -s out/index.html
           test -s out/cases/index.html
+          test -s out/recrutador/index.html
           test -s out/assets/projects/blohshblast-gameplay.png
           test -s out/assets/blohsh-logo.png
-          if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html; then
+          if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html out/recrutador/index.html; then
             echo "Personal project leaked into public Next.js pages."
             exit 1
           fi
