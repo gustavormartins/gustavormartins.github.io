@@ -137,13 +137,16 @@ try {
       if (await button.getAttribute('aria-expanded') !== 'false') {
         failures.push('Mobile menu did not close after navigation');
       }
+      // The old illustrative click-to-advance simulation was replaced by
+      // a real Python API route. Confirm the link without navigating away,
+      // because the following tests still exercise the homepage contact form.
       const simulator = page.locator('.ops-next');
       await simulator.scrollIntoViewIfNeeded();
-      const before = await page.locator('.ops-event').innerText();
-      await simulator.click();
-      const after = await page.locator('.ops-event').innerText();
-      if (after === before || !after.includes('EVT-002')) {
-        failures.push('OpsLens synthetic simulation did not advance to the SLA event');
+      if (await simulator.getAttribute('href') !== '/opslens/') {
+        failures.push('Python lab CTA does not lead to the live FastAPI demo');
+      }
+      if ((await page.locator('.ops-event').innerText()).includes('EVT-002')) {
+        failures.push('Old fictitious OpsLens event is still shown on homepage');
       }
     }
     if (shot.name === 'home-desktop' || shot.name === 'home-mobile') {
