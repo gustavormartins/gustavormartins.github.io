@@ -20,7 +20,7 @@ from opslens.api import ProcessEvent, incident_reasons
 
 
 class SyntheticEvent(BaseModel):
-    model_config = ConfigDict(extra="forbid", strict=True)
+    model_config = ConfigDict(extra="forbid")
 
     event_id: UUID
     process_id: Literal["DEMO_01", "DEMO_02"]
