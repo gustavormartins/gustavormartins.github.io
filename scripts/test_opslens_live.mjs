@@ -35,19 +35,19 @@ try {
       throw new Error('Dashboard displayed precomputed fake data before interaction');
     }
     await page.getByRole('button',{name:'Enviar: Operação normal'}).click();
-    await page.locator('.opslens-metrics strong').first().getByText('1').waitFor();
+    await page.waitForFunction(() => document.querySelector('.opslens-metrics strong')?.textContent?.trim() === '1');
     const afterGood = await metrics.allTextContents();
     if (afterGood[0] !== '1' || afterGood[1] !== '100%' || afterGood[2] !== '0') {
       throw new Error('Unexpected FastAPI metrics after normal event: '+JSON.stringify(afterGood));
     }
     await page.getByRole('button',{name:'Enviar: Atraso de SLA'}).click();
-    await page.locator('.opslens-metrics strong').first().getByText('2').waitFor();
+    await page.waitForFunction(() => document.querySelector('.opslens-metrics strong')?.textContent?.trim() === '2');
     const afterSla = await metrics.allTextContents();
     if (afterSla[0] !== '2' || afterSla[1] !== '50%' || afterSla[2] !== '1') {
       throw new Error('Wrong SLA after Python calculation: '+JSON.stringify(afterSla));
     }
     await page.getByRole('button',{name:'Enviar: Falha de processo'}).click();
-    await page.locator('.opslens-metrics strong').first().getByText('3').waitFor();
+    await page.waitForFunction(() => document.querySelector('.opslens-metrics strong')?.textContent?.trim() === '3');
     const afterFailure = await metrics.allTextContents();
     if (afterFailure[0] !== '3' || afterFailure[1] !== '66,67%' || afterFailure[2] !== '1' || afterFailure[3] !== '1') {
       throw new Error('Wrong failure metrics from Python: '+JSON.stringify(afterFailure));
