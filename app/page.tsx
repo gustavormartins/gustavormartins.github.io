@@ -99,33 +99,22 @@ function SalinhaDiagram() {
 
 
 // This is a local, synthetic UI demonstration, NOT a live API connection.
-const demoEvents = [
-  { event: "EVT-001", stage: "ASSEMBLY", duration: "98s", sla: "120s", type: "NORMAL", message: "Etapa dentro do prazo estabelecido", incident: false },
-  { event: "EVT-002", stage: "INSPECTION", duration: "184s", sla: "120s", type: "SLA BREACHED", message: "Duração ultrapassou o SLA sintético", incident: true },
-  { event: "EVT-003", stage: "PACKAGING", duration: "45s", sla: "120s", type: "PROCESS FAILED", message: "Falha fictícia reportada no processo", incident: true },
-] as const;
-
 function OpsLensDemo() {
-  const [position, setPosition] = useState(0);
-  const current = demoEvents[position];
   return (
-    <div className="ops-panel" aria-label="Simulador sintético do OpsLens">
+    <div className="ops-panel" aria-label="Introdução à demonstração real do OpsLens">
       <div className="ops-head">
-        <span><span className="ops-led" aria-hidden="true" /> BLOHSH / OPSLENS</span>
-        <small>DEMO LOCAL · DADOS FICTÍCIOS</small>
+        <span><span className="ops-led" aria-hidden="true"/> BLOHSH / OPSLENS</span>
+        <small>PYTHON · FASTAPI · SINTÉTICO</small>
       </div>
       <div className="ops-body">
-        <span className="ops-mini-label">EVENTO SELECIONADO / 0{position + 1}</span>
-        <motion.div key={current.event} initial={{opacity:0,y:9}} animate={{opacity:1,y:0}} transition={{duration:.3}} className="ops-event" role="status" aria-live="polite" aria-atomic="true">
-          <div className="ops-event-heading"><strong>{current.event}</strong><span className={current.incident ? "ops-alert" : "ops-success"}>{current.type}</span></div>
-          <div className="ops-meter"><span style={{width: current.incident ? "96%" : "60%"}} /></div>
-          <div className="ops-data"><span>STEP <b>{current.stage}</b></span><span>DURATION <b>{current.duration}</b></span><span>SLA <b>{current.sla}</b></span></div>
-          <p>{current.message}</p>
-        </motion.div>
-        <button className="ops-next" type="button" onClick={() => setPosition(p => (p + 1) % demoEvents.length)}>
-          SIMULAR PRÓXIMO EVENTO <ArrowRight size={15} aria-hidden="true" />
-        </button>
-        <p className="ops-disclaimer">Painel demonstrativo no navegador. Não recebe eventos reais nem está conectado à API local.</p>
+        <span className="ops-mini-label">BACKEND VERIFICÁVEL / PYTHON</span>
+        <div className="ops-event">
+          <div className="ops-event-heading"><strong>Processo → API → métricas</strong><span className="ops-success">DEMO LIVE</span></div>
+          <p>Envie uma operação normal, atraso de SLA ou falha fictícia. O Python valida cada lote e calcula os indicadores retornados pelo servidor.</p>
+          <div className="ops-data"><span>PYTHON <b>FastAPI</b></span><span>ENTRADA <b>JSON</b></span><span>SAÍDA <b>Métricas</b></span></div>
+        </div>
+        <Link className="ops-next" href="/opslens/">EXPERIMENTAR API PYTHON <ArrowRight size={15} aria-hidden="true"/></Link>
+        <p className="ops-disclaimer">A demonstração pública usa dados sintéticos e não armazena informações. O MVP original com SQLite permanece separado.</p>
       </div>
     </div>
   );
@@ -192,7 +181,7 @@ function Portfolio() {
 
         <section id="python-lab" className="section-block container python-section">
           <Reveal className="python-panel">
-            <div className="python-info"><div className="section-index">03 / NEXT EXPERIMENT</div><span className="plan-badge">MVP LOCAL — AINDA NÃO PUBLICADO</span><h2>Python com<br/><em>problema real.</em></h2><p>O <strong>Blohsh OpsLens</strong> é um MVP local em FastAPI que recebe eventos sintéticos, aplica regras de SLA, evita duplicações e retorna métricas consultáveis. A API passou em <strong>17 testes locais</strong>; ainda não há deploy público nem autenticação para uso em produção.</p><div className="chip-row"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Pytest</span><span>Idempotência</span></div><a className="ops-source-link" href="https://github.com/gustavormartins/gustavormartins.github.io/tree/feature/portfolio-next-motion/labs/opslens" target="_blank" rel="noopener noreferrer">EXPLORAR O CÓDIGO DA API <ArrowUpRight size={15} /></a></div>
+            <div className="python-info"><div className="section-index">03 / PYTHON IN ACTION</div><span className="plan-badge">API SINTÉTICA · SEM DADOS REAIS</span><h2>Python com<br/><em>problema real.</em></h2><p>O <strong>Blohsh OpsLens</strong> combina um MVP local em FastAPI/SQLite com uma API pública de demonstração isolada: você envia cenários fictícios e recebe métricas de SLA e alertas <strong>calculados por Python</strong>. A API pública não persiste eventos.</p><div className="chip-row"><span>Python</span><span>FastAPI</span><span>REST</span><span>Pytest</span><span>SLA</span></div><div className="ops-home-links"><Link className="ops-source-link ops-primary-link" href="/opslens/">ABRIR DEMONSTRAÇÃO INTERATIVA <ArrowUpRight size={15} aria-hidden="true"/></Link><a className="ops-source-link" href="https://github.com/gustavormartins/gustavormartins.github.io/tree/main/labs/opslens" target="_blank" rel="noopener noreferrer">EXAMINAR CÓDIGO PYTHON <ArrowUpRight size={15} /></a></div></div>
             <OpsLensDemo />
           </Reveal>
         </section>
