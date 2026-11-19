@@ -4,6 +4,7 @@ const hosts = [
   'https://gustavormartins.vercel.app/cases/',
   'https://gustavormartins.vercel.app/recrutador/',
   'https://gustavormartins.vercel.app/jogar/',
+  'https://gustavormartins.vercel.app/opslens/',
   'https://gustavormartins-github-pxegejdos-gustavormartins-projects.vercel.app/',
 ];
 const failures = [];
@@ -97,6 +98,21 @@ for (const url of hosts) {
         }
         if (page.url() !== url) failures.push('Game demo navigated away from its route without user action');
         console.log('PRODUCTION_GAME_OK',JSON.stringify({width,result}));
+      }
+      if (url === 'https://gustavormartins.vercel.app/opslens/') {
+        await page.getByText('API CONECTADA',{exact:true}).waitFor({state:'visible',timeout:25000});
+        if ((await page.locator('.opslens-metrics strong').allTextContents())[0] !== '—') {
+          failures.push('OpsLens falsely prepopulates metrics before a Python request');
+        }
+        await page.getByRole('button',{name:'Enviar: Operação normal'}).click();
+        await page.waitForFunction(() => document.querySelector('.opslens-metrics strong')?.textContent?.trim() === '1');
+        await page.getByRole('button',{name:'Enviar: Atraso de SLA'}).click();
+        await page.waitForFunction(() => document.querySelector('.opslens-metrics strong')?.textContent?.trim() === '2');
+        const metrics = await page.locator('.opslens-metrics strong').allTextContents();
+        if (metrics[1] !== '50%' || metrics[2] !== '1') {
+          failures.push('OpsLens publicly deployed metrics incorrect: '+JSON.stringify(metrics));
+        }
+        console.log('PRODUCTION_OPSLENS_OK',JSON.stringify({width,metrics,apiConnected:true}));
       }
     } catch(e) {console.log('DIAG_FAILED',JSON.stringify({url,width,error:String(e),errors:issues,requestFailures:requestFailures.slice(0,10)}));}
     await context.close();
