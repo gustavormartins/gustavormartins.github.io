@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Activity, AlertTriangle, ArrowRight, CheckCircle2, CircleAlert, Play, RotateCcw, Server, ShieldCheck, Wifi, WifiOff } from 'lucide-react';
 
 const API_URL = 'https://blohsh-opslens-api.vercel.app';
@@ -122,7 +122,6 @@ export function OpsLensLive() {
     setError('');
   };
 
-  const eventHistory = useMemo(() => events.slice().reverse(), [events]);
   const limitReached = events.length >= MAX_EVENTS;
 
   return (
@@ -200,7 +199,7 @@ export function OpsLensLive() {
         <div className="opslens-engineering"><CheckCircle2 size={14} aria-hidden="true"/> Os indicadores vêm do FastAPI: o navegador só exibe as respostas. API sem banco, login ou dados reais.</div>
         <details className="opslens-payload-preview">
           <summary>Ver o JSON enviado à API</summary>
-          <pre>{JSON.stringify({ events: eventHistory }, null, 2)}</pre>
+          <pre>{JSON.stringify({ events }, null, 2)}</pre>
         </details>
       </div>
     </div>
