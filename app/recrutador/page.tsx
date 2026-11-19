@@ -23,8 +23,8 @@ const projects = [
   {
     index: '01', kicker: 'PYTHON / BACKEND',
     name: 'Blohsh OpsLens',
-    status: 'MVP LOCAL / EM EVOLUÇÃO',
-    summary: 'API experimental que recebe eventos fictícios, valida dados e aplica regras de SLA, com armazenamento SQLite e testes automatizados.',
+    status: 'API DEMO / FASTAPI · SINTÉTICO',
+    summary: 'Experimente uma API Python real calculando métricas de SLA e incidentes com dados fictícios. O MVP local com SQLite permanece separado do serviço público.',
     evidence: ['FastAPI e validação', 'Idempotência de eventos', '17 testes de API'],
     repo: 'https://github.com/gustavormartins/gustavormartins.github.io/tree/main/labs/opslens',
     linkText: 'VER CÓDIGO E TESTES'
@@ -180,6 +180,7 @@ export default function RecruiterMode() {
                 <h3>{project.name}</h3>
                 <p>{project.summary}</p>
                 <div className="recruiter-project-evidence">{project.evidence.map(tag=><span key={tag}>{tag}</span>)}</div>
+                {project.name === 'Blohsh OpsLens' && <Link href="/opslens/" className="recruiter-demo-link">▶ TESTAR API PYTHON <ArrowUpRight size={15} aria-hidden="true"/></Link>}
                 {project.name === 'BlohshBlast' && <Link href="/jogar/" className="recruiter-demo-link">▶ EXPERIMENTAR JOGO <ArrowUpRight size={15} aria-hidden="true"/></Link>}
                 <a href={project.repo} target="_blank" rel="noopener noreferrer">{project.linkText} <ArrowUpRight size={15} aria-hidden="true"/></a>
               </article>

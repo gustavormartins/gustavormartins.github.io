@@ -496,3 +496,10 @@ html{scroll-behavior:auto}
 .card-links a.game-play-link{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;background:#39ff14;color:#061008;border:1px solid #39ff14;font-weight:800;box-shadow:0 0 20px rgba(57,255,20,.09);transition:background .2s ease,color .2s ease}
 .card-links a.game-play-link:hover{background:#c0ffb6;color:#041006}
 @media(prefers-reduced-motion:reduce){.card-links a.game-play-link{transition:none}}
+
+
+/* Live OpsLens CTA: emphasize real Python route, not an illustrative simulation. */
+.ops-home-links{display:flex;align-items:flex-start;flex-direction:column;gap:16px;margin-top:21px}
+.ops-home-links .ops-source-link{display:inline-flex;align-items:center;gap:10px;margin-top:0}
+.ops-home-links a.ops-primary-link{display:inline-flex;border:1px solid var(--green);background:var(--green);color:#061208;padding:12px 16px;font-weight:800}
+.ops-home-links a.ops-primary-link:hover{background:#b4ffa6;color:#071208}
