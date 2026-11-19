@@ -13,6 +13,7 @@ on:
       - 'next.config.ts'
       - 'scripts/prepare-next-assets.mjs'
       - 'scripts/capture_next.mjs'
+      - 'scripts/test_opslens_live.mjs'
       - '.github/workflows/next-build.yml'
   workflow_dispatch:
 permissions:
@@ -40,6 +41,7 @@ jobs:
           test -s out/cases/index.html
           test -s out/recrutador/index.html
           test -s out/jogar/index.html
+          test -s out/opslens/index.html
           test -s out/jogar/blohshblast/index.html
           test -s out/jogar/blohshblast/legacy-game.js
           test -s out/jogar/blohshblast/phase3.js
@@ -50,7 +52,7 @@ jobs:
           fi
           test -s out/assets/projects/blohshblast-gameplay.png
           test -s out/assets/blohsh-logo.png
-          if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html out/recrutador/index.html; then
+          if grep -R -Ei 'Lista.de.Casa|Lista-de-Casa|para-a-bia' out/index.html out/cases/index.html out/recrutador/index.html out/opslens/index.html; then
             echo "Personal project leaked into public Next.js pages."
             exit 1
           fi
@@ -67,6 +69,8 @@ jobs:
         run: node scripts/capture_next.mjs
       - name: Test actual BlohshBlast game and score progression
         run: node scripts/test_blohshblast_demo.mjs
+      - name: Exercise real OpsLens Python API from responsive dashboard
+        run: node scripts/test_opslens_live.mjs
       - name: Upload responsive snapshots
         if: always()
         uses: actions/upload-artifact@v4
